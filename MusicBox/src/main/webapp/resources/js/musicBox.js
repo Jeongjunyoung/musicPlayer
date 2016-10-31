@@ -1,4 +1,4 @@
-var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
+	var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -23,6 +23,7 @@ var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
 	function onPlayerStateChange(event) {
 		
 	}
+	//랜덤 재생
 	function shufflePlay(){
 		if(shuffle){
 			player.setShuffle(true);
@@ -34,17 +35,17 @@ var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
 			$('#shuffleBtn').removeClass('shuffleClick');
 		}
 	}
-	function playVideo(){
+	function playVideo(){ //Play 버튼 클릭 이벤트
 		player.playVideo();
 		$('#playBtn').css('display','none');
 		$('#stopBtn').css('display','inline');    	
 	}
-    function pauseVideo(){
+    function pauseVideo(){ //Pause 버튼 클릭 이벤트
     	player.pauseVideo();
     	$('#stopBtn').css('display','none');
     	$('#playBtn').css('display','inline');
     }
-    function changeVideo(video_ID){
+    function changeVideo(video_ID){ //음악 변경 이벤트
     	for(var i=0;i<arr.length;i++){
     		if(arr[i] == video_ID){
     			player.loadPlaylist(arr,i);
@@ -52,7 +53,10 @@ var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
     	}
     }
 	$(function(){
-		$('#checkAdd').on('click', function(){
+		/*$('#signUp_btn').click(function(){
+			$('#signUp_paper').modal('show');
+		})*/
+		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
 			var array = [];
 			var title_array = [];
 			$("input[name=video_id]:checked").each(function() {
@@ -72,7 +76,7 @@ var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
 			var video_ID = $(this).attr('value');
 			changeVideo(video_ID);
 		})
-		$('#searchBtn').click(function(){
+		$('#searchBtn').click(function(){ //검색 버튼
 			var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAueMXgFyZOx_OFGSEca-S1FdCygGHR51k&maxResults=20";
 			var q = $('#searchKey').val();
 			url += '&q='+q;
