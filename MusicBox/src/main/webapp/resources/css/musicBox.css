@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+#list{
+	
+}
+#search{
+	height: 150px;
+}
+.box{
+	margin-top: 10px;
+	border: 2px;
+	border-style: solid;
+	width: 50%;
+	text-align: center;
+}
+#playerBox{
+}
+.hoverList li:HOVER{
+	color: #F15F5F;
+}
+.hoverList li{
+	list-style-type: none;
+	margin-bottom: 10px;
+}
+#stopBtn{
+	display: inline;
+}
+#playBtn{
+	display: none;
+}
+.shuffleClick{
+	border-color: gray;
+	border-style: solid;
+}
+#searchResult{
+	overflow:scroll; 
+    overflow-x:hidden; 
+    height:280px;
+}
+.resultList{
+	display: inline;
+}
