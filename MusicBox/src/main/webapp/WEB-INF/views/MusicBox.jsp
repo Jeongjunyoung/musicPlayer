@@ -5,12 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- JavaSciprt File -->
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="/../resources/js/musicBox.js"></script>
-<script type="text/javascript" src="/../resources/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="/../resources/js/musicBox.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- CSS File -->
-<link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
+	<link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<div id="register">
@@ -36,15 +37,15 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times</span>
 					</button>
 					<h4 class="modal-title">타이틀</h4>
 				</div>
 				<div class="modal-body">
-					<p>바디</p>
+				
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn" data-dimiss="modal">닫기</button>
-					<button type="button" class="btn">버튼</button>
+					<button type="submit" id="signIn_btn" class="btn btn-default">가입</button>
 				</div>
 			</div> <!-- /modal-content -->
 		</div> <!-- /modal-dialog -->
