@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,9 +15,10 @@
 	<link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+		<p>${sessionScope.userSession.user_id}님 ㅎㅇ</p>
 	<div id="register">
-		<!-- <button id="signUp_btn">회원가입</button> -->
 		<button type="button" id="signUp_btn" class="btn btn-default" data-toggle="modal" data-target="#signUp_paper">회원가입</button>
+		<button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button>
 	</div>
 	<div id="player"></div>
 	<div id="list" class="box">
@@ -32,6 +34,7 @@
 	<input id="searchKey" type="text"><button id="searchBtn">검색</button><button id="checkAdd">선택 추가</button>
 	<div id="searchResult" class="box">
 	</div>
+	<!-- 회원가입 양식 -->
 	<div class="modal fade" id="signUp_paper" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -39,13 +42,52 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times</span>
 					</button>
-					<h4 class="modal-title">타이틀</h4>
+					<h4 class="modal-title">회원가입</h4>
 				</div>
 				<div class="modal-body">
-				
+					<form action="sign_in" method="post" class="form-horizontal">
+						<div class="col-sm-12">
+							ID   <input type="text" class="form-control" name="user_id">
+						</div>
+						<div class="col-sm-12">
+							PassWord   <input type="password" class="form-control" name="user_pw">
+						</div>
+						<div class="col-sm-12">
+							E-Mail   <input type="text" class="form-control" name="user_email">
+						</div>
+						<button type="submit" id="signIn_btn" class="btn btn-default">가입</button>
+					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" id="signIn_btn" class="btn btn-default">가입</button>
+					
+				</div>
+			</div> <!-- /modal-content -->
+		</div> <!-- /modal-dialog -->
+	</div> <!-- /modal -->
+	
+	<!-- 로그인 양식 -->
+	<div class="modal fade" id="login_paper" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times</span>
+					</button>
+					<h4 class="modal-title">로그인</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login_form" method="post" class="form-horizontal">
+						<div class="col-sm-12">
+							ID   <input type="text" class="form-control" name="user_id">
+						</div>
+						<div class="col-sm-12">
+							PassWord   <input type="password" class="form-control" name="user_pw">
+						</div>
+						<button type="submit" id="loginForm_btn" class="btn btn-default">로그인</button>
+					</form>
+				</div>
+				<div class="modal-footer">
+					
 				</div>
 			</div> <!-- /modal-content -->
 		</div> <!-- /modal-dialog -->

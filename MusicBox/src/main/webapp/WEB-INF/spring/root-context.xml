@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	
@@ -11,18 +13,29 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"></property>
-		<property name="username" value="shopERP"></property>
+		<property name="username" value="MusicBox"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />		
 		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
-		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"/>
+		<property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" 
  					  destroy-method="clearCache">
   		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+			<bean class="jy.mypro.interceptors.InterceptorImpl"></bean>
+		</mvc:interceptor>		
+	</mvc:interceptors> -->
+	
+	<context:component-scan base-package="jy.mypro.persistence"/>
+	<context:component-scan base-package="jy.mypro.service"/>
+	
 </beans>

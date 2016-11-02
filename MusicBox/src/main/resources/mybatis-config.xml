@@ -7,20 +7,8 @@
 	
   <typeAliases>
 
-  	<package name="erp.acc.basic.domain"/>
-    <package name="erp.pch.domain"/>  
-    <package name="erp.basic.domain"/>    
-    <package name="erp.hr.domain"/>    
-    <package name="erp.gw.projectboard.domain"/>
-    <package name="erp.gw.notice.domain"/>
-    <package name="erp.gw.deptboard.domain"/>
-    <package name="erp.gw.sign.domain"/>
-    <package name="erp.stock.domain"/>  
-    <package name="erp.common.domain"/>  
-    <package name="erp.sale.domain"/> 
-    <package name="erp.sale.companybuy.domain"/>
-    <package name="erp.my.mytext.domain"/>
-    <package name="erp.odm.domain"/>
+  	<package name="jy.mypro.domain"/>
+    
   </typeAliases>
   
 </configuration>
