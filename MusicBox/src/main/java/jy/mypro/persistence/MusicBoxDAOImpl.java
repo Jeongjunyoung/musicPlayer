@@ -1,10 +1,13 @@
 package jy.mypro.persistence;
 
+import java.awt.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
 
 @Repository
@@ -20,5 +23,9 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	@Override
 	public MusicUserVO loginUser(MusicUserVO vo) throws Exception {
 		return sqlSession.selectOne(namespace+".login_user", vo);
+	}
+	@Override
+	public java.util.List<MusicPlayList> getPlayList(String user_id) throws Exception {
+		return sqlSession.selectList(namespace+".playList", user_id);
 	}
 }

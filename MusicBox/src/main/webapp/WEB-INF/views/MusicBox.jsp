@@ -25,11 +25,11 @@
 		<img src="/../resources/images/play.png" onclick="playVideo()" id="playBtn">
 		<img src="/../resources/images/pause.png" onclick="pauseVideo()" id="stopBtn">
 		<img src="/../resources/images/shuffle.png" onclick="shufflePlay()" id="shuffleBtn">
-		<ul id="playList" class="hoverList">
-			<li value="y7gCktBEn5U">with coffee</li>
-			<li value="-sVo6NWwK_o">벌써 일년</li>
-			<li value="BTM68fJS1nM">Brown eyed girl</li>
-		</ul>
+		<c:forEach var="list" items="${list }">
+			<ul id="playList" class="hoverList">
+				<li value="${list.music_id }">${list.music_name }</li>
+			</ul>
+		</c:forEach>
 	</div>
 	<input id="searchKey" type="text"><button id="searchBtn">검색</button><button id="checkAdd">선택 추가</button>
 	<div id="searchResult" class="box">
@@ -86,9 +86,7 @@
 						<button type="submit" id="loginForm_btn" class="btn btn-default">로그인</button>
 					</form>
 				</div>
-				<div class="modal-footer">
-					
-				</div>
+				<div class="modal-footer"></div>
 			</div> <!-- /modal-content -->
 		</div> <!-- /modal-dialog -->
 	</div> <!-- /modal -->
