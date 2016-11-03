@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,14 +78,23 @@ public class MusicBoxController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/getUserPlayList")
+	//현재 로그인 되어있는 아이디의 플레이 리스트
+	@RequestMapping("/getPlayList")
 	@ResponseBody
-	public List<MusicPlayList> getUserList(@RequestParam("login_id") String user_id)throws Exception{
+	public List<MusicPlayList> getUserList(@RequestParam("user_id") String user_id)throws Exception{
 		List<MusicPlayList> list = ms.getMusic_id(user_id);
 		if(list != null){
 			return list;
 		}else{
 			return null;
 		}		
+	}
+	
+	@RequestMapping("/logout")
+	public String logout_user(HttpServletRequest request)throws Exception{
+		session = false;
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
 	}
 }

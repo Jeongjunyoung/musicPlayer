@@ -18,6 +18,7 @@
 	<c:choose>
 		<c:when test="${session == true }">
 			<p>${sessionScope.userSession.user_id}님 ㅎㅇ</p>
+			<input type="hidden" value="${sessionScope.userSession.user_id}" id="login_id">
 			<button type="button" id="logout_btn" class="btn btn-default">로그아웃</button>
 		</c:when>
 		<c:otherwise>
@@ -36,10 +37,12 @@
 			<h1>로그인 하세요</h1>
 		</c:otherwise>
 	</c:choose>	
-	<div id="list" class="box">
+	<div id="btnBox" class="box">
 		<img src="/../resources/images/play.png" onclick="playVideo()" id="playBtn">
 		<img src="/../resources/images/pause.png" onclick="pauseVideo()" id="stopBtn">
 		<img src="/../resources/images/shuffle.png" onclick="shufflePlay()" id="shuffleBtn">
+	</div>
+	<div id="list" class="box scrollBox">
 		<c:forEach var="list" items="${list }">
 			<ul id="playList" class="hoverList">
 				<li value="${list.music_id }">${list.music_name }</li>
@@ -47,8 +50,7 @@
 		</c:forEach>
 	</div>
 	<input id="searchKey" type="text"><button id="searchBtn" class="btn btn-default">검색</button><button class="btn btn-default" id="checkAdd">선택 추가</button>
-	<div id="searchResult" class="box">
-	</div>
+	<div id="searchResult" class="box scrollBox"></div>
 	<!-- 회원가입 양식 -->
 	<div class="modal fade" id="signUp_paper" role="dialog">
 		<div class="modal-dialog">

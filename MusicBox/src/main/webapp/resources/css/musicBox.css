@@ -31,7 +31,7 @@
 	border-color: gray;
 	border-style: solid;
 }
-#searchResult{
+.scrollBox{
 	overflow:scroll; 
     overflow-x:hidden; 
     height:280px;

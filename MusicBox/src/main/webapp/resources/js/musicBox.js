@@ -3,7 +3,6 @@
 		console.log($(this).val());
 		arr.push($(this).val());
 	})*/
-	var login_id = null;
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -58,16 +57,17 @@
     	}
     }
 	$(function(){
-		/*$.ajax({
+		var user_id = $('#login_id').val();
+		var url2 = 'getPlayList?user_id='+user_id;
+		$.ajax({
 			type : "GET",
-			url : 'getUserPlayList?user_id='+login_id,			
+			url : url2,		
 			dataType : "json",
 			success : getPlayListHandle
 		})		
-		$('#playList > li').each(function(){
-			console.log($(this).val());
-			//arr.push($(this).val());
-		})*/
+		$('#logout_btn').click(function(){
+			$(location).attr('href','logout');
+		})
 		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
 			var array = [];
 			var title_array = [];
@@ -101,7 +101,7 @@
 	})
 	function getPlayListHandle(data){
 		$.each(data,function(index, value){
-			console.log(value);
+			arr.push(value.music_id);
 		})
 	}
 	function successHandle(data){
