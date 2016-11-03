@@ -1,15 +1,18 @@
 package jy.mypro.controller;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
@@ -20,6 +23,7 @@ public class MusicBoxController {
 	
 	@Inject
 	MusicBoxService ms;
+	public static boolean session = false;
 	
 	//Main 폼
 	@RequestMapping("/")
@@ -28,6 +32,7 @@ public class MusicBoxController {
 		if(user != null){
 			List<MusicPlayList> list = ms.getList(user.getUser_id());		
 			model.addAttribute("list", list);
+			model.addAttribute("session", session);
 		}
 		return "MusicBox";
 	}
@@ -41,14 +46,45 @@ public class MusicBoxController {
 	
 	//로그인 폼
 	@RequestMapping(value="/login_form", method=RequestMethod.POST)
-	public String login_user(MusicUserVO vo, HttpServletRequest request)throws Exception{
+	public String login_user(Model model, MusicUserVO vo, HttpServletRequest request)throws Exception{
 		MusicUserVO user = ms.login_check(vo);
+		session = true;
 		if(user == null){
 			return "redirect:/LoginFail";
 		}else{
 			request.getSession().setAttribute("userSession", user);
-			return "redirect:/";
+			model.addAttribute("list", ms.getList(user.getUser_id()));
+			model.addAttribute("session", session);
+			return "MusicBox";
 		}
-		
+	}
+	
+	//음악 추가
+	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)
+	public String addPlayList(@RequestParam("music_id") String[] music_id, 
+								@RequestParam("music_name") String[] music_name, 
+										HttpServletRequest request)throws Exception{
+		session = true;
+		MusicUserVO user_id = (MusicUserVO) request.getSession().getAttribute("userSession");
+		MusicPlayList user = new MusicPlayList();
+		for(int i=0;i<music_id.length;i++){
+			String music_name_de = URLDecoder.decode(music_name[i], "UTF-8");
+			user.setUser_id(user_id.getUser_id());
+			user.setMusic_id(music_id[i]);
+			user.setMusic_name(music_name_de);			
+			ms.insertMusic(user);
+		}	
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/getUserPlayList")
+	@ResponseBody
+	public List<MusicPlayList> getUserList(@RequestParam("login_id") String user_id)throws Exception{
+		List<MusicPlayList> list = ms.getMusic_id(user_id);
+		if(list != null){
+			return list;
+		}else{
+			return null;
+		}		
 	}
 }

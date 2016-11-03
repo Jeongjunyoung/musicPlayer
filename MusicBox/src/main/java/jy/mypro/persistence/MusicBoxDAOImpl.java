@@ -1,6 +1,5 @@
 package jy.mypro.persistence;
-
-import java.awt.List;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,7 +24,15 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 		return sqlSession.selectOne(namespace+".login_user", vo);
 	}
 	@Override
-	public java.util.List<MusicPlayList> getPlayList(String user_id) throws Exception {
+	public List<MusicPlayList> getPlayList(String user_id) throws Exception {
 		return sqlSession.selectList(namespace+".playList", user_id);
+	}
+	@Override
+	public void addMusic(MusicPlayList mpl) throws Exception {
+		sqlSession.insert(namespace+".add_Music",mpl);
+	}
+	@Override
+	public List<MusicPlayList> getUserList(String user_id) throws Exception {
+		return sqlSession.selectList(namespace+".getUserList", user_id);
 	}
 }

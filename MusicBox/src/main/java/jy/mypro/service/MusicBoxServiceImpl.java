@@ -28,5 +28,13 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	public List<MusicPlayList> getList(String user_id) throws Exception {
 		return dao.getPlayList(user_id);
 	}
-
+	@Override
+	public void insertMusic(MusicPlayList mpl) throws Exception {
+		dao.addMusic(mpl);
+	}
+	@Override
+	public List<MusicPlayList> getMusic_id(String user_id) throws Exception {
+		return dao.getUserList(user_id);
+	}
+	
 }

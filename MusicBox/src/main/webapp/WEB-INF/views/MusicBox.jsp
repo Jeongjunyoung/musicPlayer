@@ -15,12 +15,27 @@
 	<link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-		<p>${sessionScope.userSession.user_id}님 ㅎㅇ</p>
+	<c:choose>
+		<c:when test="${session == true }">
+			<p>${sessionScope.userSession.user_id}님 ㅎㅇ</p>
+			<button type="button" id="logout_btn" class="btn btn-default">로그아웃</button>
+		</c:when>
+		<c:otherwise>
+			<button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button>
+		</c:otherwise>
+	</c:choose>
 	<div id="register">
 		<button type="button" id="signUp_btn" class="btn btn-default" data-toggle="modal" data-target="#signUp_paper">회원가입</button>
-		<button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button>
+		
 	</div>
-	<div id="player"></div>
+	<c:choose>
+		<c:when test="${session == true }">
+			<div id="player"></div>
+		</c:when>
+		<c:otherwise>
+			<h1>로그인 하세요</h1>
+		</c:otherwise>
+	</c:choose>	
 	<div id="list" class="box">
 		<img src="/../resources/images/play.png" onclick="playVideo()" id="playBtn">
 		<img src="/../resources/images/pause.png" onclick="pauseVideo()" id="stopBtn">
@@ -31,7 +46,7 @@
 			</ul>
 		</c:forEach>
 	</div>
-	<input id="searchKey" type="text"><button id="searchBtn">검색</button><button id="checkAdd">선택 추가</button>
+	<input id="searchKey" type="text"><button id="searchBtn" class="btn btn-default">검색</button><button class="btn btn-default" id="checkAdd">선택 추가</button>
 	<div id="searchResult" class="box">
 	</div>
 	<!-- 회원가입 양식 -->

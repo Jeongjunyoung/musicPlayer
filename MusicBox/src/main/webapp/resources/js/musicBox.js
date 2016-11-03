@@ -1,4 +1,9 @@
-	var arr = ['y7gCktBEn5U','-sVo6NWwK_o','BTM68fJS1nM'];
+	var arr = [];
+	/*$('#playList li').each(function(){
+		console.log($(this).val());
+		arr.push($(this).val());
+	})*/
+	var login_id = null;
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -53,21 +58,27 @@
     	}
     }
 	$(function(){
-		/*$('#signUp_btn').click(function(){
-			$('#signUp_paper').modal('show');
+		/*$.ajax({
+			type : "GET",
+			url : 'getUserPlayList?user_id='+login_id,			
+			dataType : "json",
+			success : getPlayListHandle
+		})		
+		$('#playList > li').each(function(){
+			console.log($(this).val());
+			//arr.push($(this).val());
 		})*/
 		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
 			var array = [];
 			var title_array = [];
+			var encode_title = '';
+			var url = "addPlayList?";
 			$("input[name=video_id]:checked").each(function() {
-				array.push($(this).val());
-				title_array.push($(this).parent().find('p').text());
+				array.push($(this).val());				
+				encode_title = escape(encodeURIComponent($(this).parent().find('p').text()));
+				title_array.push(encode_title);
 			})
-			for(var i=0;i<array.length;i++){
-				var html = '<li value='+ array[i] +'>'+ title_array[i] +'</li>';
-				$('#playList').append(html);
-				arr.push(array[i]);
-			}
+			$(location).attr('href',url+"music_id="+array+"&music_name="+title_array);
 		})
 		$('#playBtn').click(function(){			
 			playList(arr);
@@ -88,6 +99,11 @@
 			})
 		})
 	})
+	function getPlayListHandle(data){
+		$.each(data,function(index, value){
+			console.log(value);
+		})
+	}
 	function successHandle(data){
 	 	var id_arr = [];
 	 	var title_arr = [];

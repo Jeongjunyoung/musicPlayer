@@ -9,4 +9,6 @@ public interface MusicBoxDAO {
 	public void signInUser(MusicUserVO vo)throws Exception;
 	public MusicUserVO loginUser(MusicUserVO vo)throws Exception;
 	public List<MusicPlayList> getPlayList(String user_id)throws Exception;
+	public void addMusic(MusicPlayList mpl)throws Exception;
+	public List<MusicPlayList> getUserList(String user_id)throws Exception;
 }
