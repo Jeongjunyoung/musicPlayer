@@ -12,7 +12,6 @@
 	<script type="text/javascript" src="/../resources/js/musicBox.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- CSS File -->
-	<link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<c:choose>

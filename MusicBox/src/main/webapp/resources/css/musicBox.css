@@ -38,6 +38,7 @@ table{
 .hoverList li{
 	list-style-type: none;
 	margin-bottom: 10px;
+	font-size: 20px;
 }
 #stopBtn{
 	display: inline;
@@ -54,9 +55,11 @@ table{
     overflow-x:hidden; 
     height:280px;
 }
-.resultList{
-	display: inline;
-}
 .input_text{
 	text-align: center;
+}
+.result-Scroll{
+	overflow:scroll; 
+    overflow-x:hidden;
+    height:300px;
 }

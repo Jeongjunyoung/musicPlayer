@@ -68,13 +68,10 @@
 			var url = "addPlayList?";
 			$("input[name=video_id]:checked").each(function() {
 				array.push($(this).val());				
-				encode_title = escape(encodeURIComponent($(this).parent().find('p').text()));
+				encode_title = escape(encodeURIComponent($(this).parent().next().find('p').text()));
 				title_array.push(encode_title);
 			})
 			$(location).attr('href',url+"music_id="+array+"&music_name="+title_array);
-		})
-		$('#playBtn').click(function(){			
-			playList(arr);
 		})
 		$('#playList').on('click', 'td', function(){
 			var video_ID = $(this).attr('id');
@@ -93,7 +90,7 @@
 		})
 	})
 	function getPlayListHandle(data){
-		$.each(data,function(index, value){
+		$.each(data, function(index, value){
 			arr.push(value.music_id);
 		})
 	}
@@ -107,7 +104,7 @@
 			title_arr[index] = value.snippet.title;
 		})
 		for(var i=0;i<id_arr.length;i++){
-			html += '<div><input type="checkbox" value='+ id_arr[i]+' class='+"resultCheck resultList"+' name='+"video_id"+'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
+			html += '<div class='+"col-xs-2"+'><input type="checkbox" value='+ id_arr[i]+' name='+"video_id"+'></div><div class='+"col-xs-10"+'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
 		}
 		$('#searchResult').html(html);
 	}

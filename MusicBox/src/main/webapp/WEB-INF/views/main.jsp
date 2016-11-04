@@ -21,7 +21,7 @@
     <link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -138,24 +138,21 @@
                 <div class="col-lg-12 text-center">
                 	<p>SEARCH LIST</p>
                 </div>
-                <!-- <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a>
-                </div> -->
                 <div class="col-lg-8 col-lg-offset-2">
 	                <div class="row control-group text-center">
-						<div class="form-group col-lg-offset-2 col-xs-8 floating-label-form-group controls">
-						    <label>Name</label>
-						    <input type="text" class="form-control" placeholder="Word" id="name">
-						    <p class="help-block text-danger"></p>	      
+						<div class="form-group col-xs-8 floating-label-form-group controls">
+						    <label>searchKey</label>
+						    <input type="text" class="form-control" placeholder="Word" id="searchKey">
 						</div>
-						<div class="form-group col-xs-2 floating-label-form-group controls">
-							<button type="submit" class="btn btn-lg btn-outline">Send</button>
+						<div class="form-group col-xs-2 controls">
+							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">SEARCH</button>
 	                	</div>
+						<div class="form-group col-xs-2 controls">
+							<button type="button" class="btn btn-xs btn-outline" id="checkAdd">ADD</button>
+	                	</div>
+	                </div>
+	                <div class="row control-group text-center result-Scroll" id="searchResult">
+	                	
 	                </div>
                 </div>
             </div>
