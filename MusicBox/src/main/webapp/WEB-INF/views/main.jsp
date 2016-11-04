@@ -46,12 +46,12 @@
                 </button>
                 <c:choose>
 					<c:when test="${session == true }">
-						<a class="navbar-brand" href="#page-top">${sessionScope.userSession.user_id}'s MUSIC BOX</a>
+						<a class="navbar-brand" href="#page-top">${sessionScope.userSession.user_id}'s MY MY</a>
 						<input type="hidden" value="${sessionScope.userSession.user_id}" id="login_id">
 						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
 					</c:when>
 					<c:otherwise>
-						<a class="navbar-brand" href="#page-top">MUSIC BOX</a>
+						<a class="navbar-brand" href="#page-top">MY MY</a>
 						<!-- <button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button> -->
 					</c:otherwise>
 				</c:choose>                
@@ -64,22 +64,22 @@
                     </li>
                     <li class="page-scroll">
                         <a href="#portfolio">PLAYLIST</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">SEARCH</a>
                     </li>                    
                     <li class="page-scroll">
-                        <a href="#signUpModal" data-toggle="modal">SIGN UP</a>
+	                    <c:choose>
+	                    	<c:when test="${session == true }">
+	                    		<a href="logout">LOGOUT</a>                    		
+	                   		</c:when>
+	                   		<c:otherwise>
+	                   			<a href="#loginModal" data-toggle="modal">LOGIN</a>
+	                   		</c:otherwise>
+	                    </c:choose>
                     </li>
                     <li class="page-scroll">
-                    <c:choose>
-                    	<c:when test="${session == true }">
-                    		<a href="logout">LOGOUT</a>                    		
-                   		</c:when>
-                   		<c:otherwise>
-                   			<a href="#loginModal" data-toggle="modal">LOGIN</a>
-                   		</c:otherwise>
-                    </c:choose>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
+                        <a href="#signUpModal" data-toggle="modal">SIGN IN</a>
                     </li>
                 </ul>
             </div>
@@ -93,9 +93,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                	<span class="skills">PLAYING NOW</span>
-               		<hr class="star-light">
+                	<!-- <span class="skills">PLAYING NOW</span>
+               		<hr class="star-light"> -->
                     <div class="intro-text" id="player"></div>
+                    <img src="/../resources/images/play2.png" class="img-responsive" alt="">
                 </div>
             </div>
         </div>
@@ -113,13 +114,13 @@
             <div id="playList_scroll" class="row">
             	<table class="table table-hover hoverList" id="playList">
             		<tr class="playList-th">
-            			<td>Title</td>
-            			<td>Artist</td>
+            			<td>TITLE</td>
             		</tr>
-            		<tr class="playList-td">
-            			<td>안녕</td>
-            			<td>안녕</td>
-            		</tr>
+            		<c:forEach var="list" items="${list }">
+	            		<tr class="playList-td">
+	            			<td id="${list.music_id }">${list.music_name }</td>
+	            		</tr>
+	            	</c:forEach>
             	</table>
             </div>
         </div>
@@ -130,21 +131,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>SEARCH</h2>
                     <hr class="star-light">
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                <div class="col-lg-12 text-center">
+                	<p>SEARCH LIST</p>
                 </div>
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#" class="btn btn-lg btn-outline">
                         <i class="fa fa-download"></i> Download Theme
                     </a>
+                </div> -->
+                <div class="col-lg-8 col-lg-offset-2">
+	                <div class="row control-group text-center">
+						<div class="form-group col-lg-offset-2 col-xs-8 floating-label-form-group controls">
+						    <label>Name</label>
+						    <input type="text" class="form-control" placeholder="Word" id="name">
+						    <p class="help-block text-danger"></p>	      
+						</div>
+						<div class="form-group col-xs-2 floating-label-form-group controls">
+							<button type="submit" class="btn btn-lg btn-outline">Send</button>
+	                	</div>
+	                </div>
                 </div>
             </div>
         </div>
@@ -246,7 +259,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Copyright &copy; Your Website 2016
+                        Copyright &copy; 2016, BokGyu All Rights Reserved.
                     </div>
                 </div>
             </div>

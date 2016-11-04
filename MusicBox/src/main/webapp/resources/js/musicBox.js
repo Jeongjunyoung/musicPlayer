@@ -76,8 +76,8 @@
 		$('#playBtn').click(function(){			
 			playList(arr);
 		})
-		$('#list').on('click', 'li', function(){
-			var video_ID = $(this).attr('value');
+		$('#playList').on('click', 'td', function(){
+			var video_ID = $(this).attr('id');
 			changeVideo(video_ID);
 		})
 		$('#searchBtn').click(function(){ //검색 버튼

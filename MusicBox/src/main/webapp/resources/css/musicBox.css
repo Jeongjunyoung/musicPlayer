@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 table{
-	width:100%;	
+	width:100%;
 	border: 0px;
 	border-collapse: collapse;
 	text-align: center;
@@ -30,7 +30,7 @@ table{
 #playList_scroll{
 	overflow:scroll; 
     overflow-x:hidden;
-    height:280px;
+    height:380px;
 }
 .hoverList li:HOVER{
 	color: #F15F5F;
