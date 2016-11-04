@@ -1,6 +1,11 @@
 @CHARSET "UTF-8";
-#list{
-	
+table{
+	width:100%;	
+	border: 0px;
+	border-collapse: collapse;
+}
+.playList-table{
+	font-size: 20px;
 }
 #search{
 	height: 150px;

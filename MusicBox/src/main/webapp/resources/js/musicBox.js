@@ -1,8 +1,4 @@
 	var arr = [];
-	/*$('#playList li').each(function(){
-		console.log($(this).val());
-		arr.push($(this).val());
-	})*/
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
