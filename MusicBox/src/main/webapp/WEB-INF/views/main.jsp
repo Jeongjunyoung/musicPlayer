@@ -93,10 +93,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                	<!-- <span class="skills">PLAYING NOW</span>
-               		<hr class="star-light"> -->
+                	<span class="skills">PLAYING NOW</span>
+               		<hr class="star-light">
                     <div class="intro-text" id="player"></div>
-                    <img src="/../resources/images/play2.png" class="img-responsive" alt="">
                 </div>
             </div>
         </div>
