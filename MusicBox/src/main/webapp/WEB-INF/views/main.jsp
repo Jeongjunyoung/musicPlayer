@@ -53,13 +53,16 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
+                        <a href="#portfolio">PLAYLIST</a>
+                    </li>                    
+                    <li class="page-scroll">
+                        <a href="#signUpModal" data-toggle="modal">SIGN UP</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#loginModal" data-toggle="modal">LOGIN</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -73,6 +76,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                	<span class="skills">PLAYING NOW</span>
+               		<hr class="star-light">
                     <div class="intro-text" id="player"></div>
                 </div>
             </div>
@@ -84,29 +89,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
+                    <h2>PLAY LIST</h2>
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
+            <div id="playList_scroll" class="row">
             	<table class="table table-hover hoverList" id="playList">
-            		<tr class="playList-table">
-            			<th>hi</th>
-            			<th>hello</th>
-            			<th>안녕</th>
+            		<tr class="playList-th">
+            			<td>Title</td>
+            			<td>Artist</td>
             		</tr>
-            		<tr>
-            			<td>안녕</td>
-            			<td>안녕</td>
-            			<td>안녕</td>
-            		</tr>
-            		<tr>
-            			<td>안녕</td>
-            			<td>안녕</td>
-            			<td>안녕</td>
-            		</tr>
-            		<tr>
-            			<td>안녕</td>
+            		<tr class="playList-td">
             			<td>안녕</td>
             			<td>안녕</td>
             		</tr>
@@ -251,7 +244,7 @@
     </div>
 
     <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -263,32 +256,27 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>SIGN UP</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <form action="sign_in" method="post" class="form-horizontal">
+								<div class="col-sm-12">
+									<p>ID</p>   <input type="text" class="form-control" name="user_id">
+								</div>
+								<div class="col-sm-12">
+									<p>PASSWORD</p>  <input type="password" class="form-control" name="user_pw">
+								</div>
+								<div class="col-sm-12">
+									<p>E-MAIL</p>   <input type="text" class="form-control" name="user_email">
+								</div><br>
+								<button type="submit" id="signIn_btn" class="btn btn-default">Sign Up</button>
+							</form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
                 <div class="lr">
@@ -300,25 +288,17 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Title</h2>
+                            <h2>LOGIN</h2>
                             <hr class="star-primary">
-                            <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <form action="login_form" method="post" class="form-horizontal">
+								<div class="col-sm-12">
+									ID   <input type="text" class="form-control" name="user_id">
+								</div>
+								<div class="col-sm-12">
+									PassWord   <input type="password" class="form-control" name="user_pw">
+								</div><br>
+								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
+							</form>
                         </div>
                     </div>
                 </div>

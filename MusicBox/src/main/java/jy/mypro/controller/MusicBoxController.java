@@ -26,12 +26,8 @@ public class MusicBoxController {
 	MusicBoxService ms;
 	public static boolean session = false;
 	
-	@RequestMapping("/")
-	public String index()throws Exception{
-		return "index";
-	}
 	
-	/*//Main 폼
+	//Main 폼
 	@RequestMapping("/")
 	public String musicBox_Main(Model model, HttpServletRequest request)throws Exception{
 		MusicUserVO user = (MusicUserVO) request.getSession().getAttribute("userSession");
@@ -41,7 +37,7 @@ public class MusicBoxController {
 			model.addAttribute("session", session);
 		}
 		return "MusicBox";
-	}*/
+	}
 	
 	//회원가입 폼
 	@RequestMapping(value="/sign_in", method=RequestMethod.POST)
