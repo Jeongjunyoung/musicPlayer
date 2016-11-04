@@ -61,9 +61,6 @@
 			dataType : "json",
 			success : getPlayListHandle
 		})		
-		$('#logout_btn').click(function(){
-			$(location).attr('href','logout');
-		})
 		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
 			var array = [];
 			var title_array = [];

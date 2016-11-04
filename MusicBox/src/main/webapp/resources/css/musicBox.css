@@ -57,3 +57,6 @@ table{
 .resultList{
 	display: inline;
 }
+.input_text{
+	text-align: center;
+}

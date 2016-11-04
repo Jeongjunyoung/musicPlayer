@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -43,9 +44,18 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">MUSIC BOX</a>
+                <c:choose>
+					<c:when test="${session == true }">
+						<a class="navbar-brand" href="#page-top">${sessionScope.userSession.user_id}'s MUSIC BOX</a>
+						<input type="hidden" value="${sessionScope.userSession.user_id}" id="login_id">
+						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
+					</c:when>
+					<c:otherwise>
+						<a class="navbar-brand" href="#page-top">MUSIC BOX</a>
+						<!-- <button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button> -->
+					</c:otherwise>
+				</c:choose>                
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -59,7 +69,14 @@
                         <a href="#signUpModal" data-toggle="modal">SIGN UP</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#loginModal" data-toggle="modal">LOGIN</a>
+                    <c:choose>
+                    	<c:when test="${session == true }">
+                    		<a href="logout">LOGOUT</a>                    		
+                   		</c:when>
+                   		<c:otherwise>
+                   			<a href="#loginModal" data-toggle="modal">LOGIN</a>
+                   		</c:otherwise>
+                    </c:choose>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
@@ -84,7 +101,7 @@
         </div>
     </header>
 
-    <!-- Portfolio Grid Section -->
+    <!-- PLAY LIST Grid Section -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
@@ -108,7 +125,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Search Section -->
     <section class="success" id="about">
         <div class="container">
             <div class="row">
@@ -256,19 +273,25 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>SIGN UP</h2>
+                            <h2>SIGN IN</h2>
                             <hr class="star-primary">
                             <form action="sign_in" method="post" class="form-horizontal">
-								<div class="col-sm-12">
-									<p>ID</p>   <input type="text" class="form-control" name="user_id">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" class="form-control input_text" name="user_id" id="input_id" placeholder="ID">
+									</div>
 								</div>
-								<div class="col-sm-12">
-									<p>PASSWORD</p>  <input type="password" class="form-control" name="user_pw">
+								<div class="form-group">									
+									<div class="col-sm-12">
+										<input type="password" class="form-control input_text" name="user_pw" id="input_pw" placeholder="PASSWORD">
+									</div>
 								</div>
-								<div class="col-sm-12">
-									<p>E-MAIL</p>   <input type="text" class="form-control" name="user_email">
-								</div><br>
-								<button type="submit" id="signIn_btn" class="btn btn-default">Sign Up</button>
+								<div class="form-group">																
+									<div class="col-sm-12">
+										<input type="email" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
+									</div>
+								</div>
+								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN IN</button>
 							</form>
                         </div>
                     </div>
@@ -291,12 +314,16 @@
                             <h2>LOGIN</h2>
                             <hr class="star-primary">
                             <form action="login_form" method="post" class="form-horizontal">
-								<div class="col-sm-12">
-									ID   <input type="text" class="form-control" name="user_id">
+                            	<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" class="form-control input_text" name="user_id" placeholder="ID">
+									</div>
 								</div>
-								<div class="col-sm-12">
-									PassWord   <input type="password" class="form-control" name="user_pw">
-								</div><br>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="password" class="form-control input_text" name="user_pw" placeholder="PASSWORD">
+									</div>
+								</div>
 								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
 							</form>
                         </div>
@@ -305,155 +332,6 @@
             </div>
         </div>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- jQuery -->
     <script src="/../resources/js/jquery.min.js"></script>
 

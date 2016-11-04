@@ -36,7 +36,7 @@ public class MusicBoxController {
 			model.addAttribute("list", list);
 			model.addAttribute("session", session);
 		}
-		return "MusicBox";
+		return "main";
 	}
 	
 	//회원가입 폼
@@ -57,7 +57,7 @@ public class MusicBoxController {
 			request.getSession().setAttribute("userSession", user);
 			model.addAttribute("list", ms.getList(user.getUser_id()));
 			model.addAttribute("session", session);
-			return "MusicBox";
+			return "main";
 		}
 	}
 	
