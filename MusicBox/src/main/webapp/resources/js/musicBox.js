@@ -88,6 +88,17 @@
 					success : successHandle
 			})
 		})
+		
+		//버튼 마우스 HOVER
+		$('.video-btn').hover(function(){
+			var img = $(this).attr('name');
+			var img_url_hover = '/../resources/images/hover/'+img+'-hover.png';
+			$(this).attr('src',img_url_hover);
+		},function(){
+			var img = $(this).attr('name');
+			var img_url = '/../resources/images/'+img+'.png';
+			$(this).attr('src',img_url);
+		})
 	})
 	function getPlayListHandle(data){
 		$.each(data, function(index, value){

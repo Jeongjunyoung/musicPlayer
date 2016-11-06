@@ -79,7 +79,7 @@
 	                    </c:choose>
                     </li>
                     <li class="page-scroll">
-                        <a href="#signUpModal" data-toggle="modal">SIGN IN</a>
+                        <a href="#signUpModal" data-toggle="modal">SIGN UP</a>
                     </li>
                 </ul>
             </div>
@@ -96,6 +96,22 @@
                 	<span class="skills">PLAYING NOW</span>
                		<hr class="star-light">
                     <div class="intro-text" id="player"></div>
+                    <br><br><br>
+                </div>
+			</div>
+			<div class="row">
+                <div class="col-md-1 col-md-offset-4">
+                	<img src="/../resources/images/play.png" class="img-responsive video-btn" onclick="playVideo()" id="playBtn" name="play">
+                	<img src="/../resources/images/pause.png" class="img-responsive video-btn" onclick="pauseVideo()" id="stopBtn" name="pause">
+                </div>
+                <div class="col-md-1">
+                	<img src="/../resources/images/shuffle.png" class="img-responsive video-btn" onclick="shufflePlay()" id="shuffleBtn" name="shuffle">
+                </div>
+                <div class="col-md-1">
+                	<img src="/../resources/images/replay.png" class="img-responsive video-btn" id="replayBtn" name="replay">
+                </div>
+                <div class="col-md-1">
+                	<img src="/../resources/images/audio.png" class="img-responsive video-btn" id="audioBtn" name="audio">
                 </div>
             </div>
         </div>
@@ -282,7 +298,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>SIGN IN</h2>
+                            <h2>SIGN UP</h2>
                             <hr class="star-primary">
                             <form action="sign_in" method="post" class="form-horizontal">
 								<div class="form-group">
