@@ -20,13 +20,6 @@ table{
 #search{
 	height: 150px;
 }
-.box{
-	margin-top: 10px;
-	border: 2px;
-	border-style: solid;
-	width: 50%;
-	text-align: center;
-}
 #playList_scroll{
 	overflow:scroll; 
     overflow-x:hidden;
@@ -65,4 +58,11 @@ table{
 }
 .button-div{
 	text-align: center;
+}
+.videoBtn-click{
+	border:  1px;
+	border-style: solid;
+}
+.now-playing{
+	background-color: #B778FF;
 }

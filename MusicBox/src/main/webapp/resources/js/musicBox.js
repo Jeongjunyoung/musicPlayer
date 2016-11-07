@@ -6,7 +6,10 @@
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	
 	var player;
+	var replay = true;
 	var shuffle = true;
+	var volume = true;
+	
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
 		   height: '390',
@@ -16,23 +19,67 @@
 		     'onStateChange': onPlayerStateChange
 		   }
 		});
-	}	
+	}
+	function changeListBlock(index){
+		var getPlaylist = player.getPlaylist();
+		$('.clickList-td').each(function(){
+			if($(this).attr('id') == getPlaylist[index]){
+				$(this).addClass('now-playing');
+			}
+		})
+	}
 	function onPlayerReady(event) {
 		player.loadPlaylist(arr,0);
-	}
+		player.setLoop(true);
+		$('.clickList-td').each(function(){
+			if($(this).attr('id') == arr[0]){
+				$(this).addClass('now-playing');
+			}
+		})
+	}	
 	function onPlayerStateChange(event) {
-		
+		if(player.getPlayerState()==0){
+			var index = player.getPlaylistIndex();
+			$('.clickList-td').removeClass('now-playing');
+			changeListBlock(index);
+		}
+	}	
+	//볼륨 컨트롤
+	function audio_btn(){
+		var src = '/../resources/images/audio';
+		if(volume){
+			player.mute();
+			volume = false;
+			$('#audioBtn').attr('src',src+'-off.png');
+		}else{
+			player.unMute();
+			volume = true;
+			$('#audioBtn').attr('src',src+'.png');
+		}
 	}
+	
+	/*//전곡 재생
+	function replay_btn(){
+		if(replay){
+			player.setLoop(replay);
+			replay = false;
+			$('#replayBtn').addClass('videoBtn-click');
+		}else{
+			player.setLoop(replay);
+			replay = true;
+			$('#replayBtn').removeClass('videoBtn-click');
+		}
+	}*/
 	//랜덤 재생
 	function shufflePlay(){
 		if(shuffle){
-			player.setShuffle(true);
+			player.setShuffle(shuffle);
 			shuffle = false;
-			$('#shuffleBtn').addClass('shuffleClick');
+			$('#shuffleBtn').addClass('videoBtn-click');
 		}else{
-			player.setShuffle(false);
+			player.setShuffle(shuffle);
 			shuffle = true;
-			$('#shuffleBtn').removeClass('shuffleClick');
+			$('#shuffleBtn').removeClass('videoBtn-click');
 		}
 	}
 	function playVideo(){ //Play 버튼 클릭 이벤트
@@ -47,6 +94,7 @@
     }
     function changeVideo(video_ID){ //음악 변경 이벤트
     	for(var i=0;i<arr.length;i++){
+    		player.setLoop(true);
     		if(arr[i] == video_ID){
     			player.loadPlaylist(arr,i);
     		}
@@ -73,11 +121,13 @@
 			})
 			$(location).attr('href',url+"music_id="+array+"&music_name="+title_array);
 		})
-		$('#playList').on('click', 'td', function(){
+		$('#playList').on('click', 'td', function(){ //리스트 클릭 이벤트
 			var video_ID = $(this).attr('id');
+			$('.clickList-td').removeClass('now-playing');
+			$(this).addClass('now-playing');
 			changeVideo(video_ID);
 		})
-		$('#searchBtn').click(function(){ //검색 버튼
+		$('#searchBtn').click(function(){ //검색 버튼 이벤트
 			var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAueMXgFyZOx_OFGSEca-S1FdCygGHR51k&maxResults=20";
 			var q = $('#searchKey').val();
 			url += '&q='+q;

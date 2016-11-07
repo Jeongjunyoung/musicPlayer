@@ -108,10 +108,10 @@
                 	<img src="/../resources/images/shuffle.png" class="img-responsive video-btn" onclick="shufflePlay()" id="shuffleBtn" name="shuffle">
                 </div>
                 <div class="col-md-1">
-                	<img src="/../resources/images/replay.png" class="img-responsive video-btn" id="replayBtn" name="replay">
+                	<img src="/../resources/images/replay.png" class="img-responsive video-btn" onclick="replay_btn()" id="replayBtn" name="replay">
                 </div>
                 <div class="col-md-1">
-                	<img src="/../resources/images/audio.png" class="img-responsive video-btn" id="audioBtn" name="audio">
+                	<img src="/../resources/images/audio.png" class="img-responsive" onclick="audio_btn()" id="audioBtn">
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@
             		</tr>
             		<c:forEach var="list" items="${list }">
 	            		<tr class="playList-td">
-	            			<td id="${list.music_id }">${list.music_name }</td>
+	            			<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
 	            		</tr>
 	            	</c:forEach>
             	</table>
