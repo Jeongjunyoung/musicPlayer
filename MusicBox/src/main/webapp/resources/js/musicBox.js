@@ -93,10 +93,10 @@
     	$('#playBtn').css('display','inline');
     }
     function changeVideo(video_ID){ //음악 변경 이벤트
-    	for(var i=0;i<arr.length;i++){
-    		player.setLoop(true);
+    	for(var i=0;i<arr.length;i++){    		
     		if(arr[i] == video_ID){
     			player.loadPlaylist(arr,i);
+    			player.setLoop(true);
     		}
     	}
     }

@@ -62,6 +62,7 @@ table{
 .videoBtn-click{
 	border:  1px;
 	border-style: solid;
+	border-color: #FF2424;
 }
 .now-playing{
 	background-color: #B778FF;
