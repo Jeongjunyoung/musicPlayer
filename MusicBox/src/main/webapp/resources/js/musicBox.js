@@ -100,6 +100,10 @@
     		}
     	}
     }
+    function repeatOne(repeatArr){
+    	player.loadPlaylist(repeatArr,0);
+    	player.setLoop(true);
+    }
 	$(function(){
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
@@ -148,6 +152,24 @@
 			var img = $(this).attr('name');
 			var img_url = '/../resources/images/'+img+'.png';
 			$(this).attr('src',img_url);
+		})
+		//한곡 반복 재생
+		$('#replayBtn').click(function(){
+			if(replay){
+				$(this).addClass('videoBtn-click');
+				$('.clickList-td').each(function(){
+					if($(this).attr('class') == 'clickList-td now-playing'){
+						var repeatArr = [];
+						repeatArr.push($(this).attr('id'));
+						repeatOne(repeatArr);
+					}
+				})
+				replay = false;
+			}else{
+				$(this).removeClass('videoBtn-click');
+				onPlayerReady();
+				replay = true;
+			}			
 		})
 	})
 	function getPlayListHandle(data){

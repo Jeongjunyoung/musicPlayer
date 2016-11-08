@@ -108,10 +108,10 @@
                 	<img src="/../resources/images/shuffle.png" class="img-responsive video-btn" onclick="shufflePlay()" id="shuffleBtn" name="shuffle">
                 </div>
                 <div class="col-md-1">
-                	<img src="/../resources/images/replay.png" class="img-responsive video-btn" onclick="replay_btn()" id="replayBtn" name="replay">
+                	<img src="/../resources/images/repeat-one.png" class="img-responsive video-btn" id="replayBtn" name="repeat-one">
                 </div>
                 <div class="col-md-1">
-                	<img src="/../resources/images/audio.png" class="img-responsive" onclick="audio_btn()" id="audioBtn">
+                	<img src="/../resources/images/audio.png" class="img-responsive" onclick="audio_btn()" id="audioBtn" name="audio">
                 </div>
             </div>
         </div>
