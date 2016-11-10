@@ -147,29 +147,23 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>SEARCH</h2>
-                    <hr class="star-light">
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 text-center">
-                	<p>SEARCH LIST</p>
-                </div>
                 <div class="col-lg-8 col-lg-offset-2">
 	                <div class="row control-group text-center">
-						<div class="form-group col-xs-8 floating-label-form-group controls">
-						    <label>searchKey</label>
-						    <input type="text" class="form-control" placeholder="Word" id="searchKey">
+						<div class="form-group col-xs-6 col-xs-offset-2 floating-label-form-group controls">
+						    <input type="text" class="form-control" placeholder="WORD" id="searchKey">
 						</div>
-						<div class="form-group col-xs-2 controls">
-							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">SEARCH</button>
-	                	</div>
-						<div class="form-group col-xs-2 controls">
-							<button type="button" class="btn btn-xs btn-outline" id="checkAdd">ADD</button>
-	                	</div>
+						<div class="col-xs-2">
+							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">search</button>
+	                	</div>						
 	                </div>
-	                <div class="row control-group text-center result-Scroll" id="searchResult">
-	                	
-	                </div>
+	                 <div class="col-lg-12 text-center">
+                   		<hr class="star-light">
+						<button type="button" class="btn btn-xs btn-outline" id="checkAdd">ADD</button>
+						<div class="row control-group text-center result-Scroll" id="searchResult"></div>
+                	</div>
                 </div>
             </div>
         </div>
@@ -316,7 +310,7 @@
 										<input type="email" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
 									</div>
 								</div>
-								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN IN</button>
+								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
 							</form>
                         </div>
                     </div>

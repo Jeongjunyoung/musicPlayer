@@ -1,4 +1,5 @@
 	var arr = [];
+	var repeatArr = [];
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -6,14 +7,14 @@
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	
 	var player;
-	var replay = true;
+	var replay = 'normal';
 	var shuffle = true;
 	var volume = true;
 	
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
-		   height: '390',
-		   width: '640',
+		   height: '200',
+		   width: '340',
 		   events: {
 		     'onReady': onPlayerReady,
 		     'onStateChange': onPlayerStateChange
@@ -28,20 +29,46 @@
 			}
 		})
 	}
-	function onPlayerReady(event) {
-		player.loadPlaylist(arr,0);
+	function onPlayerReady(event,index) {
+		console.log(index);
+		if(index == undefined){
+			index = 0;
+		}
+		player.loadPlaylist(arr,index);
 		player.setLoop(true);
 		$('.clickList-td').each(function(){
-			if($(this).attr('id') == arr[0]){
+			if($(this).attr('id') == arr[index]){
 				$(this).addClass('now-playing');
 			}
 		})
 	}	
 	function onPlayerStateChange(event) {
 		if(player.getPlayerState()==0){
-			var index = player.getPlaylistIndex();
-			$('.clickList-td').removeClass('now-playing');
-			changeListBlock(index);
+			if(replay == 'true'){
+				player.loadPlaylist(repeatArr,0);
+				player.setLoop(true);
+			}else if(replay == 'false'){
+				var id = '';
+				var index=0;
+				$('.clickList-td').each(function(){
+					if($(this).attr('class') == 'clickList-td now-playing'){
+						id = $(this).attr('id');						
+					}
+				})
+				for(var i=0;i<arr.length;i++){
+					if(arr[i] == id){
+						index = i+1;
+					}
+				}
+				$('.clickList-td').removeClass('now-playing');
+				changeListBlock(index);
+				onPlayerReady(event,index);
+				replay = 'normal';
+			}else if(replay == 'normal'){
+				var index = player.getPlaylistIndex();
+				$('.clickList-td').removeClass('now-playing');
+				changeListBlock(index);
+			}
 		}
 	}	
 	//볼륨 컨트롤
@@ -58,26 +85,16 @@
 		}
 	}
 	
-	/*//전곡 재생
-	function replay_btn(){
-		if(replay){
-			player.setLoop(replay);
-			replay = false;
-			$('#replayBtn').addClass('videoBtn-click');
-		}else{
-			player.setLoop(replay);
-			replay = true;
-			$('#replayBtn').removeClass('videoBtn-click');
-		}
-	}*/
 	//랜덤 재생
 	function shufflePlay(){
 		if(shuffle){
 			player.setShuffle(shuffle);
+			player.setLoop(true);
 			shuffle = false;
 			$('#shuffleBtn').addClass('videoBtn-click');
 		}else{
 			player.setShuffle(shuffle);
+			player.setLoop(true);
 			shuffle = true;
 			$('#shuffleBtn').removeClass('videoBtn-click');
 		}
@@ -99,10 +116,6 @@
     			player.setLoop(true);
     		}
     	}
-    }
-    function repeatOne(repeatArr){
-    	player.loadPlaylist(repeatArr,0);
-    	player.setLoop(true);
     }
 	$(function(){
 		var user_id = $('#login_id').val();
@@ -155,20 +168,17 @@
 		})
 		//한곡 반복 재생
 		$('#replayBtn').click(function(){
-			if(replay){
+			if(replay == 'false' || replay == 'normal'){
 				$(this).addClass('videoBtn-click');
 				$('.clickList-td').each(function(){
 					if($(this).attr('class') == 'clickList-td now-playing'){
-						var repeatArr = [];
-						repeatArr.push($(this).attr('id'));
-						repeatOne(repeatArr);
+						repeatArr[0] = $(this).attr('id');
+						replay = 'true';
 					}
 				})
-				replay = false;
-			}else{
+			}else if(replay){
 				$(this).removeClass('videoBtn-click');
-				onPlayerReady();
-				replay = true;
+				replay = 'false';
 			}			
 		})
 	})
