@@ -48,13 +48,8 @@
 				player.loadPlaylist(repeatArr,0);
 				player.setLoop(true);
 			}else if(replay == 'false'){
-				var id = '';
+				var id = get_playing_id();
 				var index=0;
-				$('.clickList-td').each(function(){
-					if($(this).attr('class') == 'clickList-td now-playing'){
-						id = $(this).attr('id');						
-					}
-				})
 				for(var i=0;i<arr.length;i++){
 					if(arr[i] == id){
 						index = i+1;
@@ -70,7 +65,17 @@
 				changeListBlock(index);
 			}
 		}
-	}	
+	}
+	//재생중인 노래 id 가져오기
+	function get_playing_id(){
+		var id='';
+		$('.clickList-td').each(function(){
+			if($(this).attr('class') == 'clickList-td now-playing'){
+				id = $(this).attr('id');						
+			}
+		})
+		return id;
+	}
 	//볼륨 컨트롤
 	function audio_btn(){
 		var src = '/../resources/images/audio';
@@ -84,7 +89,6 @@
 			$('#audioBtn').attr('src',src+'.png');
 		}
 	}
-	
 	//랜덤 재생
 	function shufflePlay(){
 		if(shuffle){
@@ -170,18 +174,15 @@
 		$('#replayBtn').click(function(){
 			if(replay == 'false' || replay == 'normal'){
 				$(this).addClass('videoBtn-click');
-				$('.clickList-td').each(function(){
-					if($(this).attr('class') == 'clickList-td now-playing'){
-						repeatArr[0] = $(this).attr('id');
-						replay = 'true';
-					}
-				})
+				repeatArr[0] = get_playing_id();
+				replay = 'true';
 			}else if(replay){
 				$(this).removeClass('videoBtn-click');
 				replay = 'false';
 			}			
 		})
 	})
+	//로그인시  플레이리스트 arr배열에 노래 추가
 	function getPlayListHandle(data){
 		$.each(data, function(index, value){
 			arr.push(value.music_id);
