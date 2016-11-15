@@ -128,9 +128,6 @@
             </div>
             <div id="playList_scroll" class="row">
             	<table class="table table-hover hoverList" id="playList">
-            		<tr class="playList-th">
-            			<td>TITLE</td>
-            		</tr>
             		<c:forEach var="list" items="${list }">
 	            		<tr class="playList-td">
 	            			<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
