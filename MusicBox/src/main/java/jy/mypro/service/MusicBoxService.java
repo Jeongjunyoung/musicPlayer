@@ -11,4 +11,5 @@ public interface MusicBoxService {
 	public List<MusicPlayList> getList(String user_id)throws Exception;
 	public void insertMusic(MusicPlayList mpl)throws Exception;
 	public List<MusicPlayList> getMusic_id(String user_id)throws Exception;
+	public List<MusicPlayList> getAddList(String user_id)throws Exception;
 }

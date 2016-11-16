@@ -63,11 +63,13 @@ public class MusicBoxController {
 	
 	//음악 추가
 	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)
-	public String addPlayList(@RequestParam("music_id") String[] music_id, 
+	@ResponseBody
+	public List<MusicPlayList> addPlayList(@RequestParam("music_id") String[] music_id, 
 								@RequestParam("music_name") String[] music_name, 
 										HttpServletRequest request)throws Exception{
 		session = true;
 		MusicUserVO user_id = (MusicUserVO) request.getSession().getAttribute("userSession");
+		System.out.println(user_id.getUser_id());
 		MusicPlayList user = new MusicPlayList();
 		for(int i=0;i<music_id.length;i++){
 			String music_name_de = URLDecoder.decode(music_name[i], "UTF-8");
@@ -75,8 +77,8 @@ public class MusicBoxController {
 			user.setMusic_id(music_id[i]);
 			user.setMusic_name(music_name_de);			
 			ms.insertMusic(user);
-		}	
-		return "redirect:/";
+		}
+		return ms.getAddList(user_id.getUser_id());
 	}
 	
 	//현재 로그인 되어있는 아이디의 플레이 리스트

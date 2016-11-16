@@ -35,4 +35,12 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	public List<MusicPlayList> getUserList(String user_id) throws Exception {
 		return sqlSession.selectList(namespace+".getUserList", user_id);
 	}
+	@Override
+	public String getMaxIndex(String user_id) throws Exception {
+		return sqlSession.selectOne(namespace+".maxIndex", user_id);
+	}
+	@Override
+	public List<MusicPlayList> getAddList(String user_id) throws Exception {
+		return sqlSession.selectList(namespace+".getAddList", user_id);
+	}
 }

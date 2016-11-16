@@ -121,6 +121,8 @@
     		}
     	}
     }
+    var array = [];
+	var title_array = [];
 	$(function(){
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
@@ -131,16 +133,20 @@
 			success : getPlayListHandle
 		})		
 		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
-			var array = [];
-			var title_array = [];
 			var encode_title = '';
 			var url = "addPlayList?";
-			$("input[name=video_id]:checked").each(function() {
+			$("input[name=video_id]:checked").each(function(){
 				array.push($(this).val());				
 				encode_title = escape(encodeURIComponent($(this).parent().next().find('p').text()));
 				title_array.push(encode_title);
 			})
-			$(location).attr('href',url+"music_id="+array+"&music_name="+title_array);
+			//$(location).attr('href',url+"music_id="+array+"&music_name="+title_array);
+			$.ajax({
+				type : "GET",
+				url : url+"music_id="+array+"&music_name="+title_array,
+				dataType : "json",
+				success : addPlayListHandle
+			})
 		})
 		$('#playList').on('click', 'td', function(){ //리스트 클릭 이벤트
 			var video_ID = $(this).attr('id');
@@ -179,9 +185,17 @@
 			}else if(replay){
 				$(this).removeClass('videoBtn-click');
 				replay = 'false';
-			}			
+			}
 		})
 	})
+	//재생목록 추가 ajax 처리
+	function addPlayListHandle(data){
+		$.each(data, function(index,value){			
+			var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
+			$('#playList').append(td);
+			arr.push(value.music_id);
+		})
+	}
 	//로그인시  플레이리스트 arr배열에 노래 추가
 	function getPlayListHandle(data){
 		$.each(data, function(index, value){
@@ -201,4 +215,4 @@
 			html += '<div class='+"col-xs-2"+'><input type="checkbox" value='+ id_arr[i]+' name='+"video_id"+'></div><div class='+"col-xs-10"+'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
 		}
 		$('#searchResult').html(html);
-	}
+}

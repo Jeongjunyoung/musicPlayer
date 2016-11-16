@@ -4,6 +4,13 @@ public class MusicPlayList {
 	private String user_id;
 	private String music_id;
 	private String music_name;
+	private String music_index;
+	public String getMusic_index() {
+		return music_index;
+	}
+	public void setMusic_index(String music_index) {
+		this.music_index = music_index;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

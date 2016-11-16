@@ -11,4 +11,6 @@ public interface MusicBoxDAO {
 	public List<MusicPlayList> getPlayList(String user_id)throws Exception;
 	public void addMusic(MusicPlayList mpl)throws Exception;
 	public List<MusicPlayList> getUserList(String user_id)throws Exception;
+	public String getMaxIndex(String user_id)throws Exception;
+	public List<MusicPlayList> getAddList(String user_id)throws Exception;
 }

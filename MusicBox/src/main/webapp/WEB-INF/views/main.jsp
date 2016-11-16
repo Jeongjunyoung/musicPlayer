@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>MYMY</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
@@ -129,7 +129,7 @@
             <div id="playList_scroll" class="row">
             	<table class="table table-hover hoverList" id="playList">
             		<c:forEach var="list" items="${list }">
-	            		<tr class="playList-td">
+	            		<tr class="playList-td" id="playList-add">
 	            			<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
 	            		</tr>
 	            	</c:forEach>
