@@ -69,7 +69,6 @@ public class MusicBoxController {
 										HttpServletRequest request)throws Exception{
 		session = true;
 		MusicUserVO user_id = (MusicUserVO) request.getSession().getAttribute("userSession");
-		System.out.println(user_id.getUser_id());
 		MusicPlayList user = new MusicPlayList();
 		for(int i=0;i<music_id.length;i++){
 			String music_name_de = URLDecoder.decode(music_name[i], "UTF-8");
@@ -90,7 +89,7 @@ public class MusicBoxController {
 			return list;
 		}else{
 			return null;
-		}		
+		}
 	}
 	
 	//로그아웃

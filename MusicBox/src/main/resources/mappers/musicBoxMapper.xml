@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="playList" resultType="MusicPlayList">
  		select * from user_playlist
  			where user_id = #{user_id}
- 			order by length(music_index)
+ 			order by substr(music_index,instr(music_index,'_')+1)*1
  	</select>
  	<insert id="add_Music">
  		insert into user_playlist(music_index,user_id, music_id, music_name) values(#{music_index}, #{user_id}, #{music_id}, #{music_name})
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	<select id="getAddList" resultType="MusicPlayList">
  		select * from user_playlist
- 			where substr(music_index,instr(music_index,'_')+1)*1 = (select max(substr(music_index,instr(music_index,'_')+1)*1) from user_playlist)
- 			and user_id = #{user_id}
+ 			where substr(music_index,instr(music_index,'_')+1)*1 = (select max(substr(music_index,instr(music_index,'_')+1)*1) from user_playlist where user_id=#{user_id})
+			and user_id = #{user_id}
  	</select>
 </mapper>
