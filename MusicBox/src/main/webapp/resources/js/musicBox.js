@@ -30,7 +30,6 @@
 		})
 	}
 	function onPlayerReady(event,index) {
-		console.log(index);
 		if(index == undefined){
 			index = 0;
 		}
@@ -216,7 +215,7 @@
 			title_arr[index] = value.snippet.title;
 		})
 		for(var i=0;i<id_arr.length;i++){
-			html += '<div class='+"col-xs-2"+'><input type="checkbox" value='+ id_arr[i]+' name='+"video_id"+'></div><div class='+"col-xs-10"+'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
+			html += '<div class='+"searchList"+' id='+ id_arr[i] +'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
 		}
 		$('#searchResult').html(html);
 	}
