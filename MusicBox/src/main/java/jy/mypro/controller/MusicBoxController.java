@@ -64,19 +64,17 @@ public class MusicBoxController {
 	//음악 추가
 	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)
 	@ResponseBody
-	public List<MusicPlayList> addPlayList(@RequestParam("music_id") String[] music_id, 
-								@RequestParam("music_name") String[] music_name, 
+	public List<MusicPlayList> addPlayList(@RequestParam("music_id") String music_id, 
+								@RequestParam("music_name") String music_name, 
 										HttpServletRequest request)throws Exception{
 		session = true;
 		MusicUserVO user_id = (MusicUserVO) request.getSession().getAttribute("userSession");
 		MusicPlayList user = new MusicPlayList();
-		for(int i=0;i<music_id.length;i++){
-			String music_name_de = URLDecoder.decode(music_name[i], "UTF-8");
-			user.setUser_id(user_id.getUser_id());
-			user.setMusic_id(music_id[i]);
-			user.setMusic_name(music_name_de);			
-			ms.insertMusic(user);
-		}
+		String music_name_de = URLDecoder.decode(music_name, "UTF-8");
+		user.setUser_id(user_id.getUser_id());
+		user.setMusic_id(music_id);
+		user.setMusic_name(music_name_de);			
+		ms.insertMusic(user);
 		return ms.getAddList(user_id.getUser_id());
 	}
 	

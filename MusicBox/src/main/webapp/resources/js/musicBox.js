@@ -120,8 +120,8 @@
     		}
     	}
     }
-    var array = [];
-	var title_array = [];
+    /*var array = [];
+	var title_array = [];*/
 	$(function(){
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
@@ -130,22 +130,30 @@
 			url : url2,		
 			dataType : "json",
 			success : getPlayListHandle
-		})		
+		})
+		//검색 이벤트들...
+		$('#searchResult').on('click','p',function(){
+			$('.searchList').removeClass('search-click');
+			$(this).addClass('search-click');
+		})
 		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
+			var add_id = '';
 			var encode_title = '';
 			var url = "addPlayList?";
-			$("input[name=video_id]:checked").each(function() {
-				array.push($(this).val());				
-				encode_title = escape(encodeURIComponent($(this).parent().next().find('p').text()));
-				title_array.push(encode_title);
+			$(".searchList").each(function() {
+				if($(this).attr('class') == 'searchList search-click'){
+					add_id = $(this).attr('id');
+					encode_title = escape(encodeURIComponent($(this).text()))
+				}
 			})
 			$.ajax({
 				type : "GET",
-				url : url+"music_id="+array+"&music_name="+title_array,
+				url : url+"music_id="+add_id+"&music_name="+encode_title,
 				dataType : "json",
 				success : addPlayListHandle,
 				error : errorHandle
 			})
+			$('.searchList').removeClass('search-click');
 		})
 		$('#playList').on('click', 'td', function(){ //리스트 클릭 이벤트
 			var video_ID = $(this).attr('id');
@@ -163,8 +171,7 @@
 					dataType : "json",
 					success : successHandle
 			})
-		})
-		
+		})		
 		//버튼 마우스 HOVER
 		$('.video-btn').hover(function(){
 			var img = $(this).attr('name');
@@ -175,6 +182,7 @@
 			var img_url = '/../resources/images/'+img+'.png';
 			$(this).attr('src',img_url);
 		})
+		
 		//한곡 반복 재생
 		$('#replayBtn').click(function(){
 			if(replay == 'false' || replay == 'normal'){
@@ -193,7 +201,6 @@
 	//재생목록 추가 ajax 처리
 	function addPlayListHandle(data){
 		$.each(data, function(index,value){
-			console.log('aaa');
 			var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
 			$('#playList').append(td);
 			arr.push(value.music_id);
@@ -215,7 +222,8 @@
 			title_arr[index] = value.snippet.title;
 		})
 		for(var i=0;i<id_arr.length;i++){
-			html += '<div class='+"searchList"+' id='+ id_arr[i] +'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
+			//html += '<div class='+"searchList"+' id='+ id_arr[i] +'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
+			html += '<p id='+ id_arr[i] +' class='+ "searchList" +' name='+"title_name"+'>'+title_arr[i]+'</p>';
 		}
 		$('#searchResult').html(html);
 	}
