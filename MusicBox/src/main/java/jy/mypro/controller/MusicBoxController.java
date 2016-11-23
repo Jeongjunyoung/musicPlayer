@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,8 @@ public class MusicBoxController {
 	MusicBoxService ms;
 	public static boolean session = false;
 	
+	@Inject
+	BCryptPasswordEncoder encoder;
 	
 	//Main 폼
 	@RequestMapping("/")
@@ -42,6 +45,8 @@ public class MusicBoxController {
 	//회원가입 폼
 	@RequestMapping(value="/sign_in", method=RequestMethod.POST)
 	public String signIn_user(MusicUserVO vo)throws Exception{
+		String bCryptString = encoder.encode(vo.getUser_pw());
+		vo.setUser_pw(bCryptString);
 		ms.insertUser(vo);
 		return "redirect:/";
 	}

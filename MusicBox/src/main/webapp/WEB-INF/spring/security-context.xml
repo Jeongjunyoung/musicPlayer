@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    
+   <http pattern="/**/*.js" security="none" />
+   <http pattern="/**/*.css" security="none" />
+   <http pattern="/images/*" security="none" />
+
+   <http auto-config="true">
+      <intercept-url pattern="/*" access="permitAll" />
+      <intercept-url pattern="/addPlayList" access="ROLE_USER"/>
+     <form-login login-page="/" username-parameter="user_id"
+         password-parameter="user_pw" login-processing-url="/login_form"  
+         authentication-failure-url="/"
+         default-target-url="/"
+      />
+      <csrf/>
+   </http>
+   
+   <authentication-manager alias="authenticationManager">
+   		<authentication-provider>
+   			<user-service>
+   				<user authorities="ROLE_USER" name="guest" password="guest" />
+   			</user-service>
+   		</authentication-provider>
+   </authentication-manager>
+   
+   
+	<beans:bean id="bcryptPasswordEncoder" 
+			class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+			
+	<authentication-manager>
+		<authentication-provider user-service-ref="customJdbcDaoLmpl">
+			<password-encoder ref="bcryptPasswordEncoder"/>
+		</authentication-provider>
+	</authentication-manager>
+	<beans:bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+		<beans:property name="username" value="MusicBox"/>
+		<beans:property name="password" value="1234"/>
+	</beans:bean>
+	<beans:bean id="customJdbcDaoLmpl" class="jy.mypro.login.CustomJdbcDaoImpl">
+		<beans:property name="dataSource" ref="dataSource"/>
+		 <beans:property name="usersByUsernameQuery"
+         	value="SELECT USER_ID, USER_PW, USER_EMAIL FROM MUSIC_USER WHERE USER_ID=?" />
+     	 <beans:property name="authoritiesByUsernameQuery"
+         	value="SELECT AUTHORITIES FROM MUSIC_USER WHERE USER_ID=?" />
+     	 <beans:property name="enableGroups" value="false" />
+	</beans:bean>
+</beans:beans>

@@ -92,12 +92,24 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                	<span class="skills">PLAYING NOW</span>
-               		<hr class="star-light">
-                    <div class="intro-text" id="player"></div>
-                    <br><br><br>
-                </div>
+            <c:choose>
+	            <c:when test="${session == true }">
+	            	<div class="col-lg-12">
+	                	<span class="skills">PLAYING NOW</span>
+	               		<hr class="star-light">
+	                    <div class="intro-text" id="player"></div>
+	                    <br><br><br>
+	                </div>
+	            </c:when>
+	            <c:otherwise>
+	            	<div class="col-lg-12">
+	                	<span class="skills">PLAYING NOW</span>
+	               		<hr class="star-light">
+	                    <span class="skills" id="login-plz">LOGIN PLEASE..</span>
+	                    <br><br><br>
+	                </div>
+	            </c:otherwise>
+            </c:choose>
 			</div>
 			<div class="row">
                 <div class="col-md-1 col-md-offset-4">
@@ -307,6 +319,7 @@
 										<input type="email" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
 									</div>
 								</div>
+								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
 							</form>
                         </div>
@@ -340,6 +353,7 @@
 										<input type="password" class="form-control input_text" name="user_pw" placeholder="PASSWORD">
 									</div>
 								</div>
+								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
 							</form>
                         </div>
