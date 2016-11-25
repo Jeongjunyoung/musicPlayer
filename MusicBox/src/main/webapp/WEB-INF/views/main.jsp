@@ -74,7 +74,7 @@
 	                    		<a href="logout">LOGOUT</a>                    		
 	                   		</c:when>
 	                   		<c:otherwise>
-	                   			<a href="#loginModal" data-toggle="modal">LOGIN</a>
+	                   			<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
 	                   		</c:otherwise>
 	                    </c:choose>
                     </li>
@@ -106,6 +106,7 @@
 	                	<span class="skills">PLAYING NOW</span>
 	               		<hr class="star-light">
 	                    <span class="skills" id="login-plz">LOGIN PLEASE..</span>
+	                    <input type="hidden" value="${logoutFail }" id="logoutFail">
 	                    <br><br><br>
 	                </div>
 	            </c:otherwise>

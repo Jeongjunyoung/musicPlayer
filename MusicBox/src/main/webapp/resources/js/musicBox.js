@@ -123,6 +123,13 @@
     /*var array = [];
 	var title_array = [];*/
 	$(function(){
+		var logout = $('#logoutFail').val();
+		if(logout == "true"){
+			console.log('111');
+			$('#loginModal').modal();
+			alert('Login Fail');
+		}
+		
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
 		$.ajax({
@@ -162,6 +169,7 @@
 			changeVideo(video_ID);
 		})
 		$('#searchBtn').click(function(){ //검색 버튼 이벤트
+			console.log('aa');
 			var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAueMXgFyZOx_OFGSEca-S1FdCygGHR51k&maxResults=20";
 			var q = $('#searchKey').val();
 			url += '&q='+q;

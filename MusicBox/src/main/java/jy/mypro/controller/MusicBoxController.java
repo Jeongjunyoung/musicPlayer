@@ -1,18 +1,15 @@
 package jy.mypro.controller;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,13 +31,8 @@ public class MusicBoxController {
 	
 	//Main 폼
 	@RequestMapping("/")
-	public String musicBox_Main()throws Exception{
-		/*MusicUserVO user = (MusicUserVO) request.getSession().getAttribute("userSession");
-		if(user != null){
-			List<MusicPlayList> list = ms.getList(user.getUser_id());		
-			model.addAttribute("list", list);
-			model.addAttribute("session", session);
-		}*/
+	public String musicBox_Main(Model model)throws Exception{
+		model.addAttribute("logoutFail", "none");
 		return "main";
 	}
 	
@@ -53,23 +45,12 @@ public class MusicBoxController {
 		return "redirect:/";
 	}
 	
-	/*//로그인 폼
-	@RequestMapping(value="/login_form", method=RequestMethod.POST)
-	public String login_user(Model model, MusicUserVO vo, HttpServletRequest request)throws Exception{
-		String bCryptString = encoder.encode(vo.getUser_pw());
-		vo.setUser_pw(bCryptString);
-		MusicUserVO user = ms.login_check(vo);
-		session = true;
-		if(user == null){
-			return "redirect:/LoginFail";
-		}else{
-			request.getSession().setAttribute("userSession", user);
-			model.addAttribute("list", ms.getList(user.getUser_id()));
-			model.addAttribute("session", session);
-			return "main";
-		}
-	}*/
-	
+	@RequestMapping("/loginFail")
+	public String loginFail(Model model)throws Exception{
+		System.out.println("로그아웃 실패");
+		model.addAttribute("logoutFail", "true");
+		return "main";
+	}
 	//음악 추가
 	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)
 	@ResponseBody
@@ -99,12 +80,12 @@ public class MusicBoxController {
 		}
 	}
 	
-	/*//로그아웃
+	///로그아웃
 	@RequestMapping("/logout")
 	public String logout_user(HttpServletRequest request)throws Exception{
 		session = false;
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return "redirect:/";
-	}*/
+	}
 }

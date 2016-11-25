@@ -15,19 +15,19 @@
      <form-login login-page="/main" username-parameter="user_id"
          password-parameter="user_pw" login-processing-url="/login_form"
          authentication-success-handler-ref="loginSuccessHandler"
+         authentication-failure-url="/loginFail"
          default-target-url="/"
       />
       <logout delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
-      <access-denied-handler error-page="/403page"/>
       <csrf/>
    </http>
    
 	<beans:bean id="loginSuccessHandler" class="jy.mypro.login.LoginSuccessHandler">
-		<beans:property name="login" value="loginRe"/>
+		<beans:property name="login" value="login"/>
 	</beans:bean>
 	   
 	<beans:bean id="logoutSuccessHandler" class="jy.mypro.login.LogoutSuccessHandle">
-		<beans:property name="logout" value="logoutRe"/>
+		<beans:property name="logout" value="logout"/>
 	</beans:bean>
 	   
 	<beans:bean id="bcryptPasswordEncoder" 
