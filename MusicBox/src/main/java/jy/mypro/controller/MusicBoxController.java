@@ -34,13 +34,13 @@ public class MusicBoxController {
 	
 	//Main 폼
 	@RequestMapping("/")
-	public String musicBox_Main(Model model, HttpServletRequest request)throws Exception{
-		MusicUserVO user = (MusicUserVO) request.getSession().getAttribute("userSession");
+	public String musicBox_Main()throws Exception{
+		/*MusicUserVO user = (MusicUserVO) request.getSession().getAttribute("userSession");
 		if(user != null){
 			List<MusicPlayList> list = ms.getList(user.getUser_id());		
 			model.addAttribute("list", list);
 			model.addAttribute("session", session);
-		}
+		}*/
 		return "main";
 	}
 	
@@ -53,7 +53,7 @@ public class MusicBoxController {
 		return "redirect:/";
 	}
 	
-	//로그인 폼
+	/*//로그인 폼
 	@RequestMapping(value="/login_form", method=RequestMethod.POST)
 	public String login_user(Model model, MusicUserVO vo, HttpServletRequest request)throws Exception{
 		String bCryptString = encoder.encode(vo.getUser_pw());
@@ -68,7 +68,7 @@ public class MusicBoxController {
 			model.addAttribute("session", session);
 			return "main";
 		}
-	}
+	}*/
 	
 	//음악 추가
 	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)
@@ -99,12 +99,12 @@ public class MusicBoxController {
 		}
 	}
 	
-	//로그아웃
+	/*//로그아웃
 	@RequestMapping("/logout")
 	public String logout_user(HttpServletRequest request)throws Exception{
 		session = false;
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return "redirect:/";
-	}
+	}*/
 }

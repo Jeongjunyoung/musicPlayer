@@ -17,18 +17,18 @@
          authentication-success-handler-ref="loginSuccessHandler"
          default-target-url="/"
       />
-      <!-- <logout delete-cookies="JSESSIONID" success-handler-ref="logoutSeccessHandler"/>
-      <access-denied-handler error-page="/403page"/> -->
+      <logout delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
+      <access-denied-handler error-page="/403page"/>
       <csrf/>
    </http>
    
 	<beans:bean id="loginSuccessHandler" class="jy.mypro.login.LoginSuccessHandler">
-		<beans:property name="login" value="login"/>
+		<beans:property name="login" value="loginRe"/>
 	</beans:bean>
 	   
-	<!-- <beans:bean id="logoutSeccessHandler" class="jy.mypro.login.LogoutSuccessHandler">
-		<beans:property name="logout" value="logout"/>
-	</beans:bean> -->
+	<beans:bean id="logoutSuccessHandler" class="jy.mypro.login.LogoutSuccessHandle">
+		<beans:property name="logout" value="logoutRe"/>
+	</beans:bean>
 	   
 	<beans:bean id="bcryptPasswordEncoder" 
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
