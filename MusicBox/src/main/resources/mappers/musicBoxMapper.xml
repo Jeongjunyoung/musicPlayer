@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="getUserList" resultType="MusicPlayList">
  		select * from user_playlist
  			where user_id = #{user_id}
+ 			order by substr(music_index,instr(music_index,'_')+1)*1
  	</select>
  	<select id="maxIndex" resultType="String">
  		select max(substr(music_index,instr(music_index,'_')+1)*1) from user_playlist

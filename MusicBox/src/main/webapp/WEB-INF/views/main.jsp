@@ -46,8 +46,8 @@
                 </button>
                 <c:choose>
 					<c:when test="${session == true }">
-						<a class="navbar-brand" href="#page-top">${sessionScope.userSession.user_id}'s MY MY</a>
-						<input type="hidden" value="${sessionScope.userSession.user_id}" id="login_id">
+						<a class="navbar-brand" href="#page-top">${user.user_id}'s MY MY</a>
+						<input type="hidden" value="${user.user_id}" id="login_id">
 						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
 					</c:when>
 					<c:otherwise>

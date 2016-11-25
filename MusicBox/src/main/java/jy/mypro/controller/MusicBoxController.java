@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +56,8 @@ public class MusicBoxController {
 	//로그인 폼
 	@RequestMapping(value="/login_form", method=RequestMethod.POST)
 	public String login_user(Model model, MusicUserVO vo, HttpServletRequest request)throws Exception{
+		String bCryptString = encoder.encode(vo.getUser_pw());
+		vo.setUser_pw(bCryptString);
 		MusicUserVO user = ms.login_check(vo);
 		session = true;
 		if(user == null){
@@ -73,7 +77,7 @@ public class MusicBoxController {
 								@RequestParam("music_name") String music_name, 
 										HttpServletRequest request)throws Exception{
 		session = true;
-		MusicUserVO user_id = (MusicUserVO) request.getSession().getAttribute("userSession");
+		MusicUserVO user_id = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		MusicPlayList user = new MusicPlayList();
 		String music_name_de = URLDecoder.decode(music_name, "UTF-8");
 		user.setUser_id(user_id.getUser_id());

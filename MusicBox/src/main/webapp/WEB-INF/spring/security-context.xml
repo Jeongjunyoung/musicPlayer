@@ -12,26 +12,26 @@
 
    <http auto-config="true">
       <intercept-url pattern="/*" access="permitAll" />
-      <intercept-url pattern="/addPlayList" access="ROLE_USER"/>
-     <form-login login-page="/" username-parameter="user_id"
-         password-parameter="user_pw" login-processing-url="/login_form"  
-         authentication-failure-url="/"
+     <form-login login-page="/main" username-parameter="user_id"
+         password-parameter="user_pw" login-processing-url="/login_form"
+         authentication-success-handler-ref="loginSuccessHandler"
          default-target-url="/"
       />
+      <!-- <logout delete-cookies="JSESSIONID" success-handler-ref="logoutSeccessHandler"/>
+      <access-denied-handler error-page="/403page"/> -->
       <csrf/>
    </http>
    
-   <authentication-manager alias="authenticationManager">
-   		<authentication-provider>
-   			<user-service>
-   				<user authorities="ROLE_USER" name="guest" password="guest" />
-   			</user-service>
-   		</authentication-provider>
-   </authentication-manager>
-   
-   
+	<beans:bean id="loginSuccessHandler" class="jy.mypro.login.LoginSuccessHandler">
+		<beans:property name="login" value="login"/>
+	</beans:bean>
+	   
+	<!-- <beans:bean id="logoutSeccessHandler" class="jy.mypro.login.LogoutSuccessHandler">
+		<beans:property name="logout" value="logout"/>
+	</beans:bean> -->
+	   
 	<beans:bean id="bcryptPasswordEncoder" 
-			class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 			
 	<authentication-manager>
 		<authentication-provider user-service-ref="customJdbcDaoLmpl">
@@ -47,6 +47,7 @@
 	</beans:bean>
 	<beans:bean id="customJdbcDaoLmpl" class="jy.mypro.login.CustomJdbcDaoImpl">
 		<beans:property name="dataSource" ref="dataSource"/>
+		<beans:property name="rolePrefix" value=""/>
 		 <beans:property name="usersByUsernameQuery"
          	value="SELECT USER_ID, USER_PW, USER_EMAIL FROM MUSIC_USER WHERE USER_ID=?" />
      	 <beans:property name="authoritiesByUsernameQuery"
