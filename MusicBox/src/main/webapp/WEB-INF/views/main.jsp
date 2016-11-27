@@ -304,23 +304,23 @@
                         <div class="modal-body">
                             <h2>SIGN UP</h2>
                             <hr class="star-primary">
-                            <form action="sign_in" method="post" class="form-horizontal">
+                            <form action="sign_in" method="post" class="form-horizontal" id="frm">
 								<div class="form-group">
 									<div class="col-sm-12">
-										<input type="text" class="form-control input_text" name="user_id" id="input_id" placeholder="ID">
+										<input type="text" title="ID" class="form-control input_text" name="user_id" id="input_id" placeholder="ID">
 									</div>
 								</div>
 								<div class="form-group">									
 									<div class="col-sm-12">
-										<input type="password" class="form-control input_text" name="user_pw" id="input_pw" placeholder="PASSWORD">
+										<input type="password" title="PASSWORD" class="form-control input_text" name="user_pw" id="input_pw" placeholder="PASSWORD">
 									</div>
 								</div>
 								<div class="form-group">																
 									<div class="col-sm-12">
-										<input type="email" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
+										<input type="email" title="E-MAIL" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
 									</div>
 								</div>
-								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<input type="hidden" title="HIDDEN" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
 							</form>
                         </div>

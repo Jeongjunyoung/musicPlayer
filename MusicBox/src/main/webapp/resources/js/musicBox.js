@@ -65,6 +65,17 @@
 			}
 		}
 	}
+	function checkFields(){
+		var txtEle = $("#frm input").not(":input[type=hidden]");
+		for(var i = 0; i < txtEle.length; i ++){
+			if("" == $(txtEle[i]).val() || null == $(txtEle[i]).val()){
+				var title = $(txtEle[i]).attr("title");
+				alert(title + "을(를) 입력하세요");
+				return false;
+			}
+		}
+		return true;
+	}
 	//재생중인 노래 id 가져오기
 	function get_playing_id(){
 		var id='';
@@ -138,6 +149,13 @@
 			dataType : "json",
 			success : getPlayListHandle
 		})
+		$('#frm').submit(function(){
+			var result = checkFields();
+			if(result == false){
+				return false;
+			}
+		})
+		
 		//검색 이벤트들...
 		$('#searchResult').on('click','p',function(){
 			$('.searchList').removeClass('search-click');
