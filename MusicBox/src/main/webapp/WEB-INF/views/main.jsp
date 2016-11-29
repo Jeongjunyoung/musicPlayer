@@ -87,7 +87,6 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-
     <!-- Header -->
     <header>
         <div class="container">
@@ -113,23 +112,22 @@
             </c:choose>
 			</div>
 			<div class="row">
-                <div class="col-md-1 col-md-offset-4">
+                <div class="col-xs-1 col-md-offset-4">
                 	<img src="/../resources/images/play.png" class="img-responsive video-btn" onclick="playVideo()" id="playBtn" name="play">
                 	<img src="/../resources/images/pause.png" class="img-responsive video-btn" onclick="pauseVideo()" id="stopBtn" name="pause">
                 </div>
-                <div class="col-md-1">
+                <div class="col-xs-1">
                 	<img src="/../resources/images/shuffle.png" class="img-responsive video-btn" onclick="shufflePlay()" id="shuffleBtn" name="shuffle">
                 </div>
-                <div class="col-md-1">
+                <div class="col-xs-1">
                 	<img src="/../resources/images/repeat-one.png" class="img-responsive video-btn" id="replayBtn" name="repeat-one">
                 </div>
-                <div class="col-md-1">
+                <div class="col-xs-1">
                 	<img src="/../resources/images/audio.png" class="img-responsive" onclick="audio_btn()" id="audioBtn" name="audio">
                 </div>
             </div>
         </div>
     </header>
-
     <!-- PLAY LIST Grid Section -->
     <section id="portfolio">
         <div class="container">
@@ -166,7 +164,7 @@
 						    <input type="text" class="form-control" placeholder="WORD" id="searchKey">
 						</div>
 						<div class="col-xs-2">
-							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">search</button>
+							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">SEARCH</button>
 	                	</div>						
 	                </div>
 	                 <div class="col-lg-12 text-center">

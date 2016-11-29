@@ -36,6 +36,11 @@ public class MusicBoxController {
 		return "main";
 	}
 	
+	@RequestMapping("/google")
+	public String google_Login()throws Exception{
+		return "google";
+	}
+	
 	//회원가입 폼
 	@RequestMapping(value="/sign_in", method=RequestMethod.POST)
 	public String signIn_user(MusicUserVO vo)throws Exception{
