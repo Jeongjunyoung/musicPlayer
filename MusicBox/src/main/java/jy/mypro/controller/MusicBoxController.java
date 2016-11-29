@@ -33,12 +33,21 @@ public class MusicBoxController {
 	@RequestMapping("/")
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
-		return "main";
+		return "/main";
+	}
+	
+	@RequestMapping("/googlee3b57ab611071f86.html")
+	public String google_auth()throws Exception{
+		return "/googlee3b57ab611071f86";
 	}
 	
 	@RequestMapping("/google")
-	public String google_Login()throws Exception{
+	public String google()throws Exception{
 		return "google";
+	}
+	@RequestMapping("/google_login")
+	public String google_Login()throws Exception{
+		return "google_login";
 	}
 	
 	//회원가입 폼
