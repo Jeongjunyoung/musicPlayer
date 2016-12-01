@@ -65,6 +65,22 @@
 			}
 		}
 	}
+	//구글 로그인
+	function onSignIn(googleUser){
+		var profile = googleUser.getBasicProfile();
+		var googleArr = [];
+		googleArr.push(profile.getId());
+		googleArr.push(profile.getName());
+		googleArr.push(profile.getEmail());
+		/*$('#id').html(profile.getId());
+		$('#name').html(profile.getName());
+		$('#email').html(profile.getEmail());
+		$('#image_url').html(profile.getImageUrl());*/
+		//var url = 'googleLogin?id='+profile.getId()+'&name='+profile.getName()+'&email='+profile.getEmail();
+		var url = 'googleLogin?googleArr='+googleArr;
+		$(location).attr('href',url);
+	}
+	//로그인 NULL값 체크
 	function checkFields(){
 		var txtEle = $("#frm input").not(":input[type=hidden]");
 		for(var i = 0; i < txtEle.length; i ++){
@@ -131,31 +147,28 @@
     		}
     	}
     }
-    /*var array = [];
-	var title_array = [];*/
 	$(function(){
 		var logout = $('#logoutFail').val();
+		var user_id = $('#login_id').val();
+		var url2 = 'getPlayList?user_id='+user_id;
+		//로그인 실패시
 		if(logout == "true"){
-			console.log('111');
 			$('#loginModal').modal();
 			alert('Login Fail');
 		}
-		
-		var user_id = $('#login_id').val();
-		var url2 = 'getPlayList?user_id='+user_id;
 		$.ajax({
 			type : "GET",
 			url : url2,		
 			dataType : "json",
 			success : getPlayListHandle
 		})
+		//로그인  submit
 		$('#frm').submit(function(){
 			var result = checkFields();
 			if(result == false){
 				return false;
 			}
 		})
-		
 		//검색 이벤트들...
 		$('#searchResult').on('click','p',function(){
 			$('.searchList').removeClass('search-click');

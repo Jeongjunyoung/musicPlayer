@@ -35,21 +35,10 @@ public class MusicBoxController {
 		model.addAttribute("logoutFail", "none");
 		return "/main";
 	}
-	
 	@RequestMapping("/googlee3b57ab611071f86.html")
 	public String google_auth()throws Exception{
 		return "/googlee3b57ab611071f86";
 	}
-	
-	@RequestMapping("/google")
-	public String google()throws Exception{
-		return "google";
-	}
-	@RequestMapping("/google_login")
-	public String google_Login()throws Exception{
-		return "google_login";
-	}
-	
 	//회원가입 폼
 	@RequestMapping(value="/sign_in", method=RequestMethod.POST)
 	public String signIn_user(MusicUserVO vo)throws Exception{
@@ -58,7 +47,15 @@ public class MusicBoxController {
 		ms.insertUser(vo);
 		return "redirect:/";
 	}
-	
+	//구글 로그인
+	@RequestMapping(value="/googleLogin", method=RequestMethod.GET)
+	public String google_Login(@RequestParam("googleArr") String[] arr)throws Exception{
+		for(String str : arr){
+			System.out.println(str);
+		}
+		return null;
+	}
+	//로그인 실패
 	@RequestMapping("/loginFail")
 	public String loginFail(Model model)throws Exception{
 		System.out.println("로그아웃 실패");

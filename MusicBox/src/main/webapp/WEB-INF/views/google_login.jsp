@@ -13,7 +13,6 @@
 <script type="text/javascript">
 function onSignIn(googleUser){
 	var profile = googleUser.getBasicProfile();
-	
 	$('#id').html(profile.getId());
 	$('#name').html(profile.getName());
 	$('#email').html(profile.getEmail());

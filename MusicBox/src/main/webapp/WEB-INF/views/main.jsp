@@ -10,7 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-site-verification" content="60I7cWIaqvcVC_HneXrEvqvbUD99KqLcdRmOnNUhexA">
+	<meta name="google-signin-client_id" content="222457887868-9bofjnk09tuuc2v2cgedclv7nu6c868n.apps.googleusercontent.com">
+	
     <title>MYMY</title>
 
     <!-- Bootstrap Core CSS -->
@@ -354,6 +357,7 @@
 								</div>
 								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
+								<div class="g-signin2" data-onsuccess="onSignIn"></div>
 							</form>
                         </div>
                     </div>
@@ -377,7 +381,9 @@
 
     <!-- Theme JavaScript -->
     <script src="/../resources/js/freelancer.min.js"></script>
-
+	
+	<!-- Google API -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
 </html>
