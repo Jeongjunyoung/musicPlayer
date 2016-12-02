@@ -18,10 +18,17 @@ function onSignIn(googleUser){
 	$('#email').html(profile.getEmail());
 	$('#image_url').html(profile.getImageUrl());
 }
+function signOut() {
+	var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+		alert('User signed out.');
+	});
+}
 </script>
 </head>
 <body>
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
+<a href="#" onclick="signOut();">Sign out</a>
 <br/>
 id : <span id="id"></span><br/>
 name : <span id="name"></span><br/>

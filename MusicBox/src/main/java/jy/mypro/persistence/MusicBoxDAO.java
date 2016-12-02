@@ -13,4 +13,5 @@ public interface MusicBoxDAO {
 	public List<MusicPlayList> getUserList(String user_id)throws Exception;
 	public String getMaxIndex(String user_id)throws Exception;
 	public List<MusicPlayList> getAddList(String user_id)throws Exception;
+	public MusicUserVO getGoogleUser(MusicUserVO vo)throws Exception;
 }

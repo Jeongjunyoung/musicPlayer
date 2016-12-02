@@ -69,16 +69,27 @@
 	function onSignIn(googleUser){
 		var profile = googleUser.getBasicProfile();
 		var googleArr = [];
-		googleArr.push(profile.getId());
-		googleArr.push(profile.getName());
+		var encodeName = escape(encodeURIComponent(profile.getName()));
+		var id_token = googleUser.getAuthResponse().id_token;
+		googleArr.push(id_token);
+		googleArr.push(encodeName);
 		googleArr.push(profile.getEmail());
-		/*$('#id').html(profile.getId());
-		$('#name').html(profile.getName());
-		$('#email').html(profile.getEmail());
-		$('#image_url').html(profile.getImageUrl());*/
-		//var url = 'googleLogin?id='+profile.getId()+'&name='+profile.getName()+'&email='+profile.getEmail();
 		var url = 'googleLogin?googleArr='+googleArr;
 		$(location).attr('href',url);
+	}
+	//구글 로그아웃
+	function signOut(){
+		var google_user = $('#google_user').val();
+		alert(google_user);
+		if(google_user == 'true'){
+			alert('login come on');
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+				alert('logout success');
+				//$(location).attr('href','logout');
+			});
+		}
+		
 	}
 	//로그인 NULL값 체크
 	function checkFields(){

@@ -43,4 +43,8 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	public List<MusicPlayList> getAddList(String user_id) throws Exception {
 		return sqlSession.selectList(namespace+".getAddList", user_id);
 	}
+	@Override
+	public MusicUserVO getGoogleUser(MusicUserVO vo) throws Exception {
+		return sqlSession.selectOne(namespace+".google_user", vo);
+	}
 }

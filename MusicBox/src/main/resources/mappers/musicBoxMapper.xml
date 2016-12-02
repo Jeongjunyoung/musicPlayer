@@ -33,4 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			where substr(music_index,instr(music_index,'_')+1)*1 = (select max(substr(music_index,instr(music_index,'_')+1)*1) from user_playlist where user_id=#{user_id})
 			and user_id = #{user_id}
  	</select>
+ 	<select id="google_user" resultType="MusicUserVO">
+ 		select * from music_user
+ 			where user_id = #{user_id} and user_email = #{user_email}
+ 	</select>
 </mapper>

@@ -18,9 +18,7 @@ public class MusicUserVO implements UserDetails{
 	private String user_pw;
 	private String user_email;
 	private Set<GrantedAuthority> authorities;
-	
 	public MusicUserVO(){}
-	
 	public MusicUserVO(String user_id, String user_pw, String user_email, Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.user_id = user_id;

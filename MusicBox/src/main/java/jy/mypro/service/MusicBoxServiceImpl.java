@@ -50,5 +50,9 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	public List<MusicPlayList> getAddList(String user_id) throws Exception {
 		return dao.getAddList(user_id);
 	}
+	@Override
+	public MusicUserVO getGoogleUser(MusicUserVO vo) throws Exception {
+		return dao.getGoogleUser(vo);
+	}
 	
 }

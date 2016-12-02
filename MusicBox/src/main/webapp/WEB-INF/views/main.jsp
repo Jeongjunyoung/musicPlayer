@@ -51,6 +51,7 @@
 					<c:when test="${session == true }">
 						<a class="navbar-brand" href="#page-top">${user.user_id}'s MY MY</a>
 						<input type="hidden" value="${user.user_id}" id="login_id">
+						<input type="hidden" id="google_user" value="${google_user}">
 						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
 					</c:when>
 					<c:otherwise>
@@ -74,7 +75,7 @@
                     <li class="page-scroll">
 	                    <c:choose>
 	                    	<c:when test="${session == true }">
-	                    		<a href="logout">LOGOUT</a>                    		
+	                    		<a href="logout" onclick="signOut();">LOGOUT</a>                    		
 	                   		</c:when>
 	                   		<c:otherwise>
 	                   			<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
@@ -290,7 +291,7 @@
         </a>
     </div>
 
-    <!-- Portfolio Modals -->
+    <!-- 회원가입 Modal -->
     <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -330,6 +331,7 @@
             </div>
         </div>
     </div>
+    <!-- 로그인 Modal -->
     <div class="portfolio-modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
             <div class="close-modal" data-dismiss="modal">
@@ -359,6 +361,10 @@
 								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
 								<div class="g-signin2" data-onsuccess="onSignIn"></div>
 							</form>
+							<c:if test="${session == false }">
+								
+								
+							</c:if>
                         </div>
                     </div>
                 </div>
