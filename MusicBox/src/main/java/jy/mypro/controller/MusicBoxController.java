@@ -54,6 +54,7 @@ public class MusicBoxController {
 	public String google_Login(@RequestParam("googleArr") String[] arr,Model model)throws Exception{
 		session = true;
 		google_user = "true";
+		System.out.println("google");
 		String de_str = URLDecoder.decode(arr[1],"UTF-8");
 		String user_name = arr[2].substring(0, arr[2].indexOf("@"));
 		MusicUserVO vo = new MusicUserVO();

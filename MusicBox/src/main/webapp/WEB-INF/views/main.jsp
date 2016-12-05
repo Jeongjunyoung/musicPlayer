@@ -346,25 +346,22 @@
                         <div class="modal-body">
                             <h2>LOGIN</h2>
                             <hr class="star-primary">
-                            <form action="login_form" method="post" class="form-horizontal">
+                            <form action="login_form" method="post" class="form-horizontal" name="loginForm">
                             	<div class="form-group">
 									<div class="col-sm-12">
-										<input type="text" class="form-control input_text" name="user_id" placeholder="ID">
+										<input type="text" class="form-control input_text" name="user_id" placeholder="ID" id="user_id">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-12">
-										<input type="password" class="form-control input_text" name="user_pw" placeholder="PASSWORD">
+										<input type="password" class="form-control input_text" name="user_pw" placeholder="PASSWORD" id="user_pw">
+										<input type="hidden" name="user_email" id="user_email"/>
 									</div>
 								</div>
 								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
 								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
-								<div class="g-signin2" data-onsuccess="onSignIn"></div>
 							</form>
-							<c:if test="${session == false }">
-								
-								
-							</c:if>
+							<div class="g-signin2" data-onsuccess="onSignIn"></div>
                         </div>
                     </div>
                 </div>
@@ -391,5 +388,4 @@
 	<!-- Google API -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
-
 </html>

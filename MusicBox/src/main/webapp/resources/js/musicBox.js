@@ -71,22 +71,25 @@
 		var googleArr = [];
 		var encodeName = escape(encodeURIComponent(profile.getName()));
 		var id_token = googleUser.getAuthResponse().id_token;
+		var google_user = $('#google_user').val();
 		googleArr.push(id_token);
 		googleArr.push(encodeName);
 		googleArr.push(profile.getEmail());
+		$('#user_id').val(encodeName);
+		$('#user_pw').val(id_token);
+		$('#user_email').val(profile.getEmail());
 		var url = 'googleLogin?googleArr='+googleArr;
-		$(location).attr('href',url);
+		if(google_user != 'true'){
+			$(location).attr('href',url);
+		}
 	}
 	//구글 로그아웃
 	function signOut(){
 		var google_user = $('#google_user').val();
-		alert(google_user);
 		if(google_user == 'true'){
-			alert('login come on');
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut().then(function () {
-				alert('logout success');
-				//$(location).attr('href','logout');
+				$(location).attr('href','logout');
 			});
 		}
 		
