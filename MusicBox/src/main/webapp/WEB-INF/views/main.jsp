@@ -47,11 +47,11 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
+                <input type="hidden" id="google_user" value="${google_user}">
                 <c:choose>
 					<c:when test="${session == true }">
 						<a class="navbar-brand" href="#page-top">${user.user_id}'s MY MY</a>
 						<input type="hidden" value="${user.user_id}" id="login_id">
-						<input type="hidden" id="google_user" value="${google_user}">
 						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
 					</c:when>
 					<c:otherwise>
@@ -109,7 +109,7 @@
 	                	<span class="skills">PLAYING NOW</span>
 	               		<hr class="star-light">
 	                    <span class="skills" id="login-plz">LOGIN PLEASE..</span>
-	                    <input type="hidden" value="${logoutFail }" id="logoutFail">
+	                    <input type="hidden" value="${loginFail }" id="loginFail">
 	                    <br><br><br>
 	                </div>
 	            </c:otherwise>
@@ -346,7 +346,7 @@
                         <div class="modal-body">
                             <h2>LOGIN</h2>
                             <hr class="star-primary">
-                            <form action="login_form" method="post" class="form-horizontal" name="loginForm">
+                            <form action="login_form" method="post" class="form-horizontal" name="loginForm" id="loginForm">
                             	<div class="form-group">
 									<div class="col-sm-12">
 										<input type="text" class="form-control input_text" name="user_id" placeholder="ID" id="user_id">

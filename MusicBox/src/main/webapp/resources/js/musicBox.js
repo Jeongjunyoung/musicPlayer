@@ -79,14 +79,25 @@
 		$('#user_pw').val(id_token);
 		$('#user_email').val(profile.getEmail());
 		var url = 'googleLogin?googleArr='+googleArr;
-		if(google_user != 'true'){
-			$(location).attr('href',url);
+		var queryString = $('#loginForm').serialize();
+		alert(google_user);
+		if(google_user != 'trueS'){
+			$.ajax({
+				type : 'post',
+				url : 'googleLogin',
+				data : queryString,
+				dataType : 'json',
+				success : googleHandler
+			})
 		}
+	}
+	function googleHandler(){
+		$(location).attr('href','googleSet');
 	}
 	//구글 로그아웃
 	function signOut(){
 		var google_user = $('#google_user').val();
-		if(google_user == 'true'){
+		if(google_user == 'trueS'){
 			var auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut().then(function () {
 				$(location).attr('href','logout');
@@ -162,11 +173,11 @@
     	}
     }
 	$(function(){
-		var logout = $('#logoutFail').val();
+		var login = $('#loginFail').val();
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
 		//로그인 실패시
-		if(logout == "true"){
+		if(login == "true"){
 			$('#loginModal').modal();
 			alert('Login Fail');
 		}

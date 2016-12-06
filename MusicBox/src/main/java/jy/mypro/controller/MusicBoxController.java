@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,20 +22,17 @@ import jy.mypro.service.MusicBoxService;
 
 @Controller
 public class MusicBoxController {
-	
 	@Inject
 	MusicBoxService ms;
-	public static boolean session = false;
+	public static boolean Social_session = false;
 	public static String google_user = "false";
-	
 	@Inject
 	BCryptPasswordEncoder encoder;
-	
 	//Main 폼
 	@RequestMapping("/")
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
-		model.addAttribute("session", session);
+		model.addAttribute("session", Social_session);
 		return "/main";
 	}
 	@RequestMapping("/googlee3b57ab611071f86.html")
@@ -50,24 +48,40 @@ public class MusicBoxController {
 		return "redirect:/";
 	}
 	//구글 로그인
-	@RequestMapping(value="/googleLogin", method=RequestMethod.GET)
-	public String google_Login(@RequestParam("googleArr") String[] arr,Model model)throws Exception{
-		session = true;
-		google_user = "true";
-		System.out.println("google");
-		String de_str = URLDecoder.decode(arr[1],"UTF-8");
-		String user_name = arr[2].substring(0, arr[2].indexOf("@"));
-		MusicUserVO vo = new MusicUserVO();
-		vo.setUser_pw(arr[0]);
+	@RequestMapping(value="/googleLogin", method=RequestMethod.POST)
+	@ResponseBody
+	public MusicUserVO google_Login(MusicUserVO vo, Model model, HttpServletRequest request)throws Exception{
+		/*session = true;
+		google_user = "true";*/
+		HttpSession session = request.getSession();
+		System.out.println(vo.getUser_email());
+		String email = vo.getUser_email();
+		//String de_str = URLDecoder.decode(arr[1],"UTF-8");
+		String user_name = email.substring(0, email.indexOf("@"));
 		vo.setUser_id(user_name);
-		vo.setUser_email(arr[2]);
 		MusicUserVO check = ms.getGoogleUser(vo);
 		if(check == null){
 			ms.insertUser(vo);
 		}
 		MusicUserVO user = ms.getGoogleUser(vo);
-		model.addAttribute("user", user);
+		session.setAttribute("googleUser", user);
+		/*model.addAttribute("user", user);
 		model.addAttribute("session", session);
+		model.addAttribute("google_user", google_user);
+		model.addAttribute("list", ms.getList(user.getUser_id()));*/
+		return user;
+	}
+	//구글 로그인 셋팅
+	@RequestMapping(value="/googleSet", method=RequestMethod.GET)
+	public String googleSet(Model model, HttpServletRequest request)throws Exception{
+		Social_session = true;
+		google_user = "trueS";
+		System.out.println("google setting");
+		HttpSession session = request.getSession();
+		MusicUserVO user = (MusicUserVO) session.getAttribute("googleUser");
+		System.out.println(user.getUser_email());
+		model.addAttribute("user", user);
+		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
 		model.addAttribute("list", ms.getList(user.getUser_id()));
 		return "/main";
@@ -79,8 +93,7 @@ public class MusicBoxController {
 	//로그인 실패
 	@RequestMapping("/loginFail")
 	public String loginFail(Model model)throws Exception{
-		System.out.println("로그아웃 실패");
-		model.addAttribute("logoutFail", "true");
+		model.addAttribute("loginFail", "true");
 		return "/main";
 	}
 	//음악 추가
@@ -89,7 +102,7 @@ public class MusicBoxController {
 	public List<MusicPlayList> addPlayList(@RequestParam("music_id") String music_id, 
 								@RequestParam("music_name") String music_name, 
 										HttpServletRequest request)throws Exception{
-		session = true;
+		Social_session = true;
 		MusicUserVO user_id = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		MusicPlayList user = new MusicPlayList();
 		String music_name_de = URLDecoder.decode(music_name, "UTF-8");
@@ -113,8 +126,7 @@ public class MusicBoxController {
 	///로그아웃
 	@RequestMapping("/logout")
 	public String logout_user(HttpServletRequest request)throws Exception{
-		System.out.println("logout");
-		session = false;
+		Social_session = false;
 		google_user = "false";
 		HttpSession session = request.getSession();
 		session.invalidate();
