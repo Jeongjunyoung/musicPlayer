@@ -80,7 +80,6 @@
 		$('#user_email').val(profile.getEmail());
 		var url = 'googleLogin?googleArr='+googleArr;
 		var queryString = $('#loginForm').serialize();
-		alert(google_user);
 		if(google_user != 'trueS'){
 			$.ajax({
 				type : 'post',
