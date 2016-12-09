@@ -32,9 +32,10 @@ public class MusicBoxController {
 	@RequestMapping("/")
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
-		model.addAttribute("session", Social_session);
+		//model.addAttribute("session", Social_session);
 		return "/main";
 	}
+	//구글 인증
 	@RequestMapping("/googlee3b57ab611071f86.html")
 	public String google_auth()throws Exception{
 		return "/googlee3b57ab611071f86";
@@ -51,8 +52,6 @@ public class MusicBoxController {
 	@RequestMapping(value="/googleLogin", method=RequestMethod.POST)
 	@ResponseBody
 	public MusicUserVO google_Login(MusicUserVO vo, Model model, HttpServletRequest request)throws Exception{
-		/*session = true;
-		google_user = "true";*/
 		HttpSession session = request.getSession();
 		System.out.println(vo.getUser_email());
 		String email = vo.getUser_email();
@@ -65,10 +64,6 @@ public class MusicBoxController {
 		}
 		MusicUserVO user = ms.getGoogleUser(vo);
 		session.setAttribute("googleUser", user);
-		/*model.addAttribute("user", user);
-		model.addAttribute("session", session);
-		model.addAttribute("google_user", google_user);
-		model.addAttribute("list", ms.getList(user.getUser_id()));*/
 		return user;
 	}
 	//구글 로그인 셋팅
@@ -103,7 +98,13 @@ public class MusicBoxController {
 								@RequestParam("music_name") String music_name, 
 										HttpServletRequest request)throws Exception{
 		Social_session = true;
-		MusicUserVO user_id = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		HttpSession session = request.getSession();
+		MusicUserVO user_id;
+		if((MusicUserVO) session.getAttribute("googleUser") == null){
+			user_id = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}else{
+			user_id = (MusicUserVO) session.getAttribute("googleUser");
+		}
 		MusicPlayList user = new MusicPlayList();
 		String music_name_de = URLDecoder.decode(music_name, "UTF-8");
 		user.setUser_id(user_id.getUser_id());
@@ -123,7 +124,7 @@ public class MusicBoxController {
 			return null;
 		}
 	}
-	///로그아웃
+	//로그아웃
 	@RequestMapping("/logout")
 	public String logout_user(HttpServletRequest request)throws Exception{
 		Social_session = false;
@@ -131,5 +132,10 @@ public class MusicBoxController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		return "redirect:/";
+	}
+	//TEST
+	@RequestMapping("/testPage")
+	public String test()throws Exception{
+		return "testPage";
 	}
 }

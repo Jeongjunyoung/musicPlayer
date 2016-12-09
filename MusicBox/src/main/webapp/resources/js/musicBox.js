@@ -1,5 +1,7 @@
 	var arr = [];
 	var repeatArr = [];
+	var editArr = [];
+	
 	var tag = document.createElement('script');
 	
 	tag.src = "https://www.youtube.com/iframe_api";
@@ -10,6 +12,7 @@
 	var replay = 'normal';
 	var shuffle = true;
 	var volume = true;
+	var edit = false;
 	
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
@@ -120,7 +123,7 @@
 	function get_playing_id(){
 		var id='';
 		$('.clickList-td').each(function(){
-			if($(this).attr('class') == 'clickList-td now-playing'){
+			if($(this).hasClass('now-playing')){
 				id = $(this).attr('id');						
 			}
 		})
@@ -172,20 +175,72 @@
     	}
     }
 	$(function(){
+		//delete 버튼
+		var btn = $('.btn-del');
+		var btnFront = $('.btn-front'),
+		    btnYes = $('.btn-back .yes'),
+		    btnNo = $('.btn-back .no');
+		
+		btnFront.on( 'click', function( event ) {
+		  var mx = event.clientX - btn.offsetLeft,
+		      my = event.clientY - btn.offsetTop;
+		
+		  var w = btn.offsetWidth,
+		      h = btn.offsetHeight;
+			
+		  var directions = [
+		    { id: 'top', x: w/2, y: 0 },
+		    { id: 'right', x: w, y: h/2 },
+		    { id: 'bottom', x: w/2, y: h },
+		    { id: 'left', x: 0, y: h/2 }
+		  ];
+		  
+		  directions.sort(function( a, b ) {
+		    return distance( mx, my, a.x, a.y ) - distance( mx, my, b.x, b.y );
+		  });
+		  
+		  btn.attr('data-direction', directions.shift().id );
+		  btn.addClass('is-open');
+		
+		});
+		
+		btnYes.on('click', function(event) {	
+		  btn.removeClass('is-open');
+		  for(var i=0;i<editArr.length;i++){
+			  console.log(editArr[i]);
+		  }
+		});
+		
+		btnNo.on('click', function(event) {
+		  btn.removeClass( 'is-open' );
+		});
+		
+		function distance(x1, y1, x2, y2) {
+		  var dx = x1-x2;
+		  var dy = y1-y2;
+		  return Math.sqrt(dx*dx + dy*dy);
+		}
+		//EDIT 버튼
+		$('#editBtn').click(function(){
+			edit = true;
+			$(this).css('display','none');
+			btn.css('display','block');
+		})
+		//MYMY 기본
 		var login = $('#loginFail').val();
 		var user_id = $('#login_id').val();
 		var url2 = 'getPlayList?user_id='+user_id;
-		//로그인 실패시
-		if(login == "true"){
-			$('#loginModal').modal();
-			alert('Login Fail');
-		}
 		$.ajax({
 			type : "GET",
 			url : url2,		
 			dataType : "json",
 			success : getPlayListHandle
 		})
+		//로그인 실패시
+		if(login == "true"){
+			$('#loginModal').modal();
+			alert('Login Fail');
+		}
 		//로그인  submit
 		$('#frm').submit(function(){
 			var result = checkFields();
@@ -198,12 +253,13 @@
 			$('.searchList').removeClass('search-click');
 			$(this).addClass('search-click');
 		})
-		$('#checkAdd').on('click', function(){ //체크 선택 추가 이벤트
+		//체크 선택 추가 이벤트
+		$('#checkAdd').on('click', function(){
 			var add_id = '';
 			var encode_title = '';
 			var url = "addPlayList?";
 			$(".searchList").each(function() {
-				if($(this).attr('class') == 'searchList search-click'){
+				if($(this).hasClass('search-click')){
 					add_id = $(this).attr('id');
 					encode_title = escape(encodeURIComponent($(this).text()))
 				}
@@ -217,13 +273,30 @@
 			})
 			$('.searchList').removeClass('search-click');
 		})
-		$('#playList').on('click', 'td', function(){ //리스트 클릭 이벤트
-			var video_ID = $(this).attr('id');
-			$('.clickList-td').removeClass('now-playing');
-			$(this).addClass('now-playing');
-			changeVideo(video_ID);
+		//리스트 클릭 이벤트
+		$('#playList').on('click', 'td', function(){
+				var video_ID = $(this).attr('id');
+				var $this = $(this);
+			if(edit){
+				if($this.hasClass('edit-click')){
+					$this.removeClass('edit-click');
+					for(var i=0;i<editArr.length;i++){
+						if(editArr[i] == video_ID){
+							editArr.splice(i, 1)
+						}
+					}
+				}else{
+					$this.addClass('edit-click');
+					editArr.push(video_ID);
+				}
+			}else{
+				$('.clickList-td').removeClass('now-playing');
+				$this.addClass('now-playing');
+				changeVideo(video_ID);
+			}
 		})
-		$('#searchBtn').click(function(){ //검색 버튼 이벤트
+		//검색 버튼 이벤트
+		$('#searchBtn').click(function(){
 			console.log('aa');
 			var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAueMXgFyZOx_OFGSEca-S1FdCygGHR51k&maxResults=20";
 			var q = $('#searchKey').val();
@@ -259,7 +332,7 @@
 		})
 	})
 	function errorHandle(data){
-		alert('Sorry Server Error');
+		alert('Sorry Server error......');
 	}
 	//재생목록 추가 ajax 처리
 	function addPlayListHandle(data){
@@ -285,7 +358,6 @@
 			title_arr[index] = value.snippet.title;
 		})
 		for(var i=0;i<id_arr.length;i++){
-			//html += '<div class='+"searchList"+' id='+ id_arr[i] +'><p name='+"title_name"+'>'+title_arr[i]+'</p></div>';
 			html += '<p id='+ id_arr[i] +' class='+ "searchList" +' name='+"title_name"+'>'+title_arr[i]+'</p>';
 		}
 		$('#searchResult').html(html);

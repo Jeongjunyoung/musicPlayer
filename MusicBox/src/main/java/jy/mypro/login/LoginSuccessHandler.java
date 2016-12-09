@@ -33,9 +33,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
 		//(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); ->>> 사용자 정보 조회
-		boolean session = true;
 		MusicUserVO user = (MusicUserVO)auth.getPrincipal();
-		request.setAttribute("session", session);
+		request.setAttribute("session", true);
 		request.setAttribute("user", user);
 		try {			
 			request.setAttribute("list", ms.getList(user.getUser_id()));

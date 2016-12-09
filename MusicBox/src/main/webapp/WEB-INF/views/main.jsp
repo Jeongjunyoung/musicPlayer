@@ -18,7 +18,8 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
     <!-- Theme CSS -->
     <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
     <link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
@@ -34,7 +35,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body id="page-top" class="index">
@@ -140,6 +140,19 @@
                     <h2>PLAY LIST</h2>
                     <hr class="star-primary">
                 </div>
+                <div class="col-lg-offset-10 col-lg-2">
+                    <button class="btn btn-lg btn-default" id="editBtn">EDIT</button>
+                </div>
+                <div class="col-lg-offset-10 col-lg-2">
+					<div class="btn-del">
+						<div class="btn-back">
+							<p>정말 삭제 할까요?</p>
+							<button class="yes">YES</button>
+							<button class="no">NO</button>
+						</div>
+						<div class="btn-front">Delete</div>
+					</div>
+				</div>
             </div>
             <div id="playList_scroll" class="row">
             	<table class="table table-hover hoverList" id="playList">
