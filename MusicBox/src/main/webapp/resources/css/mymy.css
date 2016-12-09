@@ -73,7 +73,7 @@ table{
 	font-size: 50px;
 }
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
-html, body {
+html, body{
   width: 100%;
   height: 100%;
   margin: 0;
@@ -82,21 +82,21 @@ html, body {
       -ms-user-select: none;
           user-select: none;
 }
-.description {
+.description{
   margin-bottom: 30px;
   text-align: center;
   color: #999;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
-.description a {
+.description a{
   color: #4A9DF6;
   text-decoration: none;
 }
-.btn-del.is-open ~ .description {
+.btn-del.is-open ~ .description{
   opacity: 0;
 }
-.btn-del {
+.btn-del{
   display: none;
   position: relative;
   width: 100px;
@@ -111,7 +111,7 @@ html, body {
           transform-origin: 50% 50%;
   text-align: center;
 }
-.btn-front {
+.btn-front{
   position: absolute;
   display: block;
   width: 100%;
@@ -127,16 +127,16 @@ html, body {
   transition: background 0.15s ease, line-height 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.btn-front:hover {
+.btn-front:hover{
   background-color: #f77066;
 }
 
-.btn-del.is-open .btn-front {
+.btn-del.is-open .btn-front{
   pointer-events: none;
   line-height: 160px;
 }
 
-.btn-back {
+.btn-back{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -149,12 +149,12 @@ html, body {
   transition: box-shadow 0.8s ease;
 }
 
-.btn-back p {
+.btn-back p{
   margin-top: 15px;
   margin-bottom: 16px;
 }
 
-.btn-back button {
+.btn-back button{
   padding: 12px 20px;
   width: 30%;
   margin: 0 5px;
@@ -168,54 +168,54 @@ html, body {
   -webkit-transition: background 0.15s ease;
   transition: background 0.15s ease;
 }
-.btn-back button:focus {
+.btn-back button:focus{
   outline: 0;
 }
-.btn-back button.yes {
+.btn-back button.yes{
   background-color: #2196F3;
   color: #fff;
 }
-.btn-back button.yes:hover {
+.btn-back button.yes:hover{
   background-color: #51adf6;
 }
-.btn-back button.no {
+.btn-back button.no{
   color: #2196F3;
 }
-.btn-back button.no:hover {
+.btn-back button.no:hover{
   background-color: #ddd;
 }
 
-.btn-del.is-open .btn-back {
+.btn-del.is-open .btn-back{
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 .btn-del[data-direction="left"] .btn-back,
-.btn-del[data-direction="right"] .btn-back {
+.btn-del[data-direction="right"] .btn-back{
   -webkit-transform: translateZ(-2px) rotateY(180deg);
           transform: translateZ(-2px) rotateY(180deg);
 }
 
-.btn-del.is-open {
+.btn-del.is-open{
   width: 270px;
   height: 110px;
 }
 
-.btn-del[data-direction="top"].is-open {
+.btn-del[data-direction="top"].is-open{
   -webkit-transform: rotateX(180deg);
           transform: rotateX(180deg);
 }
 
-.btn-del[data-direction="right"].is-open {
+.btn-del[data-direction="right"].is-open{
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
 
-.btn-del[data-direction="bottom"].is-open {
+.btn-del[data-direction="bottom"].is-open{
   -webkit-transform: rotateX(-180deg);
           transform: rotateX(-180deg);
 }
 
-.btn-del[data-direction="left"].is-open {
+.btn-del[data-direction="left"].is-open{
   -webkit-transform: rotateY(-180deg);
           transform: rotateY(-180deg);
 }

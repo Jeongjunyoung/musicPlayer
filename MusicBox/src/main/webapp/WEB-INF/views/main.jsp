@@ -22,7 +22,7 @@
 	
     <!-- Theme CSS -->
     <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
-    <link href="/../resources/css/musicBox.css" type="text/css" rel="stylesheet">
+    <link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -392,7 +392,7 @@
 
     <!-- Contact Form JavaScript -->
     <script src="/../resources/js/jqBootstrapValidation.js"></script>
-    <script src="/../resources/js/musicBox.js"></script>
+    <script src="/../resources/js/mymy.js"></script>
     <script src="/../resources/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
