@@ -51,6 +51,9 @@ table{
 	overflow:scroll; 
     overflow-x:hidden;
     height:300px;
+    width: 100%;
+    background-color: white;
+    color: black;
 }
 .button-div{
 	text-align: center;
@@ -74,4 +77,7 @@ table{
 }
 .delCancelBtn{
 	display: none;
+}
+#searchKey{
+	height: 45px;
 }

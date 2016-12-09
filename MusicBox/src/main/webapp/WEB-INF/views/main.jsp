@@ -173,15 +173,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
 	                <div class="row control-group text-center">
-						<div class="form-group col-xs-6 col-xs-offset-2 floating-label-form-group controls">
+						<div class="form-group col-xs-9 controls">
 						    <input type="text" class="form-control" placeholder="WORD" id="searchKey">
 						</div>
-						<div class="col-xs-2">
-							<button type="button" class="btn btn-xs btn-outline" id="searchBtn">SEARCH</button>
-	                	</div>						
+						<div class="col-xs-1">
+							<button type="button" class="btn btn-lg btn-default" id="searchBtn"><span class="fa fa-search"></button>
+	                	</div>
+	                	<div class="col-xs-1">
+							<button type="button" class="btn btn-lg btn-default" id="checkAdd"><span class="fa fa-plus"></button>
+	                	</div>
+	                			
 	                </div>
 	                 <div class="col-lg-12 text-center">
-						<button type="button" class="btn btn-xs btn-outline" id="checkAdd">ADD</button>
 						<div class="row control-group text-center result-Scroll" id="searchResult"></div>
                 	</div>
                 </div>
