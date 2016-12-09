@@ -23,7 +23,8 @@
     <!-- Theme CSS -->
     <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
     <link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
-
+	<link rel="stylesheet" type="text/css" href="/../resources/css/sweetalert.css">
+	
     <!-- Custom Fonts -->
     <link href="/../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -98,7 +99,7 @@
             <c:choose>
 	            <c:when test="${session == true }">
 	            	<div class="col-lg-12">
-	                	<span class="skills">PLAYING NOW</span>
+	                	<h2>PLAYING NOW</h2>
 	               		<hr class="star-light">
 	                    <div class="intro-text" id="player"></div>
 	                    <br><br><br>
@@ -106,7 +107,7 @@
 	            </c:when>
 	            <c:otherwise>
 	            	<div class="col-lg-12">
-	                	<span class="skills">PLAYING NOW</span>
+	                	<h2>PLAYING NOW</h2>
 	               		<hr class="star-light">
 	                    <span class="skills" id="login-plz">LOGIN PLEASE..</span>
 	                    <input type="hidden" value="${loginFail }" id="loginFail">
@@ -140,18 +141,12 @@
                     <h2>PLAY LIST</h2>
                     <hr class="star-primary">
                 </div>
-                <div class="col-lg-offset-10 col-lg-2">
-                    <button class="btn btn-lg btn-default" id="editBtn">EDIT</button>
+                <div class="col-lg-12 text-center">
+                    <button class="btn btn-lg btn-info" id="editBtn">EDIT</button>
                 </div>
-                <div class="col-lg-offset-10 col-lg-2">
-					<div class="btn-del">
-						<div class="btn-back">
-							<p>정말 삭제 할까요?</p>
-							<button class="yes">YES</button>
-							<button class="no">NO</button>
-						</div>
-						<div class="btn-front">Delete</div>
-					</div>
+                <div class="col-lg-12 text-center">
+					<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
+					<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
 				</div>
             </div>
             <div id="playList_scroll" class="row">
@@ -172,6 +167,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>SEARCH</h2>
+                    <hr class="star-light">
                 </div>
             </div>
             <div class="row">
@@ -185,7 +181,6 @@
 	                	</div>						
 	                </div>
 	                 <div class="col-lg-12 text-center">
-                   		<hr class="star-light">
 						<button type="button" class="btn btn-xs btn-outline" id="checkAdd">ADD</button>
 						<div class="row control-group text-center result-Scroll" id="searchResult"></div>
                 	</div>
@@ -397,7 +392,7 @@
 
     <!-- Theme JavaScript -->
     <script src="/../resources/js/freelancer.min.js"></script>
-	
+	<script src="/../resources/js/sweetalert.min.js"></script>
 	<!-- Google API -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>

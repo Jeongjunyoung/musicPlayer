@@ -1,5 +1,6 @@
 package jy.mypro.persistence;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -46,5 +47,9 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	@Override
 	public MusicUserVO getGoogleUser(MusicUserVO vo) throws Exception {
 		return sqlSession.selectOne(namespace+".google_user", vo);
+	}
+	@Override
+	public void delMusic(Map<String, String> map) throws Exception {
+		sqlSession.delete(namespace+".delMusic", map);
 	}
 }

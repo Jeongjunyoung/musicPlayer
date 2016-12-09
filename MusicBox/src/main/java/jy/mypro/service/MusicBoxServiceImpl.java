@@ -1,6 +1,7 @@
 package jy.mypro.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -53,6 +54,10 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	@Override
 	public MusicUserVO getGoogleUser(MusicUserVO vo) throws Exception {
 		return dao.getGoogleUser(vo);
+	}
+	@Override
+	public void removeMusic(Map<String, String> map) throws Exception {
+		dao.delMusic(map);
 	}
 	
 }

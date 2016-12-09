@@ -1,6 +1,7 @@
 package jy.mypro.service;
 
 import java.util.List;
+import java.util.Map;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
@@ -13,4 +14,5 @@ public interface MusicBoxService {
 	public List<MusicPlayList> getMusic_id(String user_id)throws Exception;
 	public List<MusicPlayList> getAddList(String user_id)throws Exception;
 	public MusicUserVO getGoogleUser(MusicUserVO vo)throws Exception;
+	public void removeMusic(Map<String, String> map)throws Exception;
 }

@@ -1,16 +1,19 @@
 package jy.mypro.controller;
 
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -137,5 +140,28 @@ public class MusicBoxController {
 	@RequestMapping("/testPage")
 	public String test()throws Exception{
 		return "testPage";
+	}
+	//음악 삭제
+	@RequestMapping("/delPlayList")
+	public String del_Music(@RequestParam("editArr") String[] editArr, HttpServletRequest request, Model model)throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		HttpSession session = request.getSession();
+		MusicUserVO user;
+		if((MusicUserVO) session.getAttribute("googleUser") == null){
+			user = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}else{
+			user = (MusicUserVO) session.getAttribute("googleUser");
+		}
+		String user_id = user.getUser_id();
+		for(int i=0;i<editArr.length;i++){
+			map.put("user_id", user_id);
+			map.put("music_id", editArr[i]);
+			ms.removeMusic(map);
+		}
+		model.addAttribute("user", user);
+		model.addAttribute("session", Social_session);
+		model.addAttribute("google_user", google_user);
+		model.addAttribute("list", ms.getList(user.getUser_id()));
+		return "/main";
 	}
 }

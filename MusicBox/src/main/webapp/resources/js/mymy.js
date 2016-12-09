@@ -1,19 +1,15 @@
 	var arr = [];
 	var repeatArr = [];
 	var editArr = [];
-	
 	var tag = document.createElement('script');
-	
 	tag.src = "https://www.youtube.com/iframe_api";
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-	
 	var player;
 	var replay = 'normal';
 	var shuffle = true;
 	var volume = true;
 	var edit = false;
-	
 	function onYouTubeIframeAPIReady() {
 		player = new YT.Player('player', {
 		   height: '200',
@@ -113,7 +109,7 @@
 		for(var i = 0; i < txtEle.length; i ++){
 			if("" == $(txtEle[i]).val() || null == $(txtEle[i]).val()){
 				var title = $(txtEle[i]).attr("title");
-				alert(title + "을(를) 입력하세요");
+				swal("Login Failed...", title + "을(를) 입력하세요", "error");
 				return false;
 			}
 		}
@@ -175,56 +171,45 @@
     	}
     }
 	$(function(){
-		//delete 버튼
-		var btn = $('.btn-del');
-		var btnFront = $('.btn-front'),
-		    btnYes = $('.btn-back .yes'),
-		    btnNo = $('.btn-back .no');
-		
-		btnFront.on( 'click', function( event ) {
-		  var mx = event.clientX - btn.offsetLeft,
-		      my = event.clientY - btn.offsetTop;
-		
-		  var w = btn.offsetWidth,
-		      h = btn.offsetHeight;
+		//DEL 버튼
+		$('#delBtn').click(function(){
+			if(editArr.length == 0){
+				swal("Delete Failed...", "삭제할 음악을 선택하세요.", "error");
+			}else{
+				var url = 'delPlayList?editArr='+editArr;
+				swal({
+					  title: "삭제하시겠습니까?",
+					  text: "다시 한번 확인해주세요!",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "Yes, delete it!",
+					  closeOnConfirm: false,
+					  html: false
+					}, function(){
+					  swal("삭제하였습니다!",
+					  "음악들이 삭제되었습니다.",
+					  "success");
+					  $(location).attr('href',url);
+				});
+				
+				
+			}
 			
-		  var directions = [
-		    { id: 'top', x: w/2, y: 0 },
-		    { id: 'right', x: w, y: h/2 },
-		    { id: 'bottom', x: w/2, y: h },
-		    { id: 'left', x: 0, y: h/2 }
-		  ];
-		  
-		  directions.sort(function( a, b ) {
-		    return distance( mx, my, a.x, a.y ) - distance( mx, my, b.x, b.y );
-		  });
-		  
-		  btn.attr('data-direction', directions.shift().id );
-		  btn.addClass('is-open');
-		
-		});
-		
-		btnYes.on('click', function(event) {	
-		  btn.removeClass('is-open');
-		  for(var i=0;i<editArr.length;i++){
-			  console.log(editArr[i]);
-		  }
-		});
-		
-		btnNo.on('click', function(event) {
-		  btn.removeClass( 'is-open' );
-		});
-		
-		function distance(x1, y1, x2, y2) {
-		  var dx = x1-x2;
-		  var dy = y1-y2;
-		  return Math.sqrt(dx*dx + dy*dy);
-		}
+		})
 		//EDIT 버튼
 		$('#editBtn').click(function(){
 			edit = true;
-			$(this).css('display','none');
-			btn.css('display','block');
+			if($(this).css('display') != 'none'){
+				$(this).hide();
+				$('.delCancelBtn').show();
+			}
+		})
+		//CANCEL 버튼
+		$('#cancelBtn').click(function(){
+			edit = false;
+			$('.delCancelBtn').hide();
+			$('#editBtn').show();
 		})
 		//MYMY 기본
 		var login = $('#loginFail').val();
@@ -239,7 +224,7 @@
 		//로그인 실패시
 		if(login == "true"){
 			$('#loginModal').modal();
-			alert('Login Fail');
+			swal("Login Failed...", "아이디와 비밀번호를 확인하세요.", "error");
 		}
 		//로그인  submit
 		$('#frm').submit(function(){
@@ -252,26 +237,6 @@
 		$('#searchResult').on('click','p',function(){
 			$('.searchList').removeClass('search-click');
 			$(this).addClass('search-click');
-		})
-		//체크 선택 추가 이벤트
-		$('#checkAdd').on('click', function(){
-			var add_id = '';
-			var encode_title = '';
-			var url = "addPlayList?";
-			$(".searchList").each(function() {
-				if($(this).hasClass('search-click')){
-					add_id = $(this).attr('id');
-					encode_title = escape(encodeURIComponent($(this).text()))
-				}
-			})
-			$.ajax({
-				type : "GET",
-				url : url+"music_id="+add_id+"&music_name="+encode_title,
-				dataType : "json",
-				success : addPlayListHandle,
-				error : errorHandle
-			})
-			$('.searchList').removeClass('search-click');
 		})
 		//리스트 클릭 이벤트
 		$('#playList').on('click', 'td', function(){
@@ -297,17 +262,40 @@
 		})
 		//검색 버튼 이벤트
 		$('#searchBtn').click(function(){
-			console.log('aa');
 			var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAueMXgFyZOx_OFGSEca-S1FdCygGHR51k&maxResults=20";
 			var q = $('#searchKey').val();
 			url += '&q='+q;
 			$.ajax({
-					type : "GET",
-					url : url,
-					dataType : "json",
-					success : successHandle
+				type : "GET",
+				url : url,
+				dataType : "json",
+				success : successHandle
 			})
-		})		
+		})
+		//체크 선택 추가 이벤트
+		$('#checkAdd').on('click', function(){
+			var add_id = '';
+			var encode_title = '';
+			var url = "addPlayList?";
+			$(".searchList").each(function() {
+				if($(this).hasClass('search-click')){
+					add_id = $(this).attr('id');
+					encode_title = escape(encodeURIComponent($(this).text()))
+				}
+			})
+			if(add_id == '' || add_id == null){
+				swal("Add Failed...", "추가할 음악을 선택하세요.", "error");
+			}else{
+				$.ajax({
+					type : "GET",
+					url : url+"music_id="+add_id+"&music_name="+encode_title,
+					dataType : "json",
+					success : addPlayListHandle,
+					error : errorHandle
+				})
+				$('.searchList').removeClass('search-click');
+			}
+		})
 		//버튼 마우스 HOVER
 		$('.video-btn').hover(function(){
 			var img = $(this).attr('name');
@@ -332,10 +320,11 @@
 		})
 	})
 	function errorHandle(data){
-		alert('Sorry Server error......');
+		swal("Add Failed...", "로그인 해주세요.", "error");
 	}
 	//재생목록 추가 ajax 처리
 	function addPlayListHandle(data){
+		swal("Add Success!!", "음악을 추가하였습니다.", "success");
 		$.each(data, function(index,value){
 			var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
 			$('#playList').append(td);
