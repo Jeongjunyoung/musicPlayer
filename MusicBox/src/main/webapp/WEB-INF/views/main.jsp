@@ -15,20 +15,18 @@
 	<meta name="google-signin-client_id" content="222457887868-9bofjnk09tuuc2v2cgedclv7nu6c868n.apps.googleusercontent.com">
 	
     <title>MYMY</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Theme CSS -->
+    
     <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
     <link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/../resources/css/sweetalert.css">
 	
     <!-- Custom Fonts -->
-    <link href="/../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -135,31 +133,56 @@
     </header>
     <!-- PLAY LIST Grid Section -->
     <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>PLAY LIST</h2>
-                    <hr class="star-primary">
-                </div>
-                <div class="col-lg-12 text-center">
-                    <button class="btn btn-lg btn-info" id="editBtn">EDIT</button>
-                </div>
-                <div class="col-lg-12 text-center">
-					<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
-					<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>PLAY LIST</h2>
+				<hr class="star-primary">
+			</div>
+			<div class="col-lg-12 text-center">
+				<button class="btn btn-lg btn-info" id="editBtn">EDIT</button>
+				<button class="btn btn-lg btn-info" id="btn-add-tab">ADD TAB</button>
+			</div>
+			<div class="col-lg-12 text-center">
+				<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
+				<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Nav tabs -->
+					<ul id="tab-list" class="nav nav-tabs" role="tablist">
+						<li><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
+						<li class="active"><a href="#tab2" role="tab" data-toggle="tab">MY LIST</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div id="tab-content">
+						<div class="tab-pane fade" id="tab1"></div>
+						<div class="tab-pane fade in active" id="tab2">
+							<table class="table table-hover hoverList" id="playList">
+								<c:forEach var="list" items="${list }">
+									<tr class="playList-td" id="playList-add">
+										<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+					</div>
 				</div>
-            </div>
-            <div id="playList_scroll" class="row">
-            	<table class="table table-hover hoverList" id="playList">
-            		<c:forEach var="list" items="${list }">
-	            		<tr class="playList-td" id="playList-add">
-	            			<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
-	            		</tr>
-	            	</c:forEach>
-            	</table>
-            </div>
-        </div>
-    </section>
+			</div>
+		</div>
+		<%-- <div id="playList_scroll" class="row">
+			<table class="table table-hover hoverList" id="playList">
+				<c:forEach var="list" items="${list }">
+					<tr class="playList-td" id="playList-add">
+						<td class="clickList-td"></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div> --%>
+	</div>
+	</section>
 
     <!-- Search Section -->
     <section class="success" id="about">
@@ -174,15 +197,11 @@
                 <div class="col-lg-8 col-lg-offset-2">
 	                <div class="row control-group text-center">
 						<div class="form-group col-xs-9 controls">
-						    <input type="text" class="form-control" placeholder="WORD" id="searchKey">
+						    <input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
 						</div>
-						<div class="col-xs-1">
+						<div class="col-xs-2">
 							<button type="button" class="btn btn-lg btn-default" id="searchBtn"><span class="fa fa-search"></button>
 	                	</div>
-	                	<div class="col-xs-1">
-							<button type="button" class="btn btn-lg btn-default" id="checkAdd"><span class="fa fa-plus"></button>
-	                	</div>
-	                			
 	                </div>
 	                 <div class="col-lg-12 text-center">
 						<div class="row control-group text-center result-Scroll" id="searchResult"></div>
@@ -191,99 +210,8 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <!-- <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.
-                    The form should work on most web servers, but if the form is not working you may need to configure your web server differently.
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <!-- Footer -->
     <footer class="text-center">
-        <!-- <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="footer-below">
             <div class="container">
                 <div class="row">
@@ -387,15 +315,18 @@
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
+	
     <!-- Contact Form JavaScript -->
-    <script src="/../resources/js/jqBootstrapValidation.js"></script>
     <script src="/../resources/js/mymy.js"></script>
-    <script src="/../resources/js/contact_me.js"></script>
+    <script src="/../resources/js/mymySocial.js"></script>
+    <script src="/../resources/js/tabs.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="/../resources/js/freelancer.min.js"></script>
 	<script src="/../resources/js/sweetalert.min.js"></script>
+	<script src="/../resources/js/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
 	<!-- Google API -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>

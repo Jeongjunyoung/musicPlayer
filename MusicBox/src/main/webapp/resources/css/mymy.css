@@ -2,7 +2,7 @@
 table{
 	margin-left : auto;
 	margin-right : auto;
-	width:100%;
+	width: 100%;
 	border: 0px;
 	border-collapse: collapse;
 	text-align: center;
@@ -15,11 +15,6 @@ table{
 }
 #search{
 	height: 150px;
-}
-#playList_scroll{
-	overflow:scroll; 
-    overflow-x:hidden;
-    height:380px;
 }
 .hoverList li:HOVER{
 	color: #F15F5F;
@@ -40,6 +35,11 @@ table{
 	border-style: solid;
 }
 .scrollBox{
+	overflow:scroll; 
+    overflow-x:hidden; 
+    height:280px;
+}
+.tab-pane{
 	overflow:scroll; 
     overflow-x:hidden; 
     height:280px;
@@ -80,4 +80,10 @@ table{
 }
 #searchKey{
 	height: 45px;
+}
+.checkAdd{
+	display: none;
+}
+#searchResult{
+	width: 100%;
 }
