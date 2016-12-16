@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
+import jy.mypro.domain.UserTabs;
 import jy.mypro.persistence.MusicBoxDAO;
 
 @Service
@@ -58,6 +59,22 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	@Override
 	public void removeMusic(Map<String, String> map) throws Exception {
 		dao.delMusic(map);
+	}
+	@Override
+	public List<UserTabs> getUserTabs(String user_id) throws Exception {
+		return dao.selectTabs(user_id);
+	}
+	@Override
+	public Integer getMaxTabId(String user_id) throws Exception {
+		return dao.getMaxTabId(user_id);
+	}
+	@Override
+	public void insertTabs(UserTabs tabs) throws Exception {
+		dao.addTabs(tabs);
+	}
+	@Override
+	public MusicPlayList getMusicInfo(MusicPlayList vo) throws Exception {
+		return dao.getMusicInfo(vo);
 	}
 	
 }

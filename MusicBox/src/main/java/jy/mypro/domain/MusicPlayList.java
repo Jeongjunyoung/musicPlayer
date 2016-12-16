@@ -5,6 +5,13 @@ public class MusicPlayList {
 	private String music_id;
 	private String music_name;
 	private String music_index;
+	private String tab_id;
+	public String getTab_id() {
+		return tab_id;
+	}
+	public void setTab_id(String tab_id) {
+		this.tab_id = tab_id;
+	}
 	public String getMusic_index() {
 		return music_index;
 	}

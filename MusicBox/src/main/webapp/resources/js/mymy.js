@@ -291,7 +291,7 @@
 			$(".searchList").each(function() {
 				if($(this).hasClass('search-click')){
 					add_id = $(this).attr('id');
-					encode_title = escape(encodeURIComponent($(this).text()))
+					encode_title = escape(encodeURIComponent($(this).text()));
 				}
 			})
 			if(add_id == '' || add_id == null){

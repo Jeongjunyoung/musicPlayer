@@ -40,4 +40,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<delete id="delMusic">
  		delete from user_playlist where music_id = #{music_id} and user_id = #{user_id}
  	</delete>
+ 	<select id="selectUserTabs" resultType="UserTabs">
+ 		select * from user_tabs where user_id = #{user_id}
+ 			order by substr(tab_id,instr(tab_id,'_')+1)*1
+ 	</select>
+ 	<select id="maxTabId" resultType="Integer">
+ 		select max(substr(tab_id,instr(tab_id,'_')+1)*1) from user_tabs
+ 			where user_id = #{user_id}
+ 	</select>
+ 	<insert id="add_Tab">
+ 		insert into user_tabs(user_id, tab_id, tab_name) values(#{user_id}, #{tab_id}, #{tab_name})
+ 	</insert>
+ 	<select id="getMusicInfo" resultType="MusicPlayList">
+ 		select * from user_playlist where music_id = #{music_id} and user_id = #{user_id}
+ 	</select>
+ 	<!-- <insert id="addTabMusic">
+ 		insert into tabs_music(user_id, tabs_music_id, tabs_music_name) values(#{user_id, #{tabs_})
+ 	</insert> -->
 </mapper>

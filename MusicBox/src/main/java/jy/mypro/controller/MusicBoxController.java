@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
+import jy.mypro.domain.TabMusicVO;
+import jy.mypro.domain.UserTabs;
 import jy.mypro.service.MusicBoxService;
 
 @Controller
@@ -162,6 +164,50 @@ public class MusicBoxController {
 		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
 		model.addAttribute("list", ms.getList(user.getUser_id()));
+		return "/main";
+	}
+	//탭 추가
+	@RequestMapping("/addTabs")
+	@ResponseBody
+	public UserTabs add_tabs(@RequestParam("tab_name") String tab_name, HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
+		UserTabs tabs = new UserTabs();
+		String tab_DeName = URLDecoder.decode(tab_name, "UTF-8");
+		MusicUserVO user;
+		if((MusicUserVO) session.getAttribute("googleUser") == null){
+			user = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}else{
+			user = (MusicUserVO) session.getAttribute("googleUser");
+		}
+		String user_id = user.getUser_id();
+		int tab_id_num = ms.getMaxTabId(user_id)+1;
+		String str_num = Integer.toString(tab_id_num);
+		String tab_id = user_id+"tab_"+str_num;
+		tabs.setTab_id(tab_id);
+		tabs.setUser_id(user_id);
+		tabs.setTab_name(tab_DeName);
+		ms.insertTabs(tabs);
+		return tabs;
+	}
+	@RequestMapping("/addTabMusic")
+	public String add_TabMusic(@RequestParam("arr") String[] arr, HttpServletRequest request)throws Exception{
+		HttpSession session = request.getSession();
+		UserTabs tabs = new UserTabs();
+		MusicUserVO user;
+		MusicPlayList mpl = new MusicPlayList();
+		if((MusicUserVO) session.getAttribute("googleUser") == null){
+			user = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}else{
+			user = (MusicUserVO) session.getAttribute("googleUser");
+		}
+		mpl.setUser_id(user.getUser_id());
+		for(int i=0;i<arr.length;i++){
+			mpl.setMusic_id(arr[i]);
+			MusicPlayList tabMusic = ms.getMusicInfo(mpl);
+			TabMusicVO tabP = new TabMusicVO();
+			tabP.setTabs_music_id(tabMusic.getMusic_id());
+			tabP.setTabs_music_name(tabMusic.getMusic_name());
+		}
 		return "/main";
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
+import jy.mypro.domain.UserTabs;
 
 @Repository
 public class MusicBoxDAOImpl implements MusicBoxDAO {
@@ -51,5 +52,21 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	@Override
 	public void delMusic(Map<String, String> map) throws Exception {
 		sqlSession.delete(namespace+".delMusic", map);
+	}
+	@Override
+	public List<UserTabs> selectTabs(String user_id) throws Exception {
+		return sqlSession.selectList(namespace+".selectUserTabs", user_id);
+	}
+	@Override
+	public Integer getMaxTabId(String user_id) throws Exception {
+		return sqlSession.selectOne(namespace+".maxTabId", user_id);
+	}
+	@Override
+	public void addTabs(UserTabs tabs) throws Exception {
+		sqlSession.insert(namespace+".add_Tab", tabs);
+	}
+	@Override
+	public MusicPlayList getMusicInfo(MusicPlayList vo) throws Exception {
+		return sqlSession.selectOne(namespace+".getMusicInfo", vo);
 	}
 }

@@ -38,6 +38,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		request.setAttribute("user", user);
 		try {			
 			request.setAttribute("list", ms.getList(user.getUser_id()));
+			request.setAttribute("tabs", ms.getUserTabs(user.getUser_id()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

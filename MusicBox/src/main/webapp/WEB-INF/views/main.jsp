@@ -154,7 +154,10 @@
 					<!-- Nav tabs -->
 					<ul id="tab-list" class="nav nav-tabs" role="tablist">
 						<li><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
-						<li class="active"><a href="#tab2" role="tab" data-toggle="tab">MY LIST</a></li>
+						<li class="tab active"><a href="#tab2" role="tab" data-toggle="tab">MY LIST</a></li>
+						<c:forEach var="tabs" items="${tabs }">
+							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }</a></li>
+						</c:forEach>
 					</ul>
 					<!-- Tab panes -->
 					<div id="tab-content">
@@ -168,22 +171,26 @@
 								</c:forEach>
 							</table>
 						</div>
+						<c:forEach var="tabs" items="${tabs }">
+							<div class="tab-pane fade in active" id="${tabs.tab_id }">
+								<c:forEach var="list" items="${list }">
+									<c:if test="${tabs.tab_id == list.tab_id}">
+										<tr class="playList-td" id="playList-add">
+											<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+								<div class="col-lg-12 text-center">
+									<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</div>
-		<%-- <div id="playList_scroll" class="row">
-			<table class="table table-hover hoverList" id="playList">
-				<c:forEach var="list" items="${list }">
-					<tr class="playList-td" id="playList-add">
-						<td class="clickList-td"></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div> --%>
 	</div>
 	</section>
-
     <!-- Search Section -->
     <section class="success" id="about">
         <div class="container">
@@ -307,7 +314,44 @@
             </div>
         </div>
     </div>
-    <!-- jQuery -->
+	<div class="modal fade" id="AddTabModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="container">
+			<div class="row">
+				<div id="tabForm">
+					<h1 class="tabH1">ADD TAB</h1>
+					<input placeholder="TAB NAME" type="input" required="" id="tabInput">
+					<button class="tabadd-btn" id="tabAddBtn">ADD</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="AddTabMusicModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="close-modal" data-dismiss="modal">
+			<div class="lr">
+				<div class="rl"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-12 text-center">
+				<div id="AddtabForm">
+					<h1 class="tabH1">ADD MUSIC</h1>
+					<div class="col-lg-12 text-center" id="tabMusic-list">
+						<table class="table hoverList" id="tabAllList">
+							<c:forEach var="list" items="${list }">
+								<tr>
+									<td id="${list.music_id }" class="tab-list">${list.music_name }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+					<button class="tabadd-btn" id="tabMusicAddBtn">ADD</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<!-- jQuery -->
     <script src="/../resources/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
