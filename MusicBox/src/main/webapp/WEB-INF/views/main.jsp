@@ -173,13 +173,15 @@
 						</div>
 						<c:forEach var="tabs" items="${tabs }">
 							<div class="tab-pane fade in active" id="${tabs.tab_id }">
-								<c:forEach var="list" items="${list }">
-									<c:if test="${tabs.tab_id == list.tab_id}">
-										<tr class="playList-td" id="playList-add">
-											<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
+								<table class="table table-hover hoverList tab-playList">
+									<c:forEach var="tabMusic" items="${tabMusic }">
+										<c:if test="${tabMusic.tab_id == tabs.tab_id}">
+											<tr class="playList-td">
+												<td id="${tabMusic.tabs_music_id }" class="tab-clickList">${tabMusic.tabs_music_name }</td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</table>
 								<div class="col-lg-12 text-center">
 									<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
 								</div>
@@ -363,7 +365,6 @@
     <!-- Contact Form JavaScript -->
     <script src="/../resources/js/mymy.js"></script>
     <script src="/../resources/js/mymySocial.js"></script>
-    <script src="/../resources/js/tabs.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="/../resources/js/freelancer.min.js"></script>

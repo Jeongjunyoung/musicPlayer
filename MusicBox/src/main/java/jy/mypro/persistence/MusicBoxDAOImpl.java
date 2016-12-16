@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
+import jy.mypro.domain.TabMusicVO;
 import jy.mypro.domain.UserTabs;
 
 @Repository
@@ -68,5 +69,13 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	@Override
 	public MusicPlayList getMusicInfo(MusicPlayList vo) throws Exception {
 		return sqlSession.selectOne(namespace+".getMusicInfo", vo);
+	}
+	@Override
+	public void insertTabMusic(TabMusicVO tvo) throws Exception {
+		sqlSession.insert(namespace+".addTabMusic", tvo);
+	}
+	@Override
+	public List<TabMusicVO> getTabsMusic(String user_id) throws Exception {
+		return sqlSession.selectList(namespace+".tabsMusic", user_id);
 	}
 }

@@ -1,6 +1,7 @@
 package jy.mypro.controller;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,11 +191,13 @@ public class MusicBoxController {
 		return tabs;
 	}
 	@RequestMapping("/addTabMusic")
-	public String add_TabMusic(@RequestParam("arr") String[] arr, HttpServletRequest request)throws Exception{
+	@ResponseBody
+	public List<TabMusicVO> add_TabMusic(@RequestParam("arr") String[] arr, 
+			@RequestParam("tab_id") String tab_id, HttpServletRequest request)throws Exception{
 		HttpSession session = request.getSession();
-		UserTabs tabs = new UserTabs();
 		MusicUserVO user;
 		MusicPlayList mpl = new MusicPlayList();
+		List<TabMusicVO> list = new ArrayList<TabMusicVO>();
 		if((MusicUserVO) session.getAttribute("googleUser") == null){
 			user = (MusicUserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		}else{
@@ -204,10 +207,14 @@ public class MusicBoxController {
 		for(int i=0;i<arr.length;i++){
 			mpl.setMusic_id(arr[i]);
 			MusicPlayList tabMusic = ms.getMusicInfo(mpl);
-			TabMusicVO tabP = new TabMusicVO();
-			tabP.setTabs_music_id(tabMusic.getMusic_id());
-			tabP.setTabs_music_name(tabMusic.getMusic_name());
+			TabMusicVO tvo = new TabMusicVO();
+			tvo.setTab_id(tab_id);
+			tvo.setTabs_music_id(tabMusic.getMusic_id());
+			tvo.setTabs_music_name(tabMusic.getMusic_name());
+			tvo.setUser_id(user.getUser_id());
+			ms.insertTabMusic(tvo);
+			list.add(tvo);
 		}
-		return "/main";
+		return list;
 	}
 }

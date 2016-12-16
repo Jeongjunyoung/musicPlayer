@@ -54,7 +54,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="getMusicInfo" resultType="MusicPlayList">
  		select * from user_playlist where music_id = #{music_id} and user_id = #{user_id}
  	</select>
- 	<!-- <insert id="addTabMusic">
- 		insert into tabs_music(user_id, tabs_music_id, tabs_music_name) values(#{user_id, #{tabs_})
- 	</insert> -->
+ 	<insert id="addTabMusic">
+ 		insert into tabs_music(tab_id, tabs_music_id, tabs_music_name, user_id) values(#{tab_id}, #{tabs_music_id}, #{tabs_music_name}, #{user_id})
+ 	</insert>
+ 	<select id="tabsMusic" resultType="TabMusicVO">
+ 		select * from tabs_music where user_id = #{user_id}
+ 	</select>
 </mapper>

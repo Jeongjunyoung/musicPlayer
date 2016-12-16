@@ -5,6 +5,7 @@ import java.util.Map;
 
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
+import jy.mypro.domain.TabMusicVO;
 import jy.mypro.domain.UserTabs;
 
 public interface MusicBoxDAO {
@@ -21,4 +22,6 @@ public interface MusicBoxDAO {
 	public Integer getMaxTabId(String user_id)throws Exception;
 	public void addTabs(UserTabs tabs)throws Exception;
 	public MusicPlayList getMusicInfo(MusicPlayList vo)throws Exception;
+	public void insertTabMusic(TabMusicVO tvo)throws Exception;
+	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
 }
