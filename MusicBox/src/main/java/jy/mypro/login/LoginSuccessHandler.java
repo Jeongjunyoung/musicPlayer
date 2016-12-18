@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import jy.mypro.domain.MusicUserVO;
 import jy.mypro.service.MusicBoxService;
 
-
 public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private String login;

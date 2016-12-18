@@ -156,7 +156,7 @@
 						<li><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
 						<li class="tab active"><a href="#tab2" role="tab" data-toggle="tab">MY LIST</a></li>
 						<c:forEach var="tabs" items="${tabs }">
-							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }</a></li>
+							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>
 						</c:forEach>
 					</ul>
 					<!-- Tab panes -->
@@ -171,22 +171,22 @@
 								</c:forEach>
 							</table>
 						</div>
-						<c:forEach var="tabs" items="${tabs }">
-							<div class="tab-pane fade in active" id="${tabs.tab_id }">
-								<table class="table table-hover hoverList tab-playList">
-									<c:forEach var="tabMusic" items="${tabMusic }">
-										<c:if test="${tabMusic.tab_id == tabs.tab_id}">
-											<tr class="playList-td">
-												<td id="${tabMusic.tabs_music_id }" class="tab-clickList">${tabMusic.tabs_music_name }</td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</table>
-								<div class="col-lg-12 text-center">
-									<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
-								</div>
+					<c:forEach var="tabs" items="${tabs }">
+						<div class="tab-pane fade in active" id="${tabs.tab_id }">
+							<table class="table table-hover hoverList tab-playList">
+								<c:forEach var="tabMusic" items="${tabMusic }">
+									<c:if test="${tabMusic.tab_id == tabs.tab_id}">
+										<tr class="playList-td">
+											<td id="${tabMusic.tabs_music_id }" class="clickList-td">${tabMusic.tabs_music_name }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</table>
+							<div class="col-lg-12 text-center">
+								<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
 							</div>
-						</c:forEach>
+						</div>
+					</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -322,17 +322,13 @@
 				<div id="tabForm">
 					<h1 class="tabH1">ADD TAB</h1>
 					<input placeholder="TAB NAME" type="input" required="" id="tabInput">
-					<button class="tabadd-btn" id="tabAddBtn">ADD</button>
+					<button class="tabadd-btn" id="tabAddBtn">ADD</button><br><br>
+					<button class="tabadd-btn" id="tabCloseBtn">CLOSE</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="modal fade" id="AddTabMusicModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="close-modal" data-dismiss="modal">
-			<div class="lr">
-				<div class="rl"></div>
-			</div>
-		</div>
 		<div class="container">
 			<div class="row">
 			<div class="col-lg-12 text-center">
@@ -348,6 +344,7 @@
 						</table>
 					</div>
 					<button class="tabadd-btn" id="tabMusicAddBtn">ADD</button>
+					<button class="tabadd-btn" id="tabMusicCloseBtn">CLOSE</button>
 				</div>
 			</div>
 			</div>

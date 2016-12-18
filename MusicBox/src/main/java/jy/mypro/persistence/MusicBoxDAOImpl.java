@@ -78,4 +78,12 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	public List<TabMusicVO> getTabsMusic(String user_id) throws Exception {
 		return sqlSession.selectList(namespace+".tabsMusic", user_id);
 	}
+	@Override
+	public void deleteTab(String tab_id) throws Exception {
+		sqlSession.delete(namespace+".delTab", tab_id);
+	}
+	@Override
+	public void deleteTabMusic(String tab_id) throws Exception {
+		sqlSession.delete(namespace+".delTabMusic", tab_id);
+	}
 }

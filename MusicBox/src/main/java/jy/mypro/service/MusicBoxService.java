@@ -23,4 +23,5 @@ public interface MusicBoxService {
 	public MusicPlayList getMusicInfo(MusicPlayList vo)throws Exception;
 	public void insertTabMusic(TabMusicVO tvo)throws Exception;
 	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
+	public void removeTab(String tab_id)throws Exception;
 }

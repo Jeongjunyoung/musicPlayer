@@ -169,3 +169,6 @@ table{
 .tab-list-click{
 	background-color: #A5DE9F;
 }
+.delete-tab{
+	display: none;
+}

@@ -24,4 +24,6 @@ public interface MusicBoxDAO {
 	public MusicPlayList getMusicInfo(MusicPlayList vo)throws Exception;
 	public void insertTabMusic(TabMusicVO tvo)throws Exception;
 	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
+	public void deleteTab(String tab_id)throws Exception;
+	public void deleteTabMusic(String tab_id)throws Exception;
 }

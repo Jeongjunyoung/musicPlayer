@@ -60,4 +60,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="tabsMusic" resultType="TabMusicVO">
  		select * from tabs_music where user_id = #{user_id}
  	</select>
+ 	<delete id="delTab">
+ 		delete from user_tabs where tab_id = #{tab_id}
+ 	</delete>
+ 	<delete id="delTabMusic">
+ 		delete from tabs_music where tab_id = #{tab_id}
+ 	</delete>
 </mapper>

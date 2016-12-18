@@ -10,6 +10,7 @@
 	var shuffle = true;
 	var volume = true;
 	var edit = false;
+	var nowPlaying_tab = 'tab2';
 	//ajax 처리
 	function ajax_load(type,url,data,dataType,success,error){
 		$.ajax({
@@ -31,21 +32,29 @@
 		   }
 		});
 	}
+	//클릭 노래 플레이 블록 변경
 	function changeListBlock(index){
 		var getPlaylist = player.getPlaylist();
-		$('.clickList-td').each(function(){
+		var $playing_tab = null;
+		$('.tab-pane').each(function(){
+			if($(this).hasClass('active')){
+				$playing_tab = $(this).find('.clickList-td');
+			}
+		})
+		$playing_tab.each(function(){
 			if($(this).attr('id') == getPlaylist[index]){
 				$(this).addClass('now-playing');
 			}
 		})
 	}
+	//처음 시작 플레이
 	function onPlayerReady(event,index) {
 		if(index == undefined){
 			index = 0;
 		}
 		player.loadPlaylist(arr,index);
 		player.setLoop(true);
-		$('.clickList-td').each(function(){
+		$('#tab2').find('.clickList-td').each(function(){
 			if($(this).attr('id') == arr[index]){
 				$(this).addClass('now-playing');
 			}
@@ -151,7 +160,7 @@
 		swal("Add Success!!", "음악을 추가하였습니다.", "success");
 		$('.checkAdd').slideUp();
 		$.each(data, function(index,value){
-			var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
+			var td = '<tr class='+" "+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
 			$('#playList').append(td);
 			arr.push(value.music_id);
 		})
@@ -215,6 +224,7 @@
 			if($(this).css('display') != 'none'){
 				$(this).hide();
 				$('.delCancelBtn').show();
+				$('.delete-tab').show();
 			}
 		})
 		//CANCEL 버튼
@@ -222,6 +232,7 @@
 			edit = false;
 			$('.clickList-td').removeClass('edit-click');
 			$('.delCancelBtn').hide();
+			$('.delete-tab').hide();
 			$('#editBtn').show();
 		})
 		//MYMY 기본
@@ -249,9 +260,10 @@
 			$(this).next().slideDown();
 		})
 		//리스트 클릭 이벤트
-		$('#playList').on('click', 'td', function(){
+		$('#tab-content').on('click', 'td', function(){
 				var video_ID = $(this).attr('id');
 				var $this = $(this);
+				var tab_id = $(this).parent().parent().parent().parent().attr('id');
 			if(edit){
 				if($this.hasClass('edit-click')){
 					$this.removeClass('edit-click');
@@ -267,7 +279,16 @@
 			}else{
 				$('.clickList-td').removeClass('now-playing');
 				$this.addClass('now-playing');
-				changeVideo(video_ID);
+				if(tab_id == nowPlaying_tab){
+					changeVideo(video_ID);
+				}else{
+					arr.splice(0, arr.length)
+					$('#'+tab_id).find('.clickList-td').each(function(){
+						var tab_video_ID = $(this).attr('id');
+						arr.push(tab_video_ID);
+					})
+					changeVideo(video_ID);
+				}
 			}
 		})
 		//검색 버튼 이벤트
@@ -325,13 +346,35 @@
 				replay = 'false';
 			}
 		})
+		//탭 삭제
         $('#tab-list').on('click','.close',function(){
-            var tabID = $(this).parents('a').attr('href');
-            $(this).parents('li').remove();
-            $(tabID).remove();
-            var tabFirst = $('#tab-list a:first');
-            tabFirst.tab('show');
+        	var $this = $(this);
+        	var tabID = $this.parents('a').attr('href');
+        	var tab_id = tabID.substr(tabID.indexOf('#')+1);
+			var url = 'deleteTab?tab_id='+tab_id;
+			console.log(url);
+        	swal({
+				  title: "삭제하시겠습니까?",
+				  text: "다시 한번 확인해주세요!",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "Yes, delete it!",
+				  closeOnConfirm: false,
+				  html: false
+				}, function(){
+					ajax_load('GET', url, null, 'json', deleteTabSuccess);
+					$this.parents('li').remove();
+					$(tabID).remove();
+					var tabFirst = $('#tab-list a:first');
+					tabFirst.tab('show');
+					swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
+			});
+        	
         });
+		function deleteTabSuccess(){
+			swal("Delete Success!!", "탭을 삭제하였습니다.", "success");
+		}
         //탭 클릭
         $('#tab-list').on('click', 'li',function(){
         	var str = $(this).find('a').attr('href');
@@ -347,13 +390,13 @@
         		$(this).addClass('tab-list-click');
         	}
         })
+        //탭 뮤직 추가 버튼
         $('#tabMusicAddBtn').click(function(){
         	var arr = [];
         	var tab_id = '';
         	$('.tab-pane').each(function(){
         		if($(this).hasClass('active')){
         			tab_id = $(this).attr('id');
-        			console.log(tab_id);
         		}
         	})
         	$('.tab-list').each(function(){
@@ -377,9 +420,16 @@
         $('#btn-add-tab').click(function(){
         	$('#AddTabModal').modal('show');
         })
-        $('.tadAddMusic').click(function(){
+        $('#tab-content').on('click','button',function(){
         	$('#AddTabMusicModal').modal('show');
         })
+        $('#tabCloseBtn').click(function(){
+        	$('#AddTabModal').modal('hide');
+        })
+        $('#tabMusicCloseBtn').click(function(){
+        	$('#AddTabMusicModal').modal('hide');
+        })
+        //$('#tab-list').append($('<li><a href="#tab' + tabID + '" role="tab" data-toggle="tab">Tab ' + tabID + '<button class="close" type="button" title="Remove this page">×</button></a></li>'));
         //탭 ADD 버튼 클릭
         $('#tabAddBtn').click(function(){
         	var tab_name = escape(encodeURIComponent($('#tabInput').val()));
@@ -393,8 +443,8 @@
         		type : 'get',
         		dataType : 'json',
         		success : function(data){
-        			$('#tab-list').append($('<li><a href="#tab' + data.tab_id + '" role="tab" data-toggle="tab">' + data.tab_name + '</a></li>'));
-        			$('#tab-content').append($('<div class="tab-pane fade" id="tab' + data.tab_id + '"></div>'));
+        			$('#tab-list').append($('<li><a href="#' + data.tab_id + '" role="tab" data-toggle="tab">' + data.tab_name + '<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>'));
+        			$('#tab-content').append($('<div class="tab-pane fade" id="' + data.tab_id + '"><table class="table table-hover hoverList tab-playList"></table><div class="col-lg-12 text-center"><button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button></div></div>'));
         			$('#tabInput').val('');
         			$('#AddTabModal').modal('hide');
         		}

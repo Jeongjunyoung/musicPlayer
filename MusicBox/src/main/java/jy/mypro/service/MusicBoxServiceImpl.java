@@ -85,5 +85,9 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	public List<TabMusicVO> getTabsMusic(String user_id) throws Exception {
 		return dao.getTabsMusic(user_id);
 	}
-	
+	@Override
+	public void removeTab(String tab_id) throws Exception {
+		dao.deleteTabMusic(tab_id);
+		dao.deleteTab(tab_id);
+	}
 }

@@ -49,8 +49,13 @@ public class MusicBoxController {
 	//회원가입 폼
 	@RequestMapping(value="/sign_in", method=RequestMethod.POST)
 	public String signIn_user(MusicUserVO vo)throws Exception{
+		UserTabs tabs = new UserTabs();
 		String bCryptString = encoder.encode(vo.getUser_pw());
 		vo.setUser_pw(bCryptString);
+		tabs.setTab_id(vo.getUser_id()+"tab_1");
+		tabs.setUser_id(vo.getUser_id());
+		tabs.setTab_name("");
+		ms.insertTabs(tabs);
 		ms.insertUser(vo);
 		return "redirect:/";
 	}
@@ -216,5 +221,11 @@ public class MusicBoxController {
 			list.add(tvo);
 		}
 		return list;
+	}
+	@RequestMapping("/deleteTab")
+	@ResponseBody
+	public String removeTab(@RequestParam("tab_id") String tab_id)throws Exception{
+		ms.removeTab(tab_id);
+		return "success";
 	}
 }
