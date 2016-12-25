@@ -52,10 +52,6 @@ public class MusicBoxController {
 		UserTabs tabs = new UserTabs();
 		String bCryptString = encoder.encode(vo.getUser_pw());
 		vo.setUser_pw(bCryptString);
-		tabs.setTab_id(vo.getUser_id()+"tab_1");
-		tabs.setUser_id(vo.getUser_id());
-		tabs.setTab_name("");
-		ms.insertTabs(tabs);
 		ms.insertUser(vo);
 		return "redirect:/";
 	}
@@ -186,7 +182,8 @@ public class MusicBoxController {
 			user = (MusicUserVO) session.getAttribute("googleUser");
 		}
 		String user_id = user.getUser_id();
-		int tab_id_num = ms.getMaxTabId(user_id)+1;
+		int get_tab_id = ms.getMaxTabId(user_id);
+		int tab_id_num = get_tab_id+1;
 		String str_num = Integer.toString(tab_id_num);
 		String tab_id = user_id+"tab_"+str_num;
 		tabs.setTab_id(tab_id);

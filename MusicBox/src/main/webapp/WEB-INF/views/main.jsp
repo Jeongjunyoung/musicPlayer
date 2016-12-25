@@ -27,7 +27,9 @@
 	
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,11 +53,9 @@
 					<c:when test="${session == true }">
 						<a class="navbar-brand" href="#page-top">${user.user_id}'s MY MY</a>
 						<input type="hidden" value="${user.user_id}" id="login_id">
-						<!-- button type="button" id="logout_btn" class="btn btn-default">로그아웃</button> -->
 					</c:when>
 					<c:otherwise>
 						<a class="navbar-brand" href="#page-top">MY MY</a>
-						<!-- <button type="button" id="login_btn" class="btn btn-default" data-toggle="modal" data-target="#login_paper">로그인</button> -->
 					</c:otherwise>
 				</c:choose>                
             </div>
@@ -140,8 +140,8 @@
 				<hr class="star-primary">
 			</div>
 			<div class="col-lg-12 text-center">
-				<button class="btn btn-lg btn-info" id="editBtn">EDIT</button>
-				<button class="btn btn-lg btn-info" id="btn-add-tab">ADD TAB</button>
+				<button class="btn btn-lg btn-info hideBtn" id="editBtn">EDIT</button>
+				<button class="btn btn-lg btn-info hideBtn" id="btn-add-tab">ADD TAB</button>
 			</div>
 			<div class="col-lg-12 text-center">
 				<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
@@ -154,16 +154,25 @@
 					<!-- Nav tabs -->
 					<ul id="tab-list" class="nav nav-tabs" role="tablist">
 						<li><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
-						<li class="tab active"><a href="#tab2" role="tab" data-toggle="tab">MY LIST</a></li>
+						<li class="tab active"><a href="#tab2" role="tab" data-toggle="tab" id="a-tab2">MY LIST</a></li>
 						<c:forEach var="tabs" items="${tabs }">
 							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>
 						</c:forEach>
 					</ul>
 					<!-- Tab panes -->
 					<div id="tab-content">
-						<div class="tab-pane fade" id="tab1"></div>
-						<div class="tab-pane fade in active" id="tab2">
-							<table class="table table-hover hoverList" id="playList">
+						<div class="tab-pane fade top100-list" id="tab1">
+							<table class="table hoverList">
+								<c:forEach var="top100" items="${top100 }" varStatus="status">
+									<tr class="playList-td">
+										<td class="top100-ranking">${status.count}</td>
+										<td id="${top100.music_id }" class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="tab-pane fade in active user-list" id="tab2">
+							<table class="table hoverList" id="playList">
 								<c:forEach var="list" items="${list }">
 									<tr class="playList-td" id="playList-add">
 										<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
@@ -172,8 +181,8 @@
 							</table>
 						</div>
 					<c:forEach var="tabs" items="${tabs }">
-						<div class="tab-pane fade in active" id="${tabs.tab_id }">
-							<table class="table table-hover hoverList tab-playList">
+						<div class="tab-pane fade in active user-list" id="${tabs.tab_id }">
+							<table class="table hoverList tab-playList">
 								<c:forEach var="tabMusic" items="${tabMusic }">
 									<c:if test="${tabMusic.tab_id == tabs.tab_id}">
 										<tr class="playList-td">

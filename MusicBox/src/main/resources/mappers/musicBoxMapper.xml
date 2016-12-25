@@ -66,4 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<delete id="delTabMusic">
  		delete from tabs_music where tab_id = #{tab_id}
  	</delete>
+ 	<select id="get_Top100List" resultType="Top100VO"><![CDATA[
+ 		select * from top_100
+ 			order by music_ranking
+]]></select> 
 </mapper>

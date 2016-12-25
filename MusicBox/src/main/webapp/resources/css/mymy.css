@@ -67,6 +67,9 @@ table{
 #login-plz{
 	font-size: 50px;
 }
+.section-title{
+	font-size: 55px;
+}
 .delCancelBtn{
 	display: none;
 }
@@ -170,5 +173,14 @@ table{
 	background-color: #A5DE9F;
 }
 .delete-tab{
+	display: none;
+}
+.top100-ranking{
+	background-color: #9eaed8;
+}
+#playList-section{
+	display: none;
+}
+#search-section{
 	display: none;
 }

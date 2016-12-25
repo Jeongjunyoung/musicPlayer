@@ -6,6 +6,7 @@ import java.util.Map;
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
 import jy.mypro.domain.TabMusicVO;
+import jy.mypro.domain.Top100VO;
 import jy.mypro.domain.UserTabs;
 
 public interface MusicBoxService {
@@ -24,4 +25,5 @@ public interface MusicBoxService {
 	public void insertTabMusic(TabMusicVO tvo)throws Exception;
 	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
 	public void removeTab(String tab_id)throws Exception;
+	public List<Top100VO> getTop100List()throws Exception;
 }

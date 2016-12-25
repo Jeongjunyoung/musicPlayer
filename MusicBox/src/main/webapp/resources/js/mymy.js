@@ -11,6 +11,7 @@
 	var volume = true;
 	var edit = false;
 	var nowPlaying_tab = 'tab2';
+	var top100_index = 1;
 	//ajax 처리
 	function ajax_load(type,url,data,dataType,success,error){
 		$.ajax({
@@ -32,24 +33,9 @@
 		   }
 		});
 	}
-	//클릭 노래 플레이 블록 변경
-	function changeListBlock(index){
-		var getPlaylist = player.getPlaylist();
-		var $playing_tab = null;
-		$('.tab-pane').each(function(){
-			if($(this).hasClass('active')){
-				$playing_tab = $(this).find('.clickList-td');
-			}
-		})
-		$playing_tab.each(function(){
-			if($(this).attr('id') == getPlaylist[index]){
-				$(this).addClass('now-playing');
-			}
-		})
-	}
 	//처음 시작 플레이
 	function onPlayerReady(event,index) {
-		if(index == undefined){
+		/*if(index == undefined){
 			index = 0;
 		}
 		player.loadPlaylist(arr,index);
@@ -58,7 +44,7 @@
 			if($(this).attr('id') == arr[index]){
 				$(this).addClass('now-playing');
 			}
-		})
+		})*/
 	}	
 	function onPlayerStateChange(event) {
 		if(player.getPlayerState()==0){
@@ -74,15 +60,45 @@
 					}
 				}
 				$('.clickList-td').removeClass('now-playing');
+				console.log('index : '+index);
 				changeListBlock(index);
 				onPlayerReady(event,index);
 				replay = 'normal';
 			}else if(replay == 'normal'){
-				var index = player.getPlaylistIndex();
-				$('.clickList-td').removeClass('now-playing');
-				changeListBlock(index);
+				if(nowPlaying_tab == 'tab1'){
+					top100_index+=1;
+					top100ChangeMusic();
+				}else{
+					var index = player.getPlaylistIndex();
+					$('.clickList-td').removeClass('now-playing');
+					changeListBlock(index);
+				}
 			}
 		}
+	}
+	//클릭 노래 플레이 블록 변경
+	function changeListBlock(index){
+		var getPlaylist = player.getPlaylist();
+		var $playing_tab = null;
+		$('.tab-pane').each(function(){
+			if($(this).hasClass('active')){
+				$playing_tab = $(this).find('.clickList-td');
+			}
+		})
+		$playing_tab.each(function(){
+			if($(this).attr('id') == getPlaylist[index]){
+				$(this).addClass('now-playing');
+				return false;
+			}
+		})
+	}
+	//TOP100 노래 변경
+	function top100ChangeMusic(){
+		var $this = $('.top100Index-'+top100_index);
+		var video_id = $this.attr('id');
+		$('.clickList-td').removeClass('now-playing');
+		$this.addClass('now-playing');
+		player.loadVideoById(video_id);
 	}
 	//로그인 NULL값 체크
 	function checkFields(){
@@ -133,17 +149,20 @@
 			$('#shuffleBtn').removeClass('videoBtn-click');
 		}
 	}
-	function playVideo(){ //Play 버튼 클릭 이벤트
+	//Play 버튼 클릭 이벤트
+	function playVideo(){ 
 		player.playVideo();
 		$('#playBtn').css('display','none');
 		$('#stopBtn').css('display','inline');    	
 	}
-    function pauseVideo(){ //Pause 버튼 클릭 이벤트
+	//Pause 버튼 클릭 이벤트
+    function pauseVideo(){ 
     	player.pauseVideo();
     	$('#stopBtn').css('display','none');
     	$('#playBtn').css('display','inline');
     }
-    function changeVideo(video_ID){ //음악 변경 이벤트
+  //음악 변경 이벤트
+    function changeVideo(video_ID){ 
     	for(var i=0;i<arr.length;i++){
     		if(arr[i] == video_ID){
     			player.loadPlaylist(arr,i);
@@ -222,7 +241,7 @@
 		$('#editBtn').click(function(){
 			edit = true;
 			if($(this).css('display') != 'none'){
-				$(this).hide();
+				$('.hideBtn').hide();
 				$('.delCancelBtn').show();
 				$('.delete-tab').show();
 			}
@@ -233,7 +252,7 @@
 			$('.clickList-td').removeClass('edit-click');
 			$('.delCancelBtn').hide();
 			$('.delete-tab').hide();
-			$('#editBtn').show();
+			$('.hideBtn').show();
 		})
 		//MYMY 기본
 		var login = $('#loginFail').val();
@@ -259,8 +278,20 @@
 			$(this).addClass('search-click');
 			$(this).next().slideDown();
 		})
+		//TOP-100 리스트 클릭
+		$('.top100-list').on('click','td',function(){
+			var video_ID = $(this).attr('id');
+			var $this = $(this);
+			var tab_id = 'tab1';
+			nowPlaying_tab = tab_id;
+			$('.clickList-td').removeClass('now-playing');
+			$this.addClass('now-playing');
+			var str = $(this).prev().text();
+			top100_index = Number(str);
+			top100ChangeMusic();
+		})
 		//리스트 클릭 이벤트
-		$('#tab-content').on('click', 'td', function(){
+		$('.user-list').on('click', 'td', function(){
 				var video_ID = $(this).attr('id');
 				var $this = $(this);
 				var tab_id = $(this).parent().parent().parent().parent().attr('id');
@@ -282,6 +313,7 @@
 				if(tab_id == nowPlaying_tab){
 					changeVideo(video_ID);
 				}else{
+					nowPlaying_tab = tab_id;
 					arr.splice(0, arr.length)
 					$('#'+tab_id).find('.clickList-td').each(function(){
 						var tab_video_ID = $(this).attr('id');
@@ -366,8 +398,9 @@
 					ajax_load('GET', url, null, 'json', deleteTabSuccess);
 					$this.parents('li').remove();
 					$(tabID).remove();
-					var tabFirst = $('#tab-list a:first');
+					var tabFirst = $('#a-tab2');
 					tabFirst.tab('show');
+					$('#tab2').show();
 					swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
 			});
         	
@@ -429,7 +462,6 @@
         $('#tabMusicCloseBtn').click(function(){
         	$('#AddTabMusicModal').modal('hide');
         })
-        //$('#tab-list').append($('<li><a href="#tab' + tabID + '" role="tab" data-toggle="tab">Tab ' + tabID + '<button class="close" type="button" title="Remove this page">×</button></a></li>'));
         //탭 ADD 버튼 클릭
         $('#tabAddBtn').click(function(){
         	var tab_name = escape(encodeURIComponent($('#tabInput').val()));

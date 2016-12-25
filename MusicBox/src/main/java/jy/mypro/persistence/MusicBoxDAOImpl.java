@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
 import jy.mypro.domain.TabMusicVO;
+import jy.mypro.domain.Top100VO;
 import jy.mypro.domain.UserTabs;
 
 @Repository
@@ -85,5 +86,9 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	@Override
 	public void deleteTabMusic(String tab_id) throws Exception {
 		sqlSession.delete(namespace+".delTabMusic", tab_id);
+	}
+	@Override
+	public List<Top100VO> getTop100List() throws Exception {
+		return sqlSession.selectList(namespace+".get_Top100List");
 	}
 }

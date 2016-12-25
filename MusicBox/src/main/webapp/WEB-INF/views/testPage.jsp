@@ -1,384 +1,476 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="/../resources/js/jquery.min.js"></script>
-<script src="http://codepen.io/andytran/pen/vLmRVp.js"></script>
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+
+
+
+	<!-- Bootstrap Core CSS -->
+    <link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Theme CSS -->
+    
+    <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
+    <link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/../resources/css/sweetalert.css">
+	
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+	
 <style type="text/css">
 
-[ripple] {
-  z-index: 1;
-  position: relative;
-  overflow: hidden;
-}
-[ripple] .ripple {
-  position: absolute;
-  background: #FFFFFF;
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  -webkit-animation: ripple 1.6s;
-          animation: ripple 1.6s;
+body {
+  font-family: 'Architects Daughter', sans-serif;
 }
 
-@-webkit-keyframes ripple {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 0.2;
-  }
-  100% {
-    -webkit-transform: scale(40);
-            transform: scale(40);
-    opacity: 0;
-  }
-}
-
-@keyframes ripple {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-    opacity: 0.2;
-  }
-  100% {
-    -webkit-transform: scale(40);
-            transform: scale(40);
-    opacity: 0;
-  }
-}
-.tabs {
-  z-index: 15px;
-  position: relative;
-  background: #FFFFFF;
-  width: 600px;
-  border-radius: 4px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 100px auto 10px;
-  overflow: hidden;
-}
-.tabs-header {
-  position: relative;
-  background: #4285F4;
-  overflow: hidden;
-}
-.tabs-header .border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #F4B142;
-  width: auto;
-  height: 2px;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-}
-.tabs-header ul {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  width: calc(100% - 68px);
-}
-.tabs-header li {
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-}
-.tabs-header a {
-  z-index: 1;
-  display: block;
-  box-sizing: border-box;
-  padding: 15px 20px;
-  color: #FFFFFF;
-  font-weight: 500;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-.tabs-nav {
-  position: absolute;
+#paper-back {
+  width: 100%;
+  height: 100vh;
+  background-color: #243040;
+  position: fixed;
   top: 0;
-  right: 0;
-  background: #4285F4;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100%;
-  padding: 0 10px;
-  color: #FFFFFF;
+  left: 0;
+  font-size: 33px;
+}
+#paper-back nav {
+  padding: 120px 34px;
+}
+#paper-back nav a {
+  display: block;
+  margin-bottom: 25px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#paper-window {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 2;
+}
+#paper-window.tilt {
+  overflow: hidden;
+  pointer-events: none;
+}
+#paper-window.tilt #paper-front {
+  -webkit-transform: rotate(10deg) translateZ(0);
+          transform: rotate(10deg) translateZ(0);
+}
+
+#paper-front {
+  pointer-events: auto;
+  position: relative;
+  z-index: 3;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  -webkit-transform-origin: center 70%;
+          transform-origin: center 70%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+#container section {
+  height: 600px;
+  text-align: center;
+}
+#container section:first-of-type {
+  padding-top: 10vh;
+}
+#container section:first-of-type h1 {
+  font-size: 45px;
+}
+#container section:first-of-type p {
+  font-size: 25px;
+}
+@media (max-width: 600px) {
+  #container section:first-of-type {
+    padding-top: 15vh;
+  }
+  #container section:first-of-type h1 {
+    font-size: 30px;
+  }
+  #container section:first-of-type p {
+    font-size: 18px;
+  }
+}
+#container section:nth-of-type(2n) {
+  background-color: #edf1f5;
+}
+
+.hamburger {
+  position: fixed;
+  z-index: 4;
+  top: 30px;
+  left: 30px;
+  width: 45px;
+  height: 34px;
+  cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
 }
-.tabs-nav:before {
-  content: '';
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  box-shadow: 0 0 20px 10px #4285F4;
+.hamburger span {
+  position: relative;
 }
-.tabs-nav i {
-  border-radius: 100%;
+.hamburger span, .hamburger span:before, .hamburger span:after {
+  display: block;
+  width: 45px;
+  height: 6px;
+  background-color: #243040;
+  border-radius: 2px;
+}
+.hamburger span:before, .hamburger span:after {
+  content: '';
+  position: absolute;
+}
+.hamburger span:before {
+  bottom: -14px;
+}
+.hamburger span:after {
+  bottom: -28px;
+}
+
+.close {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 45px;
+  height: 34px;
   cursor: pointer;
 }
-.tabs-content {
-  position: relative;
-  padding: 15px 20px;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-  overflow: hidden;
-}
-.tabs-content:after {
+.close:before, .close:after {
   content: '';
   position: absolute;
-  bottom: -1px;
-  left: 0;
   display: block;
-  width: 100%;
-  height: 1px;
-  box-shadow: 0 0 20px 10px #FFFFFF;
+  width: 45px;
+  height: 6px;
+  top: 50%;
+  background-color: white;
+  border-radius: 2px;
 }
-.tabs-content .tab {
-  display: none;
+.close:before {
+  -webkit-transform: translateY(-50%) rotate(45deg);
+          transform: translateY(-50%) rotate(45deg);
 }
-.tabs-content .tab.active {
-  display: block;
+.close:after {
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+          transform: translateY(-50%) rotate(-45deg);
 }
-
-.pen-footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 600px;
-  margin: 20px auto 100px;
-}
-.pen-footer a {
-  color: #FFFFFF;
-  font-size: 12px;
-  text-decoration: none;
-  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
-}
-.pen-footer a .material-icons {
-  width: 12px;
-  margin: 0 5px;
-  vertical-align: middle;
-  font-size: 12px;
-}
-
-.cp-fab {
-  background: #FFFFFF !important;
-  color: #4285F4 !important;
-}
-
 </style>
-<script type="text/javascript">
-$(document).ready(function () {
-
-	  // Intial Border Position
-	  var activePos = $('.tabs-header .active').position();
-
-	  // Change Position
-	  function changePos() {
-
-	    // Update Position
-	    activePos = $('.tabs-header .active').position();
-
-	    // Change Position & Width
-	    $('.border').stop().css({
-	      left: activePos.left,
-	      width: $('.tabs-header .active').width()
-	    });
-	  }
-
-	  changePos();
-
-	  // Intial Tab Height
-	  var tabHeight = $('.tab.active').height();
-
-	  // Animate Tab Height
-	  function animateTabHeight() {
-
-	    // Update Tab Height
-	    tabHeight = $('.tab.active').height();
-
-	    // Animate Height
-	    $('.tabs-content').stop().css({
-	      height: tabHeight + 'px'
-	    });
-	  }
-
-	  animateTabHeight();
-
-	  // Change Tab
-	  function changeTab() {
-	    var getTabId = $('.tabs-header .active a').attr('tab-id');
-
-	    // Remove Active State
-	    $('.tab').stop().fadeOut(300, function () {
-	      // Remove Class
-	      $(this).removeClass('active');
-	    }).hide();
-
-	    $('.tab[tab-id=' + getTabId + ']').stop().fadeIn(300, function () {
-	      // Add Class
-	      $(this).addClass('active');
-
-	      // Animate Height
-	      animateTabHeight();
-	    });
-	  }
-
-	  // Tabs
-	  $('.tabs-header a').on('click', function (e) {
-	    e.preventDefault();
-
-	    // Tab Id
-	    var tabId = $(this).attr('tab-id');
-
-	    // Remove Active State
-	    $('.tabs-header a').stop().parent().removeClass('active');
-
-	    // Add Active State
-	    $(this).stop().parent().addClass('active');
-
-	    changePos();
-
-	    // Update Current Itm
-	    tabCurrentItem = tabItems.filter('.active');
-
-	    // Remove Active State
-	    $('.tab').stop().fadeOut(300, function () {
-	      // Remove Class
-	      $(this).removeClass('active');
-	    }).hide();
-
-	    // Add Active State
-	    $('.tab[tab-id="' + tabId + '"]').stop().fadeIn(300, function () {
-	      // Add Class
-	      $(this).addClass('active');
-
-	      // Animate Height
-	      animateTabHeight();
-	    });
-	  });
-
-	  // Tab Items
-	  var tabItems = $('.tabs-header ul li');
-
-	  // Tab Current Item
-	  var tabCurrentItem = tabItems.filter('.active');
-
-	  // Next Button
-	  $('#next').on('click', function (e) {
-	    e.preventDefault();
-
-	    var nextItem = tabCurrentItem.next();
-
-	    tabCurrentItem.removeClass('active');
-
-	    if (nextItem.length) {
-	      tabCurrentItem = nextItem.addClass('active');
-	    } else {
-	      tabCurrentItem = tabItems.first().addClass('active');
-	    }
-
-	    changePos();
-	    changeTab();
-	  });
-
-	  // Prev Button
-	  $('#prev').on('click', function (e) {
-	    e.preventDefault();
-
-	    var prevItem = tabCurrentItem.prev();
-
-	    tabCurrentItem.removeClass('active');
-
-	    if (prevItem.length) {
-	      tabCurrentItem = prevItem.addClass('active');
-	    } else {
-	      tabCurrentItem = tabItems.last().addClass('active');
-	    }
-
-	    changePos();
-	    changeTab();
-	  });
-
-	  // Ripple
-	  $('[ripple]').on('click', function (e) {
-	    var rippleDiv = $('<div class="ripple" />'),
-	      rippleOffset = $(this).offset(),
-	      rippleY = e.pageY - rippleOffset.top,
-	      rippleX = e.pageX - rippleOffset.left,
-	      ripple = $('.ripple');
-
-	    rippleDiv.css({
-	      top: rippleY - (ripple.height() / 2),
-	      left: rippleX - (ripple.width() / 2),
-	      background: $(this).attr("ripple-color")
-	    }).appendTo($(this));
-
-	    window.setTimeout(function () {
-	      rippleDiv.remove();
-	    }, 1500);
-	  });
-	});
-</script>
 </head>
 <body>
-	<div class="tabs">
-		<div class="tabs-header">
-			<div class="border"></div>
-			<ul>
-				<li class="active"><a href="#tab-1" tab-id="1" ripple="ripple"
-					ripple-color="#FFF">Tab 1</a></li>
-				<li><a href="#tab-2" tab-id="2" ripple="ripple"
-					ripple-color="#FFF">Tab 2</a></li>
-				<li><a href="#tab-3" tab-id="3" ripple="ripple"
-					ripple-color="#FFF">Tab 3</a></li>
-				<li><a href="#tab-4" tab-id="4" ripple="ripple"
-					ripple-color="#FFF">Tab 4</a></li>
-				<li><a href="#tab-5" tab-id="5" ripple="ripple"
-					ripple-color="#FFF">Tab 5</a></li>
-			</ul>
-			<nav class="tabs-nav">
-			<i class="material-icons" id="prev" ripple="ripple"
-				ripple-color="#FFF">&#xE314;</i>
-			<i class="material-icons" id="next" ripple="ripple"
-				ripple-color="#FFF">&#xE315;</i></nav>
-		</div>
-		<div class="tabs-content">
-			<div class="tab active" tab-id="1">1. Donec porttitor.</div>
-			<div class="tab" tab-id="2">2. Donec ullamcorper nulla non
-				metus auctor fringilla. Aenean eu leo quam.</div>
-			<div class="tab" tab-id="3">3. Done. Curabitur blandit tempus
-				porttitor.</div>
-			<div class="tab" tab-id="4">4. DoneAenean lacinia bibendum nulla sed
-				consectetur. Aenean lacinia bibendum nulla sed consectetur.</div>
-			<div class="tab" tab-id="5">5. Dolla sed consectetur. Aenean lacinia bibendum nulla sed
-				consectetur.</div>
+<div id="paper-back">
+	<nav>
+		<div class="close"></div>
+		<a href="#home-section" id="home-a" class="paper-menu">Home</a>
+		<a href="#playList-section" id="playlist-a" class="paper-menu">Play List</a>
+		<a href="#search-section" id="search-a" class="paper-menu">Search</a>
+		<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
+		<a href="#signUpModal" data-toggle="modal">SIGN UP</a>
+	</nav>
+</div>
+<div id="paper-window">
+	<div id="paper-front">
+		<div class="hamburger"><span></span></div>
+		<div id="container">
+			<section id="home-section">
+				<div class="container">
+					<div class="row">
+						<c:choose>
+							<c:when test="${session == true }">
+								<div class="col-lg-12">
+									<span class="skills section-title">PLAYING NOW</span>
+									<div class="intro-text" id="player"></div>
+									<br><br><br>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="col-lg-12">
+									<span class="skills section-title">PLAYING NOW</span><br>
+									<span class="skills" id="login-plz">LOGIN PLEASE..</span>
+									<input type="hidden" value="${loginFail }" id="loginFail"> <br>
+									<br><br>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div class="row">
+						<div class="col-xs-1 col-md-offset-4">
+							<img src="/../resources/images/play.png"
+								class="img-responsive video-btn" onclick="playVideo()"
+								id="playBtn" name="play"> <img
+								src="/../resources/images/pause.png"
+								class="img-responsive video-btn" onclick="pauseVideo()"
+								id="stopBtn" name="pause">
+						</div>
+						<div class="col-xs-1">
+							<img src="/../resources/images/shuffle.png"
+								class="img-responsive video-btn" onclick="shufflePlay()"
+								id="shuffleBtn" name="shuffle">
+						</div>
+						<div class="col-xs-1">
+							<img src="/../resources/images/repeat-one.png"
+								class="img-responsive video-btn" id="replayBtn"
+								name="repeat-one">
+						</div>
+						<div class="col-xs-1">
+							<img src="/../resources/images/audio.png" class="img-responsive"
+								onclick="audio_btn()" id="audioBtn" name="audio">
+						</div>
+					</div>
+				</div>
+				</section>
+			<section id="playList-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<span class="skills section-title">PLAY LIST</span>
+						</div>
+						<div class="col-lg-12 text-center">
+							<button class="btn btn-lg btn-info hideBtn" id="editBtn">EDIT</button>
+							<button class="btn btn-lg btn-info hideBtn" id="btn-add-tab">ADD TAB</button>
+						</div>
+						<div class="col-lg-12 text-center">
+							<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
+							<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
+						</div>
+					</div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<!-- Nav tabs -->
+								<ul id="tab-list" class="nav nav-tabs" role="tablist">
+									<li><a href="#tab1" role="tab" data-toggle="tab">TOP
+											100</a></li>
+									<li class="tab active"><a href="#tab2" role="tab"
+										data-toggle="tab" id="a-tab2">MY LIST</a></li>
+									<c:forEach var="tabs" items="${tabs }">
+										<li class="tab"><a href="#${tabs.tab_id }" role="tab"
+											data-toggle="tab">${tabs.tab_name }<button
+													class="close delete-tab" type="button"
+													title="Remove this page">×</button></a></li>
+									</c:forEach>
+								</ul>
+								<!-- Tab panes -->
+								<div id="tab-content">
+									<div class="tab-pane fade top100-list" id="tab1">
+										<table class="table hoverList">
+											<c:forEach var="top100" items="${top100 }" varStatus="status">
+												<tr class="playList-td">
+													<td class="top100-ranking">${status.count}</td>
+													<td id="${top100.music_id }"
+														class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+												</tr>
+											</c:forEach>
+										</table>
+									</div>
+									<div class="tab-pane fade in active user-list" id="tab2">
+										<table class="table hoverList" id="playList">
+											<c:forEach var="list" items="${list }">
+												<tr class="playList-td" id="playList-add">
+													<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
+												</tr>
+											</c:forEach>
+										</table>
+									</div>
+									<c:forEach var="tabs" items="${tabs }">
+										<div class="tab-pane fade in active user-list" id="${tabs.tab_id }">
+											<table class="table hoverList tab-playList">
+												<c:forEach var="tabMusic" items="${tabMusic }">
+													<c:if test="${tabMusic.tab_id == tabs.tab_id}">
+														<tr class="playList-td">
+															<td id="${tabMusic.tabs_music_id }" class="clickList-td">${tabMusic.tabs_music_name }</td>
+														</tr>
+													</c:if>
+												</c:forEach>
+											</table>
+											<div class="col-lg-12 text-center">
+												<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</section>
+			<section id="search-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 text-center">
+							<span class="skills section-title">SEARCH</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-8 col-lg-offset-2">
+							<div class="row control-group text-center">
+								<div class="form-group col-xs-9 controls">
+									<input type="text" class="form-control" placeholder="KEY WORD"
+										id="searchKey">
+								</div>
+								<div class="col-xs-2">
+									<button type="button" class="btn btn-lg btn-default"
+										id="searchBtn">
+										<span class="fa fa-search">
+									</button>
+								</div>
+							</div>
+							<div class="col-lg-12 text-center">
+								<div class="row control-group text-center result-Scroll"
+									id="searchResult"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</section>
 		</div>
 	</div>
+</div>
+    <!-- 회원가입 Modal -->
+    <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>SIGN UP</h2>
+                            <hr class="star-primary">
+                            <form action="sign_in" method="post" class="form-horizontal" id="frm">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" title="ID" class="form-control input_text" name="user_id" id="input_id" placeholder="ID">
+									</div>
+								</div>
+								<div class="form-group">									
+									<div class="col-sm-12">
+										<input type="password" title="PASSWORD" class="form-control input_text" name="user_pw" id="input_pw" placeholder="PASSWORD">
+									</div>
+								</div>
+								<div class="form-group">																
+									<div class="col-sm-12">
+										<input type="email" title="E-MAIL" class="form-control input_text" name="user_email" id="input_email" placeholder="E-MAIL">
+									</div>
+								</div>
+								<input type="hidden" title="HIDDEN" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
+							</form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 로그인 Modal -->
+    <div class="portfolio-modal modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>LOGIN</h2>
+                            <hr class="star-primary">
+                            <form action="login_form" method="post" class="form-horizontal" name="loginForm" id="loginForm">
+                            	<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" class="form-control input_text" name="user_id" placeholder="ID" id="user_id">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="password" class="form-control input_text" name="user_pw" placeholder="PASSWORD" id="user_pw">
+										<input type="hidden" name="user_email" id="user_email"/>
+									</div>
+								</div>
+								<input type="hidden"   name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
+							</form>
+							<div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade" id="AddTabModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="container">
+			<div class="row">
+				<div id="tabForm">
+					<h1 class="tabH1">ADD TAB</h1>
+					<input placeholder="TAB NAME" type="input" required="" id="tabInput">
+					<button class="tabadd-btn" id="tabAddBtn">ADD</button><br><br>
+					<button class="tabadd-btn" id="tabCloseBtn">CLOSE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="AddTabMusicModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-12 text-center">
+				<div id="AddtabForm">
+					<h1 class="tabH1">ADD MUSIC</h1>
+					<div class="col-lg-12 text-center" id="tabMusic-list">
+						<table class="table hoverList" id="tabAllList">
+							<c:forEach var="list" items="${list }">
+								<tr>
+									<td id="${list.music_id }" class="tab-list">${list.music_name }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+					<button class="tabadd-btn" id="tabMusicAddBtn">ADD</button>
+					<button class="tabadd-btn" id="tabMusicCloseBtn">CLOSE</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<!-- jQuery -->
+    <script src="/../resources/js/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/../resources/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	
+    <!-- Contact Form JavaScript -->
+    <script src="/../resources/js/mymy.js"></script>
+    <script src="/../resources/js/mymySocial.js"></script>
+    <script src="/../resources/js/testPage.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/../resources/js/freelancer.min.js"></script>
+	<script src="/../resources/js/sweetalert.min.js"></script>
+	<script src="/../resources/js/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+	<!-- Google API -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
 import jy.mypro.domain.TabMusicVO;
+import jy.mypro.domain.Top100VO;
 import jy.mypro.domain.UserTabs;
 import jy.mypro.persistence.MusicBoxDAO;
 
@@ -67,7 +68,11 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	}
 	@Override
 	public Integer getMaxTabId(String user_id) throws Exception {
-		return dao.getMaxTabId(user_id);
+		int get_maxTabid = 0;
+		try {
+			get_maxTabid = dao.getMaxTabId(user_id);
+		} catch (Exception e) {}
+		return get_maxTabid;
 	}
 	@Override
 	public void insertTabs(UserTabs tabs) throws Exception {
@@ -89,5 +94,9 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	public void removeTab(String tab_id) throws Exception {
 		dao.deleteTabMusic(tab_id);
 		dao.deleteTab(tab_id);
+	}
+	@Override
+	public List<Top100VO> getTop100List() throws Exception {
+		return dao.getTop100List();
 	}
 }
