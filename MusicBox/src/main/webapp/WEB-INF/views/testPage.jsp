@@ -4,12 +4,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 
-
-
-	<!-- Bootstrap Core CSS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta name="google-signin-scope" content="profile email">
+	<meta name="google-site-verification" content="60I7cWIaqvcVC_HneXrEvqvbUD99KqLcdRmOnNUhexA">
+	<meta name="google-signin-client_id" content="222457887868-9bofjnk09tuuc2v2cgedclv7nu6c868n.apps.googleusercontent.com">
+	
+    <title>MYMY</title>
+    <!-- Bootstrap Core CSS -->
     <link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -23,321 +29,225 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 	
-<style type="text/css">
-
-body {
-  font-family: 'Architects Daughter', sans-serif;
-}
-
-#paper-back {
-  width: 100%;
-  height: 100vh;
-  background-color: #243040;
-  position: fixed;
-  top: 0;
-  left: 0;
-  font-size: 33px;
-}
-#paper-back nav {
-  padding: 120px 34px;
-}
-#paper-back nav a {
-  display: block;
-  margin-bottom: 25px;
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-#paper-window {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  z-index: 2;
-}
-#paper-window.tilt {
-  overflow: hidden;
-  pointer-events: none;
-}
-#paper-window.tilt #paper-front {
-  -webkit-transform: rotate(10deg) translateZ(0);
-          transform: rotate(10deg) translateZ(0);
-}
-
-#paper-front {
-  pointer-events: auto;
-  position: relative;
-  z-index: 3;
-  background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-  -webkit-transform-origin: center 70%;
-          transform-origin: center 70%;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-#container section {
-  height: 600px;
-  text-align: center;
-}
-#container section:first-of-type {
-  padding-top: 10vh;
-}
-#container section:first-of-type h1 {
-  font-size: 45px;
-}
-#container section:first-of-type p {
-  font-size: 25px;
-}
-@media (max-width: 600px) {
-  #container section:first-of-type {
-    padding-top: 15vh;
-  }
-  #container section:first-of-type h1 {
-    font-size: 30px;
-  }
-  #container section:first-of-type p {
-    font-size: 18px;
-  }
-}
-#container section:nth-of-type(2n) {
-  background-color: #edf1f5;
-}
-
-.hamburger {
-  position: fixed;
-  z-index: 4;
-  top: 30px;
-  left: 30px;
-  width: 45px;
-  height: 34px;
-  cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-.hamburger span {
-  position: relative;
-}
-.hamburger span, .hamburger span:before, .hamburger span:after {
-  display: block;
-  width: 45px;
-  height: 6px;
-  background-color: #243040;
-  border-radius: 2px;
-}
-.hamburger span:before, .hamburger span:after {
-  content: '';
-  position: absolute;
-}
-.hamburger span:before {
-  bottom: -14px;
-}
-.hamburger span:after {
-  bottom: -28px;
-}
-
-.close {
-  position: fixed;
-  top: 30px;
-  left: 30px;
-  width: 45px;
-  height: 34px;
-  cursor: pointer;
-}
-.close:before, .close:after {
-  content: '';
-  position: absolute;
-  display: block;
-  width: 45px;
-  height: 6px;
-  top: 50%;
-  background-color: white;
-  border-radius: 2px;
-}
-.close:before {
-  -webkit-transform: translateY(-50%) rotate(45deg);
-          transform: translateY(-50%) rotate(45deg);
-}
-.close:after {
-  -webkit-transform: translateY(-50%) rotate(-45deg);
-          transform: translateY(-50%) rotate(-45deg);
-}
-</style>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body>
-<div id="paper-back">
-	<nav>
-		<div class="close"></div>
-		<a href="#home-section" id="home-a" class="paper-menu">Home</a>
-		<a href="#playList-section" id="playlist-a" class="paper-menu">Play List</a>
-		<a href="#search-section" id="search-a" class="paper-menu">Search</a>
-		<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
-		<a href="#signUpModal" data-toggle="modal">SIGN UP</a>
-	</nav>
-</div>
-<div id="paper-window">
-	<div id="paper-front">
-		<div class="hamburger"><span></span></div>
-		<div id="container">
-			<section id="home-section">
-				<div class="container">
-					<div class="row">
-						<c:choose>
-							<c:when test="${session == true }">
-								<div class="col-lg-12">
-									<span class="skills section-title">PLAYING NOW</span>
-									<div class="intro-text" id="player"></div>
-									<br><br><br>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="col-lg-12">
-									<span class="skills section-title">PLAYING NOW</span><br>
-									<span class="skills" id="login-plz">LOGIN PLEASE..</span>
-									<input type="hidden" value="${loginFail }" id="loginFail"> <br>
-									<br><br>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					<div class="row">
-						<div class="col-xs-1 col-md-offset-4">
-							<img src="/../resources/images/play.png"
-								class="img-responsive video-btn" onclick="playVideo()"
-								id="playBtn" name="play"> <img
-								src="/../resources/images/pause.png"
-								class="img-responsive video-btn" onclick="pauseVideo()"
-								id="stopBtn" name="pause">
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <input type="hidden" id="google_user" value="${google_user}">
+                <c:choose>
+					<c:when test="${session == true }">
+						<a class="navbar-brand" href="#page-top">${user.user_id}'s MY MY</a>
+						<input type="hidden" value="${user.user_id}" id="login_id">
+					</c:when>
+					<c:otherwise>
+						<a class="navbar-brand" href="#page-top">MY MY</a>
+					</c:otherwise>
+				</c:choose>                
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">PLAYLIST</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">SEARCH</a>
+                    </li>                    
+                    <li class="page-scroll">
+	                    <c:choose>
+	                    	<c:when test="${session == true }">
+	                    		<a href="logout" onclick="signOut();">LOGOUT</a>                    		
+	                   		</c:when>
+	                   		<c:otherwise>
+	                   			<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
+	                   		</c:otherwise>
+	                    </c:choose>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#signUpModal" data-toggle="modal">SIGN UP</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+            <c:choose>
+	            <c:when test="${session == true }">
+	            	<div class="col-lg-12">
+	                	<h2>PLAYING NOW</h2>
+	               		<hr class="star-light">
+	                    <div class="intro-text" id="player"></div>
+	                    <br><br><br>
+	                </div>
+	            </c:when>
+	            <c:otherwise>
+	            	<div class="col-lg-12">
+	                	<h2>PLAYING NOW</h2>
+	               		<hr class="star-light">
+	                    <span class="skills" id="login-plz">LOGIN PLEASE..</span>
+	                    <input type="hidden" value="${loginFail }" id="loginFail">
+	                    <br><br><br>
+	                </div>
+	            </c:otherwise>
+            </c:choose>
+			</div>
+			<div class="row">
+                <div class="col-xs-1 col-md-offset-4">
+                	<img src="/../resources/images/play.png" class="img-responsive video-btn" onclick="playVideo()" id="playBtn" name="play">
+                	<img src="/../resources/images/pause.png" class="img-responsive video-btn" onclick="pauseVideo()" id="stopBtn" name="pause">
+                </div>
+                <div class="col-xs-1">
+                	<img src="/../resources/images/shuffle.png" class="img-responsive video-btn" onclick="shufflePlay()" id="shuffleBtn" name="shuffle">
+                </div>
+                <div class="col-xs-1">
+                	<img src="/../resources/images/repeat-one.png" class="img-responsive video-btn" id="replayBtn" name="repeat-one">
+                </div>
+                <div class="col-xs-1">
+                	<img src="/../resources/images/audio.png" class="img-responsive" onclick="audio_btn()" id="audioBtn" name="audio">
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- PLAY LIST Grid Section -->
+    <section id="portfolio">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2>PLAY LIST</h2>
+				<hr class="star-primary">
+			</div>
+			<div class="col-lg-12 text-center">
+				<button class="btn btn-lg btn-info hideBtn" id="editBtn">EDIT</button>
+				<button class="btn btn-lg btn-info hideBtn" id="btn-add-tab">ADD TAB</button>
+			</div>
+			<div class="col-lg-12 text-center">
+				<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
+				<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Nav tabs -->
+					<ul id="tab-list" class="nav nav-tabs" role="tablist">
+						<li><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
+						<li class="tab active"><a href="#tab2" role="tab" data-toggle="tab" id="a-tab2">MY LIST</a></li>
+						<c:forEach var="tabs" items="${tabs }">
+							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>
+						</c:forEach>
+					</ul>
+					<!-- Tab panes -->
+					<div id="tab-content">
+						<div class="tab-pane fade top100-list" id="tab1">
+							<table class="table hoverList">
+								<c:forEach var="top100" items="${top100 }" varStatus="status">
+									<tr class="playList-td">
+										<td class="top100-ranking">${status.count}</td>
+										<td id="${top100.music_id }" class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
-						<div class="col-xs-1">
-							<img src="/../resources/images/shuffle.png"
-								class="img-responsive video-btn" onclick="shufflePlay()"
-								id="shuffleBtn" name="shuffle">
+						<div class="tab-pane fade in active user-list" id="tab2">
+							<table class="table hoverList" id="playList">
+								<c:forEach var="list" items="${list }">
+									<tr class="playList-td" id="playList-add">
+										<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
 						</div>
-						<div class="col-xs-1">
-							<img src="/../resources/images/repeat-one.png"
-								class="img-responsive video-btn" id="replayBtn"
-								name="repeat-one">
-						</div>
-						<div class="col-xs-1">
-							<img src="/../resources/images/audio.png" class="img-responsive"
-								onclick="audio_btn()" id="audioBtn" name="audio">
-						</div>
-					</div>
-				</div>
-				</section>
-			<section id="playList-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 text-center">
-							<span class="skills section-title">PLAY LIST</span>
-						</div>
-						<div class="col-lg-12 text-center">
-							<button class="btn btn-lg btn-info hideBtn" id="editBtn">EDIT</button>
-							<button class="btn btn-lg btn-info hideBtn" id="btn-add-tab">ADD TAB</button>
-						</div>
-						<div class="col-lg-12 text-center">
-							<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
-							<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
-						</div>
-					</div>
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<!-- Nav tabs -->
-								<ul id="tab-list" class="nav nav-tabs" role="tablist">
-									<li><a href="#tab1" role="tab" data-toggle="tab">TOP
-											100</a></li>
-									<li class="tab active"><a href="#tab2" role="tab"
-										data-toggle="tab" id="a-tab2">MY LIST</a></li>
-									<c:forEach var="tabs" items="${tabs }">
-										<li class="tab"><a href="#${tabs.tab_id }" role="tab"
-											data-toggle="tab">${tabs.tab_name }<button
-													class="close delete-tab" type="button"
-													title="Remove this page">×</button></a></li>
-									</c:forEach>
-								</ul>
-								<!-- Tab panes -->
-								<div id="tab-content">
-									<div class="tab-pane fade top100-list" id="tab1">
-										<table class="table hoverList">
-											<c:forEach var="top100" items="${top100 }" varStatus="status">
-												<tr class="playList-td">
-													<td class="top100-ranking">${status.count}</td>
-													<td id="${top100.music_id }"
-														class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
-												</tr>
-											</c:forEach>
-										</table>
-									</div>
-									<div class="tab-pane fade in active user-list" id="tab2">
-										<table class="table hoverList" id="playList">
-											<c:forEach var="list" items="${list }">
-												<tr class="playList-td" id="playList-add">
-													<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
-												</tr>
-											</c:forEach>
-										</table>
-									</div>
-									<c:forEach var="tabs" items="${tabs }">
-										<div class="tab-pane fade in active user-list" id="${tabs.tab_id }">
-											<table class="table hoverList tab-playList">
-												<c:forEach var="tabMusic" items="${tabMusic }">
-													<c:if test="${tabMusic.tab_id == tabs.tab_id}">
-														<tr class="playList-td">
-															<td id="${tabMusic.tabs_music_id }" class="clickList-td">${tabMusic.tabs_music_name }</td>
-														</tr>
-													</c:if>
-												</c:forEach>
-											</table>
-											<div class="col-lg-12 text-center">
-												<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</section>
-			<section id="search-section">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-12 text-center">
-							<span class="skills section-title">SEARCH</span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-8 col-lg-offset-2">
-							<div class="row control-group text-center">
-								<div class="form-group col-xs-9 controls">
-									<input type="text" class="form-control" placeholder="KEY WORD"
-										id="searchKey">
-								</div>
-								<div class="col-xs-2">
-									<button type="button" class="btn btn-lg btn-default"
-										id="searchBtn">
-										<span class="fa fa-search">
-									</button>
-								</div>
-							</div>
+					<c:forEach var="tabs" items="${tabs }">
+						<div class="tab-pane fade in active user-list" id="${tabs.tab_id }">
+							<table class="table hoverList tab-playList">
+								<c:forEach var="tabMusic" items="${tabMusic }">
+									<c:if test="${tabMusic.tab_id == tabs.tab_id}">
+										<tr class="playList-td">
+											<td id="${tabMusic.tabs_music_id }" class="clickList-td">${tabMusic.tabs_music_name }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</table>
 							<div class="col-lg-12 text-center">
-								<div class="row control-group text-center result-Scroll"
-									id="searchResult"></div>
+								<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
 							</div>
 						</div>
+					</c:forEach>
 					</div>
 				</div>
-				</section>
+			</div>
 		</div>
 	</div>
-</div>
+	</section>
+    <!-- Search Section -->
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>SEARCH</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+	                <div class="row control-group text-center">
+						<div class="form-group col-xs-9 controls">
+						    <input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
+						</div>
+						<div class="col-xs-2">
+							<button type="button" class="btn btn-lg btn-default" id="searchBtn"><span class="fa fa-search"></button>
+	                	</div>
+	                </div>
+	                 <div class="col-lg-12 text-center">
+						<div class="row control-group text-center result-Scroll" id="searchResult"></div>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; 2016, BokGyu All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
     <!-- 회원가입 Modal -->
     <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -462,7 +372,6 @@ body {
     <!-- Contact Form JavaScript -->
     <script src="/../resources/js/mymy.js"></script>
     <script src="/../resources/js/mymySocial.js"></script>
-    <script src="/../resources/js/testPage.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="/../resources/js/freelancer.min.js"></script>

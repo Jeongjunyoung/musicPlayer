@@ -10,7 +10,7 @@
 	var shuffle = true;
 	var volume = true;
 	var edit = false;
-	var nowPlaying_tab = 'tab2';
+	var nowPlaying_tab = 'tab';
 	var top100_index = 1;
 	//ajax 처리
 	function ajax_load(type,url,data,dataType,success,error){
@@ -88,6 +88,8 @@
 		$playing_tab.each(function(){
 			if($(this).attr('id') == getPlaylist[index]){
 				$(this).addClass('now-playing');
+				var playing_music_name = $(this).text();
+				$('#plaing-music-name').text(playing_music_name);
 				return false;
 			}
 		})
@@ -96,6 +98,8 @@
 	function top100ChangeMusic(){
 		var $this = $('.top100Index-'+top100_index);
 		var video_id = $this.attr('id');
+		var playing_music_name = $this.text();
+		$('#plaing-music-name').text(playing_music_name);
 		$('.clickList-td').removeClass('now-playing');
 		$this.addClass('now-playing');
 		player.loadVideoById(video_id);
@@ -212,7 +216,7 @@
 	}
 	$(function(){
 		$('.tab-pane').hide();
-        $('#tab2').show();
+        $('#tab1').show();
 		//DEL 버튼
 		$('#delBtn').click(function(){
 			if(editArr.length == 0){
@@ -281,10 +285,12 @@
 		//TOP-100 리스트 클릭
 		$('.top100-list').on('click','td',function(){
 			var video_ID = $(this).attr('id');
+			var playing_music_name = $(this).text();
 			var $this = $(this);
 			var tab_id = 'tab1';
 			nowPlaying_tab = tab_id;
 			$('.clickList-td').removeClass('now-playing');
+			$('#plaing-music-name').text(playing_music_name);
 			$this.addClass('now-playing');
 			var str = $(this).prev().text();
 			top100_index = Number(str);
@@ -292,9 +298,10 @@
 		})
 		//리스트 클릭 이벤트
 		$('.user-list').on('click', 'td', function(){
-				var video_ID = $(this).attr('id');
 				var $this = $(this);
-				var tab_id = $(this).parent().parent().parent().parent().attr('id');
+				var video_ID = $this.attr('id');
+				var playing_music_name = $this.text();
+				var tab_id = $this.parent().parent().parent().parent().attr('id');
 			if(edit){
 				if($this.hasClass('edit-click')){
 					$this.removeClass('edit-click');
@@ -310,9 +317,11 @@
 			}else{
 				$('.clickList-td').removeClass('now-playing');
 				$this.addClass('now-playing');
+				$('#plaing-music-name').text(playing_music_name);
 				if(tab_id == nowPlaying_tab){
 					changeVideo(video_ID);
 				}else{
+					console.log('aaa');
 					nowPlaying_tab = tab_id;
 					arr.splice(0, arr.length)
 					$('#'+tab_id).find('.clickList-td').each(function(){

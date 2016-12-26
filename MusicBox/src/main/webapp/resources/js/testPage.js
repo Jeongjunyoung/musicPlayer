@@ -11,14 +11,12 @@ var paperMenu = {
 			this.$hamburger.off('click');
 			$('#container, .hamburger').on('click', this.close.bind(this));
 			this.hamburgerFix(true);
-			console.log('opening...');
 		},
 		close: function() {
 			this.$window.removeClass('tilt'); 
 			$('#container, .hamburger').off('click');
 			this.$hamburger.on('click', this.open.bind(this));
 			this.hamburgerFix(false);
-			console.log('closing...');
 		},
 		updateTransformOrigin: function() {
 			scrollTop = this.$window.scrollTop();
@@ -62,14 +60,3 @@ var paperMenu = {
 		paperMenu.close();
 	})
 })
-/*function playlist_show(){
-		$('#paper-window').removeClass('tilt');
-		$('#home').hide();
-		$('#search-section').hide();
-		$('#playList-section').show();
-	}
-	function search_show(){
-		$('#home').hide();
-		$('#playList-section').hide();
-		$('#search-section').show();
-	}*/

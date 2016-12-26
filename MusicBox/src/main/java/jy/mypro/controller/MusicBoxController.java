@@ -39,6 +39,7 @@ public class MusicBoxController {
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
 		//model.addAttribute("session", Social_session);
+		model.addAttribute("top100", ms.getTop100List());
 		return "/main";
 	}
 	//구글 인증
@@ -85,7 +86,10 @@ public class MusicBoxController {
 		model.addAttribute("user", user);
 		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
+		model.addAttribute("top100", ms.getTop100List());
 		model.addAttribute("list", ms.getList(user.getUser_id()));
+		request.setAttribute("tabs", ms.getUserTabs(user.getUser_id()));
+		request.setAttribute("tabMusic", ms.getTabsMusic(user.getUser_id()));
 		return "/main";
 	}
 	@RequestMapping(value="/google_Login", method=RequestMethod.GET)
