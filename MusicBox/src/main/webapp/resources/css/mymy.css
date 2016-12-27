@@ -50,11 +50,6 @@ table{
 .button-div{
 	text-align: center;
 }
-.videoBtn-click{
-	border:  2px;
-	border-style: solid;
-	border-color: #FF2424;
-}
 .now-playing{
 	background-color: #B778FF;
 }
@@ -326,4 +321,7 @@ table{
 }
 #plaing-music-name{
 	font-size: 19px;
+}
+.click-play-option{
+	background-color: #f07982;
 }

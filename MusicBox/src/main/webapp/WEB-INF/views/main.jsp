@@ -56,7 +56,7 @@
 							<c:when test="${session == true }"> --%>
 								<div class="col-lg-12">
 									<span class="skills section-title">PLAYING NOW</span><br><br>
-									<span class="skills" id="plaing-music-name"></span><br><br>
+									<span class="skills" id=" q"></span><br><br>
 									<div class="intro-text" id="player"></div>
 									<br><br><br>
 								</div>
@@ -71,8 +71,8 @@
 							</c:otherwise>
 						</c:choose> --%>
 					</div>
-					<!-- <div class="row">
-						<div class="col-xs-1 col-md-offset-4">
+					 <div class="row">
+						<!--<div class="col-xs-1 col-md-offset-4">
 							<img src="/../resources/images/play.png"
 								class="img-responsive video-btn" onclick="playVideo()"
 								id="playBtn" name="play"> <img
@@ -93,8 +93,26 @@
 						<div class="col-xs-1">
 							<img src="/../resources/images/audio.png" class="img-responsive"
 								onclick="audio_btn()" id="audioBtn" name="audio">
-						</div>
-					</div> -->
+						</div> -->
+					</div>
+					<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
+						<span class="fa fa-backward">
+					</button>
+					<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
+						<span class="fa fa-play">
+					</button>
+					<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
+						<span class="fa fa-pause">
+					</button>
+					<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
+						<span class="fa fa-random">
+					</button>
+					<button type="button" class="btn btn-lg" id="replayBtn">
+						<span class="fa fa-repeat">
+					</button>
+					<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
+						<span class="fa fa-forward">
+					</button>
 				</div>
 				</section>
 			<section id="playList-section">
@@ -121,7 +139,7 @@
 									<li><a href="#tab2" role="tab" data-toggle="tab" id="a-tab2">MY LIST</a></li>
 									<c:forEach var="tabs" items="${tabs }">
 										<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }
-											<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>
+											<button class="btn btn-xs delete-tab" type="button" title="Remove this page">×</button></a></li>
 									</c:forEach>
 								</ul>
 								<!-- Tab panes -->
@@ -183,8 +201,7 @@
 										id="searchKey">
 								</div>
 								<div class="col-xs-2">
-									<button type="button" class="btn btn-lg btn-default"
-										id="searchBtn">
+									<button type="button" class="btn btn-lg btn-default" id="searchBtn">
 										<span class="fa fa-search">
 									</button>
 								</div>

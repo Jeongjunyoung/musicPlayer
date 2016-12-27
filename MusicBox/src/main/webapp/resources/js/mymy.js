@@ -145,12 +145,12 @@
 			player.setShuffle(shuffle);
 			player.setLoop(true);
 			shuffle = false;
-			$('#shuffleBtn').addClass('videoBtn-click');
+			$('#shuffleBtn').addClass('click-play-option');
 		}else{
 			player.setShuffle(shuffle);
 			player.setLoop(true);
 			shuffle = true;
-			$('#shuffleBtn').removeClass('videoBtn-click');
+			$('#shuffleBtn').removeClass('click-play-option');
 		}
 	}
 	//Play 버튼 클릭 이벤트
@@ -165,7 +165,34 @@
     	$('#stopBtn').css('display','none');
     	$('#playBtn').css('display','inline');
     }
-  //음악 변경 이벤트
+    //Next 버튼 클릭 이벤트
+    function nextVideo(){
+    	if(nowPlaying_tab != 'tab1'){
+    		player.nextVideo();
+    	}else{
+    		if(top100_index == 100){
+    			top100_index = 1;
+    		}else{
+    			top100_index+=1;
+    		}
+    		top100ChangeMusic();
+    	}
+
+    }
+    //Prev 버튼 클릭 이벤트
+    function prevVideo(){
+    	if(nowPlaying_tab != 'tab1'){
+    		player.previousVideo();
+    	}else{
+    		if(top100_index == 1){
+    			top100_index = 100;
+    		}else{
+    			top100_index-=1;
+    		}
+    		top100ChangeMusic();
+    	}
+    }
+    //음악 변경 이벤트
     function changeVideo(video_ID){ 
     	for(var i=0;i<arr.length;i++){
     		if(arr[i] == video_ID){
@@ -297,7 +324,7 @@
 			top100ChangeMusic();
 		})
 		//리스트 클릭 이벤트
-		$('.user-list').on('click', 'td', function(){
+		$('#tab-content').on('click', '.user-list td', function(){
 				var $this = $(this);
 				var video_ID = $this.attr('id');
 				var playing_music_name = $this.text();
@@ -321,11 +348,11 @@
 				if(tab_id == nowPlaying_tab){
 					changeVideo(video_ID);
 				}else{
-					console.log('aaa');
 					nowPlaying_tab = tab_id;
 					arr.splice(0, arr.length)
 					$('#'+tab_id).find('.clickList-td').each(function(){
 						var tab_video_ID = $(this).attr('id');
+						console.log(tab_video_ID);
 						arr.push(tab_video_ID);
 					})
 					changeVideo(video_ID);
@@ -379,16 +406,16 @@
 		//한곡 반복 재생
 		$('#replayBtn').click(function(){
 			if(replay == 'false' || replay == 'normal'){
-				$(this).addClass('videoBtn-click');
+				$(this).addClass('click-play-option');
 				repeatArr[0] = get_playing_id();
 				replay = 'true';
 			}else if(replay){
-				$(this).removeClass('videoBtn-click');
+				$(this).removeClass('click-play-option');
 				replay = 'false';
 			}
 		})
 		//탭 삭제
-        $('#tab-list').on('click','.close',function(){
+        $('#tab-list').on('click','.delete-tab',function(){
         	var $this = $(this);
         	var tabID = $this.parents('a').attr('href');
         	var tab_id = tabID.substr(tabID.indexOf('#')+1);
@@ -451,7 +478,7 @@
         function addTabMusicSuccess(data){
         	$.each(data,function(index,value){
         		var tab_id = value.tab_id;
-        		var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td id='+value.tabs_music_id+'>'+ value.tabs_music_name +'</td></tr>';
+        		var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td class='+"clickList-td"+' id='+value.tabs_music_id+'>'+ value.tabs_music_name +'</td></tr>';
     			$('#'+tab_id).find('table').append(td);
     			$('#AddTabMusicModal').modal('hide');
     			$('.tab-list').removeClass('tab-list-click');
@@ -484,8 +511,8 @@
         		type : 'get',
         		dataType : 'json',
         		success : function(data){
-        			$('#tab-list').append($('<li><a href="#' + data.tab_id + '" role="tab" data-toggle="tab">' + data.tab_name + '<button class="close delete-tab" type="button" title="Remove this page">×</button></a></li>'));
-        			$('#tab-content').append($('<div class="tab-pane fade" id="' + data.tab_id + '"><table class="table table-hover hoverList tab-playList"></table><div class="col-lg-12 text-center"><button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button></div></div>'));
+        			$('#tab-list').append($('<li><a href="#' + data.tab_id + '" role="tab" data-toggle="tab">' + data.tab_name + '<button class="delete-tab" type="button" title="Remove this page">×</button></a></li>'));
+        			$('#tab-content').append($('<div class="tab-pane fade user-list" id="' + data.tab_id + '"><table class="table hoverList tab-playList"></table><div class="col-lg-12 text-center"><button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button></div></div>'));
         			$('#tabInput').val('');
         			$('#AddTabModal').modal('hide');
         		}
