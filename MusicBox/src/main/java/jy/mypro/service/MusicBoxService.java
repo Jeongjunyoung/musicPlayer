@@ -26,4 +26,6 @@ public interface MusicBoxService {
 	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
 	public void removeTab(String tab_id)throws Exception;
 	public List<Top100VO> getTop100List()throws Exception;
+	public void removeSelectTabsMusic(Map<String, String> map)throws Exception;
+	public Top100VO getTop100MusicInfo(String music_id)throws Exception;
 }

@@ -49,8 +49,12 @@
 	function onPlayerStateChange(event) {
 		if(player.getPlayerState()==0){
 			if(replay == 'true'){
-				player.loadPlaylist(repeatArr,0);
-				player.setLoop(true);
+				if(nowPlaying_tab == 'tab1'){
+					top100ChangeMusic();
+				}else{
+					player.loadPlaylist(repeatArr,0);
+					player.setLoop(true);
+				}
 			}else if(replay == 'false'){
 				var id = get_playing_id();
 				var index=0;
@@ -142,15 +146,23 @@
 	//랜덤 재생
 	function shufflePlay(){
 		if(shuffle){
-			player.setShuffle(shuffle);
-			player.setLoop(true);
-			shuffle = false;
-			$('#shuffleBtn').addClass('click-play-option');
+			if(nowPlaying_tab == 'tab1'){
+				
+			}else{
+				player.setShuffle(shuffle);
+				player.setLoop(true);
+				shuffle = false;
+				$('#shuffleBtn').addClass('click-play-option');
+			}
 		}else{
-			player.setShuffle(shuffle);
-			player.setLoop(true);
-			shuffle = true;
-			$('#shuffleBtn').removeClass('click-play-option');
+			if(nowPlaying_tab == 'tab1'){
+				replay == ''
+			}else{
+				player.setShuffle(shuffle);
+				player.setLoop(true);
+				shuffle = true;
+				$('#shuffleBtn').removeClass('click-play-option');
+			}
 		}
 	}
 	//Play 버튼 클릭 이벤트
@@ -241,6 +253,9 @@
 		$('.cheak-span').addClass('fa');
 		$('.cheak-span').addClass('fa-plus');
 	}
+	function tabMusicDeleteSuccess(data){
+		
+	}
 	$(function(){
 		$('.tab-pane').hide();
         $('#tab1').show();
@@ -249,7 +264,13 @@
 			if(editArr.length == 0){
 				swal("Delete Failed...", "삭제할 음악을 선택하세요.", "error");
 			}else{
-				var url = 'delPlayList?editArr='+editArr;
+				var tab = '';
+				if(nowPlaying_tab == 'tab2'){
+					tab = 'myList';
+				}else{
+					tab = 'tab';
+				}
+				var url = 'delPlayList?editArr='+editArr+'&tab='+tab;
 				swal({
 					  title: "삭제하시겠습니까?",
 					  text: "다시 한번 확인해주세요!",
@@ -260,10 +281,9 @@
 					  closeOnConfirm: false,
 					  html: false
 					}, function(){
-					  swal("삭제하였습니다!",
-					  "음악들이 삭제되었습니다.",
-					  "success");
+					  swal("삭제하였습니다!", "음악들이 삭제되었습니다.", "success");
 					  $(location).attr('href',url);
+					  ajax_load("GET", url, null, "json", tabMusicDeleteSuccess);
 				});
 			}
 		})
@@ -352,7 +372,6 @@
 					arr.splice(0, arr.length)
 					$('#'+tab_id).find('.clickList-td').each(function(){
 						var tab_video_ID = $(this).attr('id');
-						console.log(tab_video_ID);
 						arr.push(tab_video_ID);
 					})
 					changeVideo(video_ID);
@@ -452,7 +471,7 @@
         	$('.tab-pane').hide();
         	$('#'+id_str).show();
         })
-        $('.tab-list').click(function(){
+        $('.tab-click').click(function(){
         	if($(this).hasClass('tab-list-click')){
         		$(this).removeClass('tab-list-click');
         	}else{
@@ -462,6 +481,7 @@
         //탭 뮤직 추가 버튼
         $('#tabMusicAddBtn').click(function(){
         	var arr = [];
+        	var arr_top = [];
         	var tab_id = '';
         	$('.tab-pane').each(function(){
         		if($(this).hasClass('active')){
@@ -473,7 +493,12 @@
         			arr.push($(this).attr('id'));
         		}
         	})
-        	ajax_load('get', 'addTabMusic?arr='+arr+'&tab_id='+tab_id, null,'json', addTabMusicSuccess)
+        	$('.tab-list-top100').each(function(){
+        		if($(this).hasClass('tab-list-click')){
+        			arr_top.push($(this).attr('id'));
+        		}
+        	})
+        	ajax_load('get', 'addTabMusic?arr='+arr+'&arr_top='+arr_top+'&tab_id='+tab_id, null,'json', addTabMusicSuccess)
         })
         function addTabMusicSuccess(data){
         	$.each(data,function(index,value){
@@ -482,6 +507,7 @@
     			$('#'+tab_id).find('table').append(td);
     			$('#AddTabMusicModal').modal('hide');
     			$('.tab-list').removeClass('tab-list-click');
+    			$('.tab-list-top100').removeClass('tab-list-click');
     			swal("Add Success!!", "음악을 추가하였습니다.", "success");
         	})
         }
@@ -496,7 +522,16 @@
         	$('#AddTabModal').modal('hide');
         })
         $('#tabMusicCloseBtn').click(function(){
+        	$('.tab-list').removeClass('tab-list-click');
+        	$('.tab-list-top100').removeClass('tab-list-click');
         	$('#AddTabMusicModal').modal('hide');
+        })
+        $('.add-tab').click(function(){
+        	var list_id = $(this).find('span').attr('title');
+        	$('.add-tab').removeClass('add-tab-list-none');
+        	$(this).addClass('add-tab-list-none');
+        	$('.add-tab-table').hide();
+        	$('#'+list_id).show();
         })
         //탭 ADD 버튼 클릭
         $('#tabAddBtn').click(function(){

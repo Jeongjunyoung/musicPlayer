@@ -28,17 +28,12 @@
 
 <link href="/../resources/css/freelancer.min.css" rel="stylesheet">
 <link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="/../resources/css/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="/../resources/css/sweetalert.css">
 
 <!-- Custom Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,12 +50,11 @@
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header page-scroll">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-1">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
 			</button>
 			<input type="hidden" id="google_user" value="${google_user}">
-				<a class="navbar-brand" id="plaing-music-name"></a>
+			<a class="navbar-brand" id="plaing-music-name"></a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -76,8 +70,7 @@
 							<a href="#loginModal" data-toggle="modal" id="loginBtn">LOGIN</a>
 						</c:otherwise>
 					</c:choose></li>
-				<li class="page-scroll"><a href="#signUpModal"
-					data-toggle="modal">SIGN UP</a></li>
+				<li class="page-scroll"><a href="#signUpModal" data-toggle="modal">SIGN UP</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -87,31 +80,29 @@
 	<header>
 	<div class="container">
 		<div class="row">
-			<%-- <c:choose>
-							<c:when test="${session == true }"> --%>
 			<div class="col-lg-12">
-				<h2>PLAYING NOW</h2><br><br>
+				<hr class="star-light">
 				<div class="intro-text" id="player"></div>
 				<br><br><br>
 			</div>
 		</div>
 		<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
-			<span class="fa fa-backward">
+			<span class="fa fa-backward"></span>
 		</button>
 		<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
-			<span class="fa fa-play">
+			<span class="fa fa-play"></span>
 		</button>
 		<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
-			<span class="fa fa-pause">
+			<span class="fa fa-pause"></span>
 		</button>
 		<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
-			<span class="fa fa-forward">
+			<span class="fa fa-forward"></span>
 		</button>
 		<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
-			<span class="fa fa-random">
+			<span class="fa fa-random"></span>
 		</button>
 		<button type="button" class="btn btn-lg" id="replayBtn">
-			<span class="fa fa-repeat">
+			<span class="fa fa-repeat"></span>
 		</button>
 	</div>
 	</header>
@@ -171,7 +162,7 @@
 									</c:forEach>
 								</table>
 								<div class="col-lg-12 text-center">
-									<button class="btn btn-lg btn-info tadAddMusic">ADD MUSIC</button>
+									<button class="tabadd-btn tadAddMusic">ADD MUSIC</button>
 								</div>
 							</div>
 						</c:forEach>
@@ -182,12 +173,12 @@
 		<div class="row">
 			<br><br><br>
 			<div class="col-lg-12 text-center">
-				<button class="btn btn-lg btn-info hideBtn" id="editBtn">EDIT</button>
-				<button class="btn btn-lg btn-info hideBtn" id="btn-add-tab">ADD TAB</button>
+				<button class="tabadd-btn hideBtn" id="editBtn">EDIT</button>
+				<button class="tabadd-btn hideBtn" id="btn-add-tab">ADD TAB</button>
 			</div>
 			<div class="col-lg-12 text-center">
-				<button class="btn btn-lg btn-danger delCancelBtn" id="delBtn">DELETE</button>
-				<button class="btn btn-lg btn-info delCancelBtn" id="cancelBtn">CANCEL</button>
+				<button class="tabadd-btn delCancelBtn" id="delBtn">DELETE</button>
+				<button class="tabadd-btn delCancelBtn" id="cancelBtn">CANCEL</button>
 			</div>
 		</div>
 	</div>
@@ -267,15 +258,12 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-12">
-										<input type="email" title="E-MAIL"
-											class="form-control input_text" name="user_email"
+										<input type="email" title="E-MAIL" class="form-control input_text" name="user_email"
 											id="input_email" placeholder="E-MAIL">
 									</div>
 								</div>
-								<input type="hidden" title="HIDDEN"
-									name="${_csrf.parameterName}" value="${_csrf.token}" />
-								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN
-									UP</button>
+								<input type="hidden" title="HIDDEN" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
 							</form>
 						</div>
 					</div>
@@ -340,7 +328,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="AddTabMusicModal" tabindex="-1"
+	<%-- <div class="modal fade" id="AddTabMusicModal" tabindex="-1"
 		role="dialog" aria-hidden="true">
 		<div class="container">
 			<div class="row">
@@ -362,30 +350,72 @@
 				</div>
 			</div>
 		</div>
+	</div>--%>
+	<div class="portfolio-modal modal fade" id="AddTabMusicModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h1 class="tabH1">ADD MUSIC</h1>
+						<div class="row">
+							<div class="col-xs-6 text-center add-tab add-tab-list add-tab-list-none">
+								<span class="add-tab-mylist" title="tabMusic-list">MY LIST</span>
+							</div>
+							<div class="col-xs-6 text-center add-tab add-tab-list">
+								<span class="add-tab-100list" title="tabMusic-100list">TOP 100</span>
+							</div>
+						</div>
+						<div class="col-lg-12 text-center add-tab-table" id="tabMusic-list">
+							<table class="table hoverList" id="tabAllList">
+								<c:forEach var="list" items="${list }">
+									<tr>
+										<td id="${list.music_id }" class="tab-click tab-list">${list.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="col-lg-12 text-center add-tab-table" id="tabMusic-100list">
+							<table class="table hoverList" id="tab100AllList">
+								<c:forEach var="top100" items="${top100 }" varStatus="status">
+									<tr>
+										<td class="top100-ranking">${status.count}</td>
+										<td id="${top100.music_id }" class="tab-click tab-list-top100">${top100.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<button class="tabadd-btn" id="tabMusicAddBtn">ADD</button>
+						<button class="tabadd-btn" id="tabMusicCloseBtn">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	
 	<!-- jQuery -->
 	<script src="/../resources/js/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="/../resources/js/bootstrap.min.js"></script>
-
+	<!-- <script src="/../resources/js/bootstrap.min.js"></script> -->
+	
 	<!-- Plugin JavaScript -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-	<!-- Contact Form JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	
+	<!-- Theme JavaScript -->
 	<script src="/../resources/js/mymy.js"></script>
 	<script src="/../resources/js/mymySocial.js"></script>
-
-	<!-- Theme JavaScript -->
 	<script src="/../resources/js/freelancer.min.js"></script>
 	<script src="/../resources/js/sweetalert.min.js"></script>
-	<script src="/../resources/js/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+	
 	<!-- Google API -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>

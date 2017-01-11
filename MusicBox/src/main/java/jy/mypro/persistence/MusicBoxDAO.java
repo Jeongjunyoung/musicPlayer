@@ -23,9 +23,11 @@ public interface MusicBoxDAO {
 	public Integer getMaxTabId(String user_id)throws Exception;
 	public void addTabs(UserTabs tabs)throws Exception;
 	public MusicPlayList getMusicInfo(MusicPlayList vo)throws Exception;
+	public Top100VO getTop100MusicInfo(String music_id)throws Exception;
 	public void insertTabMusic(TabMusicVO tvo)throws Exception;
 	public List<TabMusicVO> getTabsMusic(String user_id)throws Exception;
 	public void deleteTab(String tab_id)throws Exception;
 	public void deleteTabMusic(String tab_id)throws Exception;
 	public List<Top100VO> getTop100List()throws Exception;
+	public void del_selectMusic(Map<String, String> map)throws Exception;
 }

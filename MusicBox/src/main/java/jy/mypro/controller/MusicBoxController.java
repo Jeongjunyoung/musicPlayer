@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jy.mypro.domain.MusicPlayList;
 import jy.mypro.domain.MusicUserVO;
 import jy.mypro.domain.TabMusicVO;
+import jy.mypro.domain.Top100VO;
 import jy.mypro.domain.UserTabs;
 import jy.mypro.service.MusicBoxService;
 
@@ -151,7 +152,9 @@ public class MusicBoxController {
 	}
 	//음악 삭제
 	@RequestMapping("/delPlayList")
-	public String del_Music(@RequestParam("editArr") String[] editArr, HttpServletRequest request, Model model)throws Exception{
+	public String del_Music(@RequestParam("editArr") String[] editArr,
+			@RequestParam("tab") String tab,
+			HttpServletRequest request, Model model)throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
 		HttpSession session = request.getSession();
 		MusicUserVO user;
@@ -161,10 +164,18 @@ public class MusicBoxController {
 			user = (MusicUserVO) session.getAttribute("googleUser");
 		}
 		String user_id = user.getUser_id();
-		for(int i=0;i<editArr.length;i++){
-			map.put("user_id", user_id);
-			map.put("music_id", editArr[i]);
-			ms.removeMusic(map);
+		if(tab == "myList"){
+			for(int i=0;i<editArr.length;i++){
+				map.put("user_id", user_id);
+				map.put("music_id", editArr[i]);
+				ms.removeMusic(map);
+			}
+		}else{
+			for(int i=0;i<editArr.length;i++){
+				map.put("user_id", user_id);
+				map.put("music_id", editArr[i]);
+				ms.removeSelectTabsMusic(map);
+			}
 		}
 		model.addAttribute("user", user);
 		model.addAttribute("session", Social_session);
@@ -199,7 +210,9 @@ public class MusicBoxController {
 	@RequestMapping("/addTabMusic")
 	@ResponseBody
 	public List<TabMusicVO> add_TabMusic(@RequestParam("arr") String[] arr, 
-			@RequestParam("tab_id") String tab_id, HttpServletRequest request)throws Exception{
+			@RequestParam("arr_top") String[] arr_top, 
+			@RequestParam("tab_id") String tab_id, 
+			HttpServletRequest request)throws Exception{
 		HttpSession session = request.getSession();
 		MusicUserVO user;
 		MusicPlayList mpl = new MusicPlayList();
@@ -210,16 +223,30 @@ public class MusicBoxController {
 			user = (MusicUserVO) session.getAttribute("googleUser");
 		}
 		mpl.setUser_id(user.getUser_id());
-		for(int i=0;i<arr.length;i++){
-			mpl.setMusic_id(arr[i]);
-			MusicPlayList tabMusic = ms.getMusicInfo(mpl);
-			TabMusicVO tvo = new TabMusicVO();
-			tvo.setTab_id(tab_id);
-			tvo.setTabs_music_id(tabMusic.getMusic_id());
-			tvo.setTabs_music_name(tabMusic.getMusic_name());
-			tvo.setUser_id(user.getUser_id());
-			ms.insertTabMusic(tvo);
-			list.add(tvo);
+		if(arr != null){
+			for(int i=0;i<arr.length;i++){
+				mpl.setMusic_id(arr[i]);
+				MusicPlayList tabMusic = ms.getMusicInfo(mpl);
+				TabMusicVO tvo = new TabMusicVO();
+				tvo.setTab_id(tab_id);
+				tvo.setTabs_music_id(tabMusic.getMusic_id());
+				tvo.setTabs_music_name(tabMusic.getMusic_name());
+				tvo.setUser_id(user.getUser_id());
+				ms.insertTabMusic(tvo);
+				list.add(tvo);
+			}
+		}
+		if(arr_top != null){
+			for(int i=0;i<arr_top.length;i++){
+				Top100VO vo = ms.getTop100MusicInfo(arr_top[i]);
+				TabMusicVO tvo = new TabMusicVO();
+				tvo.setTab_id(tab_id);
+				tvo.setTabs_music_id(vo.getMusic_id());
+				tvo.setTabs_music_name(vo.getMusic_name());
+				tvo.setUser_id(user.getUser_id());
+				ms.insertTabMusic(tvo);
+				list.add(tvo);
+			}
 		}
 		return list;
 	}

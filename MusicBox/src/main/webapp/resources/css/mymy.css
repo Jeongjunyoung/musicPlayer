@@ -31,7 +31,7 @@ table{
     overflow-x:hidden; 
     height:280px;
 }
-#tabMusic-list{
+.add-tab-table{
 	overflow:scroll; 
     overflow-x:hidden; 
     height:280px;
@@ -84,11 +84,11 @@ table{
 }
 
 .tabH1{
-  height: 100px;
+  height: 40px;
   width: 100%;
-  font-size: 18px;
-  background: #34557c;
-  color: white;
+  font-size: 21px;
+  background: #ffffff;
+  color: black;
   line-height: 150%;
   border-radius: 3px 3px 0 0;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
@@ -150,7 +150,7 @@ table{
 }
 .tabadd-btn {
   border: none;
-  background: #34557c;
+  background: #26576f;
   cursor: pointer;
   border-radius: 3px;
   padding: 6px;
@@ -163,6 +163,9 @@ table{
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
   box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
+}
+#delBtn{
+	background: #ff6868;
 }
 .tab-list-click{
 	background-color: #A5DE9F;
@@ -324,4 +327,19 @@ table{
 }
 .click-play-option{
 	background-color: #f07982;
+}
+.add-tab-list{
+	background-color: #d5d5d5;
+	border-radius: 2px;
+	color: white;
+	font-size: 20px;
+}
+.add-tab-list-none{
+	background-color: #26576f;
+	border-radius: 2px;
+	color: white;
+	font-size: 20px;
+}
+#tabMusic-100list{
+	display: none;
 }

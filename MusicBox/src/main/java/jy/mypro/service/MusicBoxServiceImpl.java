@@ -99,4 +99,12 @@ public class MusicBoxServiceImpl implements MusicBoxService {
 	public List<Top100VO> getTop100List() throws Exception {
 		return dao.getTop100List();
 	}
+	@Override
+	public void removeSelectTabsMusic(Map<String, String> map) throws Exception {
+		dao.del_selectMusic(map);
+	}
+	@Override
+	public Top100VO getTop100MusicInfo(String music_id) throws Exception {
+		return dao.getTop100MusicInfo(music_id);
+	}
 }

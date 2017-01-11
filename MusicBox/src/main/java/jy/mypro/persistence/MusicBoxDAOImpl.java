@@ -91,4 +91,12 @@ public class MusicBoxDAOImpl implements MusicBoxDAO {
 	public List<Top100VO> getTop100List() throws Exception {
 		return sqlSession.selectList(namespace+".get_Top100List");
 	}
+	@Override
+	public void del_selectMusic(Map<String, String> map) throws Exception {
+		sqlSession.delete(namespace+".del_SelectMusic", map);
+	}
+	@Override
+	public Top100VO getTop100MusicInfo(String music_id) throws Exception {
+		return sqlSession.selectOne(namespace+".getTop100MusicInfo", music_id);
+	}
 }
