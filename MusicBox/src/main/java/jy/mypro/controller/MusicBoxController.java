@@ -152,6 +152,7 @@ public class MusicBoxController {
 	}
 	//음악 삭제
 	@RequestMapping("/delPlayList")
+	@ResponseBody
 	public String del_Music(@RequestParam("editArr") String[] editArr,
 			@RequestParam("tab") String tab,
 			HttpServletRequest request, Model model)throws Exception{
@@ -177,11 +178,11 @@ public class MusicBoxController {
 				ms.removeSelectTabsMusic(map);
 			}
 		}
-		model.addAttribute("user", user);
+		/*model.addAttribute("user", user);
 		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
-		model.addAttribute("list", ms.getList(user.getUser_id()));
-		return "/main";
+		model.addAttribute("list", ms.getList(user.getUser_id()));*/
+		return "success";
 	}
 	//탭 추가
 	@RequestMapping("/addTabs")
