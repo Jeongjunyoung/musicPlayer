@@ -153,7 +153,7 @@ public class MusicBoxController {
 	//음악 삭제
 	@RequestMapping("/delPlayList")
 	@ResponseBody
-	public String del_Music(@RequestParam("editArr") String[] editArr,
+	public MusicUserVO del_Music(@RequestParam("editArr") String[] editArr,
 			@RequestParam("tab") String tab,
 			HttpServletRequest request, Model model)throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
@@ -165,7 +165,7 @@ public class MusicBoxController {
 			user = (MusicUserVO) session.getAttribute("googleUser");
 		}
 		String user_id = user.getUser_id();
-		if(tab == "myList"){
+		if(tab.equals("myList")){
 			for(int i=0;i<editArr.length;i++){
 				map.put("user_id", user_id);
 				map.put("music_id", editArr[i]);
@@ -182,7 +182,7 @@ public class MusicBoxController {
 		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
 		model.addAttribute("list", ms.getList(user.getUser_id()));*/
-		return "success";
+		return user;
 	}
 	//탭 추가
 	@RequestMapping("/addTabs")

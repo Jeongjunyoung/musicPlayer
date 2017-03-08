@@ -78,7 +78,7 @@
 	<!-- /.container-fluid --> </nav>
 	<!-- Header -->
 	<header>
-	<div class="container">
+	<div class="container" id="play-view">
 		<div class="row">
 			<div class="col-lg-12">
 				<hr class="star-light">
@@ -141,7 +141,7 @@
 							</table>
 						</div>
 						<div class="tab-pane fade user-list" id="tab2">
-							<table class="table hoverList" id="playList">
+							<table class="table hoverList tab-playList" id="playList">
 								<c:forEach var="list" items="${list }">
 									<tr class="playList-td" id="playList-add">
 										<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>

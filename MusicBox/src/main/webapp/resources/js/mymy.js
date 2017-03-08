@@ -253,6 +253,20 @@
 		$('.cheak-span').addClass('fa');
 		$('.cheak-span').addClass('fa-plus');
 	}
+	function delSuccess(data){
+		var tabID = '';
+		  $('#tab-list li').each(function(){
+			  if($(this).hasClass('active')){
+				  tabID = $(this).find('a').attr('href');
+			  }
+		  })
+		  var $table = $(tabID).find('.tab-playList');
+		  for(var i=0;i<editArr.length;i++){
+			  $table.find('#'+editArr[i]).remove();
+		  }
+		swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
+		editArr.splice(0, editArr.length)
+	}
 	$(function(){
 		$('.tab-pane').hide();
         $('#tab1').show();
@@ -278,8 +292,8 @@
 					  closeOnConfirm: false,
 					  html: false
 					}, function(){
-					  ajax_load("GET", url, null, "json");
-					  var tabID = '';
+					  ajax_load("GET", url, null, "json", delSuccess);
+					  /*var tabID = '';
 					  $('#tab-list li').each(function(){
 						  if($(this).hasClass('active')){
 							  tabID = $(this).find('a').attr('href');
@@ -288,8 +302,8 @@
 					  var $table = $(tabID).find('.tab-playList');
 					  for(var i=0;i<editArr.length;i++){
 						  $table.find('#'+editArr[i]).remove();
-					  }
-					  swal("삭제 성공", "음악들이 삭제되었습니다.", "success");
+					  }*/
+					  //swal("삭제 성공", "음악들이 삭제되었습니다.", "success");
 				});
 			}
 		})
@@ -445,7 +459,6 @@
         	var tabID = $this.parents('a').attr('href');
         	var tab_id = tabID.substr(tabID.indexOf('#')+1);
 			var url = 'deleteTab?tab_id='+tab_id;
-			console.log(url);
         	swal({
 				  title: "삭제하시겠습니까?",
 				  text: "다시 한번 확인해주세요!",
