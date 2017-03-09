@@ -61,7 +61,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="hidden"><a href="#page-top"></a></li>
 				<li class="page-scroll"><a href="#portfolio">PLAYLIST</a></li>
-				<li class="page-scroll"><a href="#about">SEARCH</a></li>
+				<li class="page-scroll"><a href="#searchModal" data-toggle="modal">SEARCH</a></li>
 				<li class="page-scroll"><c:choose>
 						<c:when test="${session == true }">
 							<a href="logout" onclick="signOut();">LOGOUT</a>
@@ -86,24 +86,7 @@
 				<br><br><br>
 			</div>
 		</div>
-		<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
-			<span class="fa fa-backward"></span>
-		</button>
-		<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
-			<span class="fa fa-play"></span>
-		</button>
-		<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
-			<span class="fa fa-pause"></span>
-		</button>
-		<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
-			<span class="fa fa-forward"></span>
-		</button>
-		<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
-			<span class="fa fa-random"></span>
-		</button>
-		<button type="button" class="btn btn-lg" id="replayBtn">
-			<span class="fa fa-repeat"></span>
-		</button>
+		
 	</div>
 	</header>
 	<!-- PLAY LIST Grid Section -->
@@ -112,6 +95,31 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2>PLAY LIST</h2>
+			</div>
+			<div class="col-lg-12 text-center">
+				<button type="button" class="btn btn-lg" id="prevBtn"
+					onclick="prevVideo()">
+					<span class="fa fa-backward"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="playBtn"
+					onclick="playVideo()">
+					<span class="fa fa-play"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="stopBtn"
+					onclick="pauseVideo()">
+					<span class="fa fa-pause"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="nextBtn"
+					onclick="nextVideo()">
+					<span class="fa fa-forward"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="shuffleBtn"
+					onclick="shufflePlay()">
+					<span class="fa fa-random"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="replayBtn">
+					<span class="fa fa-repeat"></span>
+				</button>
 			</div>
 		</div>
 		<div class="container">
@@ -184,7 +192,7 @@
 	</div>
 	</section>
 	<!-- Search Section -->
-	<section class="success" id="about">
+	<!-- <section class="success" id="about">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
@@ -210,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-	</section>
+	</section> -->
 	<!-- Footer -->
 	<footer class="text-center">
 	<div class="footer-below">
@@ -397,7 +405,44 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="portfolio-modal modal fade" id="searchModal" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h2>SEARCH</h2>
+						<hr class="star-primary">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="row control-group text-center">
+							<div class="form-group col-xs-9 controls">
+								<input type="text" class="form-control" placeholder="KEY WORD"
+									id="searchKey">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-lg btn-default"
+									id="searchBtn">
+									<span class="fa fa-search">
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-12 text-center">
+							<div class="row control-group text-center result-Scroll"
+								id="searchResult"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- jQuery -->
 	<script src="/../resources/js/jquery.min.js"></script>
 
