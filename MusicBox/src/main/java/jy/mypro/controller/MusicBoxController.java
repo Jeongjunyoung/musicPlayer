@@ -41,7 +41,7 @@ public class MusicBoxController {
 		model.addAttribute("logoutFail", "none");
 		//model.addAttribute("session", Social_session);
 		model.addAttribute("top100", ms.getTop100List());
-		return "/main";
+		return "/newHome";
 	}
 	//구글 인증
 	@RequestMapping("/googlee3b57ab611071f86.html")
@@ -149,6 +149,11 @@ public class MusicBoxController {
 	@RequestMapping("/testPage")
 	public String test()throws Exception{
 		return "testPage";
+	}
+	//New Home
+	@RequestMapping("/nh")
+	public String newHome()throws Exception{
+		return "newHome";
 	}
 	//음악 삭제
 	@RequestMapping("/delPlayList")
