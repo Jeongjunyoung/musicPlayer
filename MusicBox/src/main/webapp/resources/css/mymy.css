@@ -2,7 +2,7 @@
 table{
 	margin-left : auto;
 	margin-right : auto;
-	width: 100%;
+	width: 115px;
 	border: 0px;
 	border-collapse: collapse;
 	text-align: center;
@@ -29,7 +29,7 @@ table{
 .tab-pane{
 	overflow:scroll; 
     overflow-x:hidden; 
-    height:280px;
+    height:470px;
 }
 .add-tab-table{
 	overflow:scroll; 
@@ -343,6 +343,6 @@ table{
 #tabMusic-100list{
 	display: none;
 }
-/* #play-view{
+#play-view{
 	display: none;
-} */
+}

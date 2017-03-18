@@ -86,7 +86,6 @@
 				<br><br><br>
 			</div>
 		</div>
-		
 	</div>
 	</header>
 	<!-- PLAY LIST Grid Section -->
@@ -97,24 +96,19 @@
 				<h2>PLAY LIST</h2>
 			</div>
 			<div class="col-lg-12 text-center">
-				<button type="button" class="btn btn-lg" id="prevBtn"
-					onclick="prevVideo()">
+				<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
 					<span class="fa fa-backward"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="playBtn"
-					onclick="playVideo()">
+				<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
 					<span class="fa fa-play"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="stopBtn"
-					onclick="pauseVideo()">
+				<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
 					<span class="fa fa-pause"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="nextBtn"
-					onclick="nextVideo()">
+				<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
 					<span class="fa fa-forward"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="shuffleBtn"
-					onclick="shufflePlay()">
+				<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
 					<span class="fa fa-random"></span>
 				</button>
 				<button type="button" class="btn btn-lg" id="replayBtn">
@@ -242,7 +236,7 @@
 		<div class="modal-content">
 			<div class="close-modal" data-dismiss="modal">
 				<div class="lr">
-					<div class="rl"></div>
+					<div cla ss="rl"></div>
 				</div>
 			</div>
 			<div class="container">

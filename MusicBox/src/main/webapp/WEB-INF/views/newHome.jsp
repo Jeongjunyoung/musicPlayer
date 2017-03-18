@@ -1,139 +1,317 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-site-verification" content="60I7cWIaqvcVC_HneXrEvqvbUD99KqLcdRmOnNUhexA">
+<meta name="google-signin-client_id" content="222457887868-9bofjnk09tuuc2v2cgedclv7nu6c868n.apps.googleusercontent.com">
 	<link href="/../resources/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Theme CSS -->
-
+	<link href="/../resources/css/mymy.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/../resources/css/sweetalert.css">
-
+	<link rel="stylesheet" type="text/css" href="/../resources/css/mBox.css">
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"	rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<!-- jQuery -->
 	<script src="/../resources/js/jquery.min.js"></script>
-	<!-- Theme -->
+	<!-- Theme js-->
+	<script src="/../resources/js/mymy.js"></script>
 	<script src="/../resources/js/sweetalert.min.js"></script>
-	
-<style type="text/css">
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-}
-a {
-  text-decoration: none;
-}
-
-.Button__textWrapper, .Button__text, .Button__icon {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-}
-
-.Button__text, .Button__icon {
-  -webkit-transition: top 500ms;
-  transition: top 500ms;
-}
-
-.Button {
-  display: inline-block;
-  position: relative;
-  background-color: #0CBABA;
-  color: black;
-  font-size: 1.4rem;
-  border-radius: 1000px;
-  width: 200px;
-  height: 60px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px rgba(255, 255, 255, 0.3);
-  text-align: center;
-  -webkit-transition: background-color 500ms, -webkit-transform 100ms;
-  transition: background-color 500ms, -webkit-transform 100ms;
-  transition: background-color 500ms, transform 100ms;
-  transition: background-color 500ms, transform 100ms, -webkit-transform 100ms;
-}
-.Button__textWrapper {
-  overflow: hidden;
-}
-.Button__text {
-  line-height: 60px;
-  top: 0;
-}
-.login-icon {
-  top: 100%;
-  background: url("/../resources/images/tab/login.png") no-repeat center center;
-}
-.search-icon {
-  top: 100%;
-  background: url("/../resources/images/tab/search.png") no-repeat center center;
-}
-.Button::before {
-  content: attr(data-tooltip);
-  width: 140px;
-  height: 60px;
-  background-color: #EEB868;
-  font-size: 1rem;
-  border-radius: .25em;
-  line-height: 60px;
-  bottom: 90px;
-  left: calc(50% - 70px);
-}
-.Button::after {
-  content: '';
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  border-top-color: #EEB868;
-  left: calc(50% - 10px);
-  bottom: 70px;
-}
-.Button::before, .Button::after {
-  position: absolute;
-  opacity: 0;
-  -webkit-transition: all 500ms;
-  transition: all 500ms;
-  visibility: hidden;
-}
-.Button:hover {
-  background-color: #01BAEF;
-}
-.Button:hover .Button__text {
-  top: -100%;
-}
-.Button:hover .Button__icon {
-  top: 0;
-}
-.Button:hover::before, .Button:hover::after {
-  opacity: 1;
-  visibility: visible;
-}
-.Button:hover::after {
-  bottom: 60px;
-}
-.Button:hover::before {
-  bottom: 80px;
-}
-.Button:active {
-  -webkit-transform: translate(2px, 2px);
-          transform: translate(2px, 2px);
-}
-</style>
+	<!-- Plugin JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$('.Button').click(function(){
-		var case_str = $(this).find('.Button__text').html();
-		swal(str, "Click", "success");
-	})
+	/* $('.Button').click(function(){
+		var c_str = $(this).find('.Button__text').html();
+		swal(c_str, "Click", "success");
+	}) */
 })
 </script>
 <title>JSP</title>
 </head>
 <body>
-	<a class="Button"><span class="Button__textWrapper"><span class="Button__text">LOGIN</span><span
-			class="Button__icon login-icon" aria-hidden="true"></span></span></a>
-	<a class="Button"><span class="Button__textWrapper"><span class="Button__text">SEARCH</span><span
-			class="Button__icon search-icon" aria-hidden="true"></span></span></a>
-	
+	<div class="container" id="play-view">
+		<div class="row">
+			<div class="col-lg-12">
+				<hr class="star-light">
+				<div class="intro-text" id="player"></div>
+				<br><br><br>
+			</div>
+		</div>
+	</div>
+	<div class="container div-box" id="menu_tab">
+		<div class="row">
+			<a class="Button" href="#loginModal" data-toggle="modal"><span class="Button__textWrapper"><span class="Button__text">LOGIN</span><span
+					class="Button__icon login-icon" aria-hidden="true"></span></span></a>
+			<a class="Button" href="#signUpModal" data-toggle="modal"><span class="Button__textWrapper"><span class="Button__text">SIGN UP</span><span
+					class="Button__icon signup-icon" aria-hidden="true"></span></span></a>
+			<a class="Button"  href="#searchModal" data-toggle="modal"><span class="Button__textWrapper"><span class="Button__text">SEARCH</span><span
+					class="Button__icon search-icon" aria-hidden="true"></span></span></a>
+		</div>
+	</div>
+	<div class="container div-box" id="controll-box">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
+					<span class="fa fa-backward"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
+					<span class="fa fa-play"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
+					<span class="fa fa-pause"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
+					<span class="fa fa-forward"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
+					<span class="fa fa-random"></span>
+				</button>
+				<button type="button" class="btn btn-lg" id="replayBtn">
+					<span class="fa fa-repeat"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="container div-box"id="playlist-box">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Nav tabs -->
+					<ul id="tab-list" class="nav nav-tabs" role="tablist">
+						<li class="tab active"><a href="#tab1" role="tab" data-toggle="tab">TOP 100</a></li>
+						<li><a href="#tab2" role="tab" data-toggle="tab" id="a-tab2">MY LIST</a></li>
+						<c:forEach var="tabs" items="${tabs }">
+							<li class="tab"><a href="#${tabs.tab_id }" role="tab" data-toggle="tab">${tabs.tab_name }
+									<button class="btn btn-xs delete-tab" type="button" title="Remove this page">×</button>
+							</a></li>
+						</c:forEach>
+					</ul>
+					<!-- Tab panes -->
+					<div id="tab-content">
+						<div class="tab-pane fade in active top100-list" id="tab1">
+							<table class="table hoverList">
+								<c:forEach var="top100" items="${top100 }" varStatus="status">
+									<tr class="playList-td">
+										<td class="top100-ranking">${status.count}</td>
+										<td id="${top100.music_id }"
+											class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="tab-pane fade user-list" id="tab2">
+							<table class="table hoverList tab-playList" id="playList">
+								<c:forEach var="list" items="${list }">
+									<tr class="playList-td" id="playList-add">
+										<td id="${list.music_id }" class="clickList-td">${list.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<c:forEach var="tabs" items="${tabs }">
+							<div class="tab-pane fade in active user-list"
+								id="${tabs.tab_id }">
+								<table class="table hoverList tab-playList">
+									<c:forEach var="tabMusic" items="${tabMusic }">
+										<c:if test="${tabMusic.tab_id == tabs.tab_id}">
+											<tr class="playList-td">
+												<td id="${tabMusic.tabs_music_id }" class="clickList-td">${tabMusic.tabs_music_name }</td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</table>
+								<div class="col-lg-12 text-center">
+									<button class="tabadd-btn tadAddMusic">ADD MUSIC</button>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container div-box"id="edit-box">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<button class="tabadd-btn hideBtn" id="editBtn">EDIT</button>
+					<button class="tabadd-btn hideBtn" id="btn-add-tab">ADD TAB</button>
+				</div>
+				<div class="col-lg-12 text-center">
+					<button class="tabadd-btn delCancelBtn" id="delBtn">DELETE</button>
+					<button class="tabadd-btn delCancelBtn" id="cancelBtn">CANCEL</button>
+				</div>
+			</div>
+		</div>
+	<!-- 회원가입 Modal -->
+	<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<h2 class="text-center">SIGN UP</h2>
+				<form action="sign_in" method="post" class="form-horizontal" id="frm">
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8 text-center">
+							<input type="text" title="ID" class="form-control input_text" name="user_id" id="input_id" placeholder="ID">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8 text-center">
+							<input type="password" title="PASSWORD"
+								class="form-control input_text" name="user_pw" id="input_pw"
+								placeholder="PASSWORD">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-8 text-center">
+							<input type="email" title="E-MAIL" class="form-control input_text" name="user_email"
+								id="input_email" placeholder="E-MAIL">
+						</div>
+					</div>
+					<input type="hidden" title="HIDDEN" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<div class="form-group">
+						<div class="col-sm-12 text-center">
+							<button type="submit" id="signIn_btn" class="btn btn-default">SIGN UP</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 로그인 Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="modal-body">
+						<h2>LOGIN</h2>
+						<form action="login_form" method="post" class="form-horizontal"
+							name="loginForm" id="loginForm">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="text" class="form-control input_text"
+										name="user_id" placeholder="ID" id="user_id">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="password" class="form-control input_text"
+										name="user_pw" placeholder="PASSWORD" id="user_pw"> <input
+										type="hidden" name="user_email" id="user_email" />
+								</div>
+							</div>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+							<button type="submit" id="loginForm_btn" class="btn btn-default">LOGIN</button>
+						</form>
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 탭추가 Modal -->
+	<div class="modal fade" id="AddTabModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="container">
+			<div class="row">
+				<div id="tabForm">
+					<h1 class="tabH1">ADD TAB</h1>
+					<input placeholder="TAB NAME" type="input" required=""
+						id="tabInput">
+					<button class="tabadd-btn" id="tabAddBtn">ADD</button>
+					<br>
+					<br>
+					<button class="tabadd-btn" id="tabCloseBtn">CLOSE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 탭뮤직 추가 Modal -->
+	<div class="portfolio-modal modal fade" id="AddTabMusicModal" tabindex="-1"	role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h1 class="tabH1">ADD MUSIC</h1>
+						<div class="row">
+							<div class="col-xs-6 text-center add-tab add-tab-list add-tab-list-none">
+								<span class="add-tab-mylist" title="tabMusic-list">MY LIST</span>
+							</div>
+							<div class="col-xs-6 text-center add-tab add-tab-list">
+								<span class="add-tab-100list" title="tabMusic-100list">TOP 100</span>
+							</div>
+						</div>
+						<div class="col-lg-12 text-center add-tab-table" id="tabMusic-list">
+							<table class="table hoverList" id="tabAllList">
+								<c:forEach var="list" items="${list }">
+									<tr>
+										<td id="${list.music_id }" class="tab-click tab-list">${list.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="col-lg-12 text-center add-tab-table" id="tabMusic-100list">
+							<table class="table hoverList" id="tab100AllList">
+								<c:forEach var="top100" items="${top100 }" varStatus="status">
+									<tr>
+										<td class="top100-ranking">${status.count}</td>
+										<td id="${top100.music_id }" class="tab-click tab-list-top100">${top100.music_name }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<button class="tabadd-btn" id="tabMusicAddBtn">ADD</button>
+						<button class="tabadd-btn" id="tabMusicCloseBtn">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 검색 Modal -->
+	<div class="portfolio-modal modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-content">
+			<div class="close-modal" data-dismiss="modal">
+				<div class="lr">
+					<div class="rl"></div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h2>SEARCH</h2>
+						<hr class="star-primary">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2">
+						<div class="row control-group text-center">
+							<div class="form-group col-xs-9 controls">
+								<input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn btn-lg btn-default" id="searchBtn">
+									<span class="fa fa-search"></span>
+								</button>
+							</div>
+						</div>
+						<div class="col-lg-12 text-center">
+							<div class="row control-group text-center result-Scroll" id="searchResult"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

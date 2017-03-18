@@ -1,0 +1,132 @@
+@CHARSET "UTF-8";
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+
+.Button__textWrapper, .Button__text, .Button__icon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+.Button__text, .Button__icon {
+  -webkit-transition: top 500ms;
+  transition: top 500ms;
+}
+
+.Button {
+  display: inline-block;
+  position: relative;
+  background-color: #5f5c5c;
+  color: white;
+  font-size: 1.4rem;
+  border-radius: 1000px;
+  width: 200px;
+  height: 60px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px rgba(255, 255, 255, 0.3);
+  text-align: center;
+  -webkit-transition: background-color 500ms, -webkit-transform 100ms;
+  transition: background-color 500ms, -webkit-transform 100ms;
+  transition: background-color 500ms, transform 100ms;
+  transition: background-color 500ms, transform 100ms, -webkit-transform 100ms;
+}
+.Button__textWrapper {
+  overflow: hidden;
+}
+.Button__text {
+  line-height: 60px;
+  top: 0;
+}
+.Button__icon{
+	top: 100%;
+}
+.login-icon {
+  background: url("/../resources/images/tab/login.png") no-repeat center center;
+}
+.search-icon {
+  background: url("/../resources/images/tab/search.png") no-repeat center center;
+}
+.signup-icon {
+  background: url("/../resources/images/tab/sign-up.png") no-repeat center center;
+}
+.Button::before {
+  content: attr(data-tooltip);
+  width: 140px;
+  height: 60px;
+  background-color: #EEB868;
+  font-size: 1rem;
+  border-radius: .25em;
+  line-height: 60px;
+  bottom: 90px;
+  left: calc(50% - 70px);
+}
+.Button::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #EEB868;
+  left: calc(50% - 10px);
+  bottom: 70px;
+}
+.Button::before, .Button::after {
+  position: absolute;
+  opacity: 0;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+  visibility: hidden;
+}
+.Button:hover {
+  background-color: #aea8ab;
+}
+.Button:hover .Button__text {
+  top: -100%;
+}
+.Button:hover .Button__icon {
+  top: 0;
+}
+.Button:hover::before, .Button:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+.Button:hover::after {
+  bottom: 60px;
+}
+.Button:hover::before {
+  bottom: 80px;
+}
+.Button:active {
+  -webkit-transform: translate(2px, 2px);
+          transform: translate(2px, 2px);
+}
+#menu_tab{
+	margin-top : 7px;
+	height: 71px;
+	width: 615px;
+}
+#playlist-box{
+	width: 615px;
+}
+#controll-box{
+	width: 615px;
+}
+#edit-box{
+	width: 615px;
+	height: 43px;
+}
+.div-box{
+	width: 615px;
+	background-color : #f2f1ec;
+	border-color: #dfdfdf;
+	border-style: solid;
+}
+.modal-box{
+	background-color: white;
+	width: 50%;
+}
