@@ -89,7 +89,7 @@ table{
   font-size: 21px;
   background: #ffffff;
   color: black;
-  line-height: 150%;
+  line-height: 50%;
   border-radius: 3px 3px 0 0;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
 }
