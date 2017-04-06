@@ -18,7 +18,9 @@
          authentication-failure-url="/loginFail"
          default-target-url="/"
       />
-      <logout delete-cookies="JSESSIONID" success-handler-ref="logoutSuccessHandler"/>
+      <logout  delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" success-handler-ref="logoutSuccessHandler"/>
+      
+      <remember-me key="wmb" token-validity-seconds="2419200"/>
       <csrf/>
    </http>
    
