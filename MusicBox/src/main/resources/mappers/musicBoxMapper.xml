@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			order by substr(music_index,instr(music_index,'_')+1)*1
  	</select>
  	<insert id="add_Music">
- 		insert into user_playlist(music_index,user_id, music_id, music_name, add_date) values(#{music_index}, #{user_id}, #{music_id}, #{music_name}, SYSDATE)
+ 		insert into user_playlist(music_index,user_id, music_id, music_name, add_date) values(#{music_index}, #{user_id}, #{music_id}, #{music_name}, SYSDATE())
  	</insert>
  	<select id="getUserList" resultType="MusicPlayList">
  		select * from user_playlist

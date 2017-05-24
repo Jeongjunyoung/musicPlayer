@@ -40,7 +40,7 @@ public class MusicBoxController {
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
 		//model.addAttribute("session", Social_session);
-		model.addAttribute("top100", ms.getTop100List());
+		//model.addAttribute("top100", ms.getTop100List());
 		return "/newHome";
 	}
 	//구글 인증

@@ -1,4 +1,4 @@
-	var arr = [];
+	//var arr = [];
 	var repeatArr = [];
 	var editArr = [];
 	var tag = document.createElement('script');
@@ -226,8 +226,10 @@
 		swal("Add Success!!", "음악을 추가하였습니다.", "success");
 		$('.checkAdd').slideUp();
 		$.each(data, function(index,value){
-			var td = '<tr class='+" "+' id='+"playList-add"+'><td id='+value.music_id+' class='+"clickList-td"+'>'+ value.music_name +'</td></tr>';
-			$('#playList').append(td);
+			var str = value.music_index;
+			var index_num = str.indexOf('_');
+			var m_index = Number(str.substring(index_num+1));
+			$('#playList').append($('<tr class="playList-td"><td class="top100-ranking last-index">'+m_index+'</td><td id="'+value.music_id+'" class="clickList-td myIndex-'+m_index+'">'+value.music_name+'</td></tr>'));
 			arr.push(value.music_id);
 		})
 	}
@@ -251,8 +253,6 @@
 			html += '<button class='+"checkAdd"+'><span class='+"cheak-span"+'></span></button>';
 		}
 		$('#searchResult').html(html);
-		$('.checkAdd').addClass('btn');
-		$('.checkAdd').addClass('btn-sm');
 		$('.checkAdd').addClass('btn-info');
 		$('.cheak-span').addClass('fa');
 		$('.cheak-span').addClass('fa-plus');
@@ -266,6 +266,7 @@
 		  })
 		  var $table = $(tabID).find('.tab-playList');
 		  for(var i=0;i<editArr.length;i++){
+			  $table.find('#'+editArr[i]).prev().remove();
 			  $table.find('#'+editArr[i]).remove();
 		  }
 		swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
@@ -298,17 +299,6 @@
 					  html: false
 					}, function(){
 					  ajax_load("GET", url, null, "json", delSuccess);
-					  /*var tabID = '';
-					  $('#tab-list li').each(function(){
-						  if($(this).hasClass('active')){
-							  tabID = $(this).find('a').attr('href');
-						  }
-					  })
-					  var $table = $(tabID).find('.tab-playList');
-					  for(var i=0;i<editArr.length;i++){
-						  $table.find('#'+editArr[i]).remove();
-					  }*/
-					  //swal("삭제 성공", "음악들이 삭제되었습니다.", "success");
 				});
 			}
 		})
@@ -392,18 +382,11 @@
 				var video_ID = $this.attr('id');
 				$('.clickList-td').removeClass('now-playing');
 				$this.addClass('now-playing');
-				$('#plaing-music-name').text(playing_music_name);
+				//$('#playing-music-name').text(playing_music_name);
 				if(tab_id == nowPlaying_tab){
-					//changeVideo(video_ID);
 					changeMusic();
 				}else{
 					nowPlaying_tab = tab_id;
-					/*arr.splice(0, arr.length)
-					$('#'+tab_id).find('.clickList-td').each(function(){
-						var tab_video_ID = $(this).attr('id');
-						arr.push(tab_video_ID);
-					})*/
-					//changeVideo(video_ID);
 					last_index = Number($this.parent().parent().find('.last-index').text());
 					changeMusic();
 				}

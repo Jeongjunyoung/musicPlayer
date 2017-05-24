@@ -42,9 +42,9 @@
 	</authentication-manager>
 	<beans:bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-		<beans:property name="username" value="MusicBox"/>
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/musicbox"/>
+		<beans:property name="username" value="musicbox"/>
 		<beans:property name="password" value="1234"/>
 	</beans:bean>
 	<beans:bean id="customJdbcDaoLmpl" class="jy.mypro.login.CustomJdbcDaoImpl">

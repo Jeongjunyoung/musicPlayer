@@ -28,14 +28,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	/* $('.Button').click(function(){
-		var c_str = $(this).find('.Button__text').html();
-		swal(c_str, "Click", "success");
-	}) */
-})
-</script>
 <title>JSP</title>
 </head>
 <body>
@@ -117,7 +109,7 @@ $(function(){
 						<div class="tab-pane fade user-list" id="tab2">
 							<table class="table hoverList tab-playList" id="playList">
 								<c:forEach var="list" items="${list }" varStatus="status">
-									<tr class="playList-td" id="playList-add">
+									<tr class="playList-td">
 										<c:choose>
 											<c:when test="${status.last }">
 												<td class="top100-ranking last-index">${status.count}</td>
@@ -293,26 +285,19 @@ $(function(){
 	</div>
 	<!-- 검색 Modal 보류.... -->
 	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<h2 class="text-center">SEARCH</h2>
-				<div class="form-group">
-					<div class="col-sm-9 controls">
+		<div class="container">
+			<div class="row">
+				<div id="searchForm">
+					<h2 class="text-center">SEARCH</h2>
 						<input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
-					</div>				
-					<div class="col-sm-2">
 						<button type="button" class="btn btn-lg btn-default" id="searchBtn">
 							<span class="fa fa-search"></span>
 						</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-12 text-center">
 						<div class="control-group text-center result-Scroll" id="searchResult"></div>
-					</div>
 				</div>
 			</div>
 		</div>
+		
 	</div>
 </body>
 </html>
