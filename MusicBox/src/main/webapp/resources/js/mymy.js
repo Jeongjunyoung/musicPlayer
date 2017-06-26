@@ -7,7 +7,7 @@
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	var player;
 	var replay = 'normal';
-	var shuffle = true;
+	var shuffle = false;
 	var volume = true;
 	var edit = false;
 	var nowPlaying_tab = 'tab';
@@ -57,15 +57,19 @@
 				replay = 'normal';
 				break;
 			case "normal":
+				if(shuffle){
+					var r_num = Math.floor(Math.random()*last_index)+1;
+					play_index = r_num;
+				}else{
+					play_index += 1;
+				}
 				if(nowPlaying_tab == 'tab1'){
-					play_index+=1;
 					changeMusic();
 				}else{
-					if(play_index == last_index){
+					if(play_index > last_index && !shuffle){
 						play_index = 1;
 						changeMusic();
 					}else{
-						play_index += 1;
 						changeMusic();
 					}
 				}
@@ -142,22 +146,18 @@
 	}
 	//랜덤 재생
 	function shufflePlay(){
-		if(shuffle){
+		if(!shuffle){
 			if(nowPlaying_tab == 'tab1'){
 				
 			}else{
-				player.setShuffle(shuffle);
-				player.setLoop(true);
-				shuffle = false;
+				shuffle = true;
 				$('#shuffleBtn').addClass('click-play-option');
 			}
 		}else{
 			if(nowPlaying_tab == 'tab1'){
 				replay == ''
 			}else{
-				player.setShuffle(shuffle);
-				player.setLoop(true);
-				shuffle = true;
+				shuffle = false;
 				$('#shuffleBtn').removeClass('click-play-option');
 			}
 		}
@@ -229,8 +229,10 @@
 			var str = value.music_index;
 			var index_num = str.indexOf('_');
 			var m_index = Number(str.substring(index_num+1));
+			$('.top100-ranking').removeClass('last-index');
 			$('#playList').append($('<tr class="playList-td"><td class="top100-ranking last-index">'+m_index+'</td><td id="'+value.music_id+'" class="clickList-td myIndex-'+m_index+'">'+value.music_name+'</td></tr>'));
-			arr.push(value.music_id);
+			
+			//arr.push(value.music_id);
 		})
 	}
 	//로그인시  플레이리스트 arr배열에 노래 추가
@@ -270,7 +272,7 @@
 			  $table.find('#'+editArr[i]).remove();
 		  }
 		swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
-		editArr.splice(0, editArr.length)
+		editArr.splice(0, editArr.length);
 	}
 	$(function(){
 		$('.tab-pane').hide();
@@ -510,11 +512,11 @@
         	})
         	ajax_load('get', 'addTabMusic?arr='+arr+'&arr_top='+arr_top+'&tab_id='+tab_id, null,'json', addTabMusicSuccess)
         })
+        //수정
         function addTabMusicSuccess(data){
         	$.each(data,function(index,value){
         		var tab_id = value.tab_id;
-        		var td = '<tr class='+"playList-td"+' id='+"playList-add"+'><td class='+"clickList-td"+' id='+value.tabs_music_id+'>'+ value.tabs_music_name +'</td></tr>';
-    			$('#'+tab_id).find('table').append(td);
+        		$('#'+tab_id).find('table').append($('<tr class="playList-td"><td class="clickList-td" id="'+value.tabs_music_id+'">'+ value.tabs_music_name +'</td></tr>'));
     			$('#AddTabMusicModal').modal('hide');
     			$('.tab-list').removeClass('tab-list-click');
     			$('.tab-list-top100').removeClass('tab-list-click');
