@@ -116,6 +116,14 @@ a {
 #controll-box{
 	width: 615px;
 }
+#now-playing{
+	width: 615px;
+}
+#plaing-music-name{
+	font-size: 20px;
+	text-align:center;
+	padding: 10px;
+}
 #edit-box{
 	width: 615px;
 	height: 43px;

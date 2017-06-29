@@ -446,7 +446,7 @@
 				replay = 'true';
 			}else if(replay){
 				$(this).removeClass('click-play-option');
-				replay = 'false';
+				replay = 'normal';
 			}
 		})
 		//탭 삭제

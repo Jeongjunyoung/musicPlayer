@@ -56,25 +56,30 @@
 					class="Button__icon search-icon" aria-hidden="true"></span></span></a>
 		</div>
 	</div>
+	<div class="container div-box" id="now-playing">
+		<div class="row">
+			<div id="plaing-music-name"></div>
+		</div>
+	</div>
 	<div class="container div-box" id="controll-box">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()">
+				<button type="button" class="btn btn-lg" id="prevBtn" onclick="prevVideo()" title="뒤로">
 					<span class="fa fa-backward"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()">
+				<button type="button" class="btn btn-lg" id="playBtn" onclick="playVideo()" title="재생">
 					<span class="fa fa-play"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()">
+				<button type="button" class="btn btn-lg" id="stopBtn" onclick="pauseVideo()" title="정지">
 					<span class="fa fa-pause"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()">
+				<button type="button" class="btn btn-lg" id="nextBtn" onclick="nextVideo()" title="다음곡">
 					<span class="fa fa-forward"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()">
+				<button type="button" class="btn btn-lg" id="shuffleBtn" onclick="shufflePlay()" title="랜덤재생">
 					<span class="fa fa-random"></span>
 				</button>
-				<button type="button" class="btn btn-lg" id="replayBtn">
+				<button type="button" class="btn btn-lg" id="replayBtn" title="한곡반복">
 					<span class="fa fa-repeat"></span>
 				</button>
 			</div>
@@ -284,7 +289,7 @@
 		</div>
 	</div>
 	<!-- 검색 Modal 보류.... -->
-	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="container">
 			<div class="row">
 				<div id="searchForm">
@@ -297,7 +302,24 @@
 				</div>
 			</div>
 		</div>
-		
+	</div> -->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<h2 class="text-center">SEARCH</h2>
+				<div id="searchForm">
+					<div class="form-group">
+						<div class="col-sm-10">
+							<input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-lg btn-default" id="searchBtn"><span class="fa fa-search"></span></button>
+						</div>
+						<div class="control-group text-center result-Scroll" id="searchResult"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
