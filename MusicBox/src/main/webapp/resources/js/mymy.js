@@ -227,12 +227,10 @@
 		$('.checkAdd').slideUp();
 		$.each(data, function(index,value){
 			var str = value.music_index;
-			var index_num = str.indexOf('_');
-			var m_index = Number(str.substring(index_num+1));
+			var index_num = $('.last-index').text();
+			var m_index = Number(index_num)+1;
 			$('.top100-ranking').removeClass('last-index');
 			$('#playList').append($('<tr class="playList-td"><td class="top100-ranking last-index">'+m_index+'</td><td id="'+value.music_id+'" class="clickList-td myIndex-'+m_index+'">'+value.music_name+'</td></tr>'));
-			
-			//arr.push(value.music_id);
 		})
 	}
 	//로그인시  플레이리스트 arr배열에 노래 추가
@@ -260,7 +258,7 @@
 		$('.cheak-span').addClass('fa-plus');
 	}
 	function delSuccess(data){
-		var tabID = '';
+		/*var tabID = '';
 		  $('#tab-list li').each(function(){
 			  if($(this).hasClass('active')){
 				  tabID = $(this).find('a').attr('href');
@@ -272,7 +270,21 @@
 			  $table.find('#'+editArr[i]).remove();
 		  }
 		swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
-		editArr.splice(0, editArr.length);
+		editArr.splice(0, editArr.length);*/
+		var tabID = '';
+		$('#tab-list li').each(function(){
+			if($(this).hasClass('active')){
+				tabID = $(this).find('a').attr('href');
+			}
+		})
+		var $table = $(tabID).find('.tab-playList');
+		var m_id = $('.now-playing').attr('id');
+		$table.empty();
+		$.each(data,function(index, list){
+			var m_index = Number(index)+1;
+			$table.append($('<tr class="playList-td"><td class="top100-ranking">'+m_index+'</td><td id="'+list.music_id+'" class="clickList-td  myIndex-'+m_index+'">'+list.music_name+'</td></tr>'));
+		})
+		$('#'+m_id).addClass('now-playing');
 	}
 	$(function(){
 		$('.tab-pane').hide();

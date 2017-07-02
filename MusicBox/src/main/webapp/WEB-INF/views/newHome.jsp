@@ -119,7 +119,7 @@
 											<c:when test="${status.last }">
 												<td class="top100-ranking last-index">${status.count}</td>
 												<td id="${list.music_id }" 
-													class="clickList-td  myIndex-${status.count}">${list.music_name }</td>
+													class="clickList-td myIndex-${status.count}">${list.music_name }</td>
 											</c:when>
 											<c:otherwise>
 												<td class="top100-ranking">${status.count}</td>

@@ -121,7 +121,7 @@ public class MusicBoxController {
 		String music_name_de = URLDecoder.decode(music_name, "UTF-8");
 		user.setUser_id(user_id.getUser_id());
 		user.setMusic_id(music_id);
-		user.setMusic_name(music_name_de);			
+		user.setMusic_name(music_name_de);
 		ms.insertMusic(user);
 		return ms.getAddList(user_id.getUser_id());
 	}
@@ -158,7 +158,7 @@ public class MusicBoxController {
 	//음악 삭제
 	@RequestMapping("/delPlayList")
 	@ResponseBody
-	public MusicUserVO del_Music(@RequestParam("editArr") String[] editArr,
+	public List<MusicPlayList> del_Music(@RequestParam("editArr") String[] editArr,
 			@RequestParam("tab") String tab,
 			HttpServletRequest request, Model model)throws Exception{
 		Map<String, String> map = new HashMap<String, String>();
@@ -187,7 +187,7 @@ public class MusicBoxController {
 		model.addAttribute("session", Social_session);
 		model.addAttribute("google_user", google_user);
 		model.addAttribute("list", ms.getList(user.getUser_id()));*/
-		return user;
+		return ms.getList(user_id);
 	}
 	//탭 추가
 	@RequestMapping("/addTabs")
