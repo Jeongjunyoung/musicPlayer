@@ -259,19 +259,6 @@
 		$('.cheak-span').addClass('fa-plus');
 	}
 	function delSuccess(data){
-		/*var tabID = '';
-		  $('#tab-list li').each(function(){
-			  if($(this).hasClass('active')){
-				  tabID = $(this).find('a').attr('href');
-			  }
-		  })
-		  var $table = $(tabID).find('.tab-playList');
-		  for(var i=0;i<editArr.length;i++){
-			  $table.find('#'+editArr[i]).prev().remove();
-			  $table.find('#'+editArr[i]).remove();
-		  }
-		swal("Delete Success!!", "탭이 삭제되었습니다.", "success");
-		editArr.splice(0, editArr.length);*/
 		var tabID = '';
 		$('#tab-list li').each(function(){
 			if($(this).hasClass('active')){
@@ -402,8 +389,6 @@
 				$('.clickList-td').removeClass('now-playing');
 				$this.addClass('now-playing');
 				last_index = Number($this.parent().parent().find('.last-index').text());
-				alert(last_index);
-				//$('#playing-music-name').text(playing_music_name);
 				if(tab_id == nowPlaying_tab){
 					changeMusic();
 				}else{
