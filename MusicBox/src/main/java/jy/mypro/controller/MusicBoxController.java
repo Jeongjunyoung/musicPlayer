@@ -40,7 +40,7 @@ public class MusicBoxController {
 	public String musicBox_Main(Model model)throws Exception{
 		model.addAttribute("logoutFail", "none");
 		//model.addAttribute("session", Social_session);
-		//model.addAttribute("top100", ms.getTop100List());
+		model.addAttribute("top100", ms.getTop100List());
 		return "/newHome";
 	}
 	//구글 인증
@@ -101,7 +101,7 @@ public class MusicBoxController {
 	@RequestMapping("/loginFail")
 	public String loginFail(Model model)throws Exception{
 		model.addAttribute("loginFail", "true");
-		return "/main";
+		return "/newHome";
 	}
 	//음악 추가
 	@RequestMapping(value="/addPlayList", method=RequestMethod.GET)

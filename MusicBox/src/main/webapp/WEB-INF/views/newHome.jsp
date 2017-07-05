@@ -34,6 +34,7 @@
 	<div class="container" id="play-view">
 		<div class="row">
 			<div class="col-lg-12">
+				<input type="hidden" value="${loginFail }" id="loginFail">
 				<div class="intro-text" id="player"></div>
 			</div>
 		</div>
@@ -104,9 +105,17 @@
 							<table class="table hoverList">
 								<c:forEach var="top100" items="${top100 }" varStatus="status">
 									<tr class="playList-td">
-										<td class="top100-ranking">${status.count}</td>
-										<td id="${top100.music_id }"
-											class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+										<c:choose>
+											<c:when test="${status.last }">
+												<td class="top100-ranking last-index">${status.count}</td>
+												<td id="${top100.music_id }" class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+												
+											</c:when>
+											<c:otherwise>
+												<td class="top100-ranking">${status.count}</td>
+												<td id="${top100.music_id }" class="clickList-td top100Index-${status.count}">${top100.music_name }</td>
+											</c:otherwise>	
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</table>
@@ -117,14 +126,12 @@
 									<tr class="playList-td">
 										<c:choose>
 											<c:when test="${status.last }">
-												<td class="top100-ranking last-index">${status.count}</td>
-												<td id="${list.music_id }" 
-													class="clickList-td myIndex-${status.count}">${list.music_name }</td>
+												<td class="top100-ranking my-index last-index">${status.count}</td>
+												<td id="${list.music_id }" class="clickList-td myIndex-${status.count}">${list.music_name }</td>
 											</c:when>
 											<c:otherwise>
 												<td class="top100-ranking">${status.count}</td>
-												<td id="${list.music_id }" 
-													class="clickList-td  myIndex-${status.count}">${list.music_name }</td>
+												<td id="${list.music_id }" class="clickList-td  myIndex-${status.count}">${list.music_name }</td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
@@ -288,21 +295,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 검색 Modal 보류.... -->
-	<!-- <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="container">
-			<div class="row">
-				<div id="searchForm">
-					<h2 class="text-center">SEARCH</h2>
-						<input type="text" class="form-control" placeholder="KEY WORD" id="searchKey">
-						<button type="button" class="btn btn-lg btn-default" id="searchBtn">
-							<span class="fa fa-search"></span>
-						</button>
-						<div class="control-group text-center result-Scroll" id="searchResult"></div>
-				</div>
-			</div>
-		</div>
-	</div> -->
+	<!-- 검색 Modal-->
 	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">

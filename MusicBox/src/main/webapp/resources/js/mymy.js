@@ -10,7 +10,7 @@
 	var shuffle = false;
 	var volume = true;
 	var edit = false;
-	var nowPlaying_tab = 'tab';
+	var nowPlaying_tab = 'tab2';
 	var play_index = 1;
 	var last_index = 0;
 	//ajax 처리
@@ -63,7 +63,8 @@
 				}else{
 					play_index += 1;
 				}
-				if(nowPlaying_tab == 'tab1'){
+				if(nowPlaying_tab == 'tab1' && play_index == 100){
+					play_index = 1;
 					changeMusic();
 				}else{
 					if(play_index > last_index && !shuffle){
@@ -282,9 +283,12 @@
 		$table.empty();
 		$.each(data,function(index, list){
 			var m_index = Number(index)+1;
-			$table.append($('<tr class="playList-td"><td class="top100-ranking">'+m_index+'</td><td id="'+list.music_id+'" class="clickList-td  myIndex-'+m_index+'">'+list.music_name+'</td></tr>'));
+			$('.my-index').removeClass('last-index');
+			$table.append($('<tr class="playList-td"><td class="top100-ranking my-index last-index">'+m_index+'</td><td id="'+list.music_id+'" class="clickList-td  myIndex-'+m_index+'">'+list.music_name+'</td></tr>'));
 		})
 		$('#'+m_id).addClass('now-playing');
+		swal("Delete Success!!", "선택하신 음악이 삭제되었습니다.", "success");
+		editArr.splice(0, editArr.length);
 	}
 	$(function(){
 		$('.tab-pane').hide();
@@ -295,7 +299,7 @@
 			if(editArr.length == 0){
 				swal("Delete Failed...", "삭제할 음악을 선택하세요.", "error");
 			}else{
-				var tab = '';
+				var tab = 'myList';
 				if(nowPlaying_tab == 'tab2'){
 					tab = 'myList';
 				}else{
@@ -365,6 +369,7 @@
 			var playing_music_name = $(this).text();
 			var tab_id = 'tab1';
 			nowPlaying_tab = tab_id;
+			last_index = 100;
 			$('.clickList-td').removeClass('now-playing');
 			$('#plaing-music-name').text(playing_music_name);
 			$this.addClass('now-playing');
@@ -396,12 +401,13 @@
 				var video_ID = $this.attr('id');
 				$('.clickList-td').removeClass('now-playing');
 				$this.addClass('now-playing');
+				last_index = Number($this.parent().parent().find('.last-index').text());
+				alert(last_index);
 				//$('#playing-music-name').text(playing_music_name);
 				if(tab_id == nowPlaying_tab){
 					changeMusic();
 				}else{
 					nowPlaying_tab = tab_id;
-					last_index = Number($this.parent().parent().find('.last-index').text());
 					changeMusic();
 				}
 			}

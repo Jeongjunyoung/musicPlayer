@@ -67,13 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from tabs_music where tab_id = #{tab_id}
  	</delete>
  	<select id="get_Top100List" resultType="Top100VO"><![CDATA[
- 		select * from top_100
+ 		select * from top100_music
  			order by music_ranking
 ]]></select>
 	<delete id="del_SelectMusic">
 		delete from tabs_music where tabs_music_id = #{music_id} and user_id = #{user_id}
 	</delete>
 	<select id="getTop100MusicInfo" resultType="Top100VO">
- 		select * from top_100 where music_id = #{music_id}
+ 		select * from top100_music where music_id = #{music_id}
  	</select>
 </mapper>
